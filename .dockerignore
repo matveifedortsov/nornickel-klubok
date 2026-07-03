@@ -1,0 +1,13 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+data
+*.sqlite
+*.sqlite3
+*.log
+.env
+# корпус (гигабайты) — монтируется томом, не кладётся в образ
+Задача 2. Научный клубок

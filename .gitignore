@@ -1,0 +1,32 @@
+# Секреты — НИКОГДА не коммитить (сдаём публичную ссылку на репо!)
+.env
+*.key
+
+# Данные корпуса и кэши
+data/
+!data/sample/
+*.sqlite
+*.sqlite3
+
+# Исходный корпус трека (~4.9 ГБ) — не в VCS, раздаётся отдельно
+Задача 2. Научный клубок/
+scripts/corpus_subset.txt
+scripts/ingest_checkpoint.txt
+scripts/ingest_report.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Прогресс/логи ингеста
+*.log
+scripts/*_checkpoint.json
+
+# ОС/IDE
+.DS_Store
+.idea/
+.vscode/

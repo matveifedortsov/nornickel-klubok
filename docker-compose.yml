@@ -1,0 +1,72 @@
+# Полный стек «Научного клубка» одной командой:
+#   docker compose up -d
+# Neo4j Browser:  http://localhost:7474   (bolt://localhost:7687)
+# Qdrant Dashboard: http://localhost:6333/dashboard
+# API (FastAPI):  http://localhost:8000/docs
+# UI (Streamlit): http://localhost:8501
+#
+# Хранилища (neo4j/qdrant) поднимаются без GPU. API/UI берут креды и бэкенды
+# (Yandex AI Studio / Mock) из .env — файл монтируется, в образ НЕ кладётся.
+services:
+  neo4j:
+    image: neo4j:5.19-community
+    container_name: klubok_neo4j
+    ports:
+      - "7474:7474"   # HTTP / Browser
+      - "7687:7687"   # Bolt
+    environment:
+      - NEO4J_AUTH=neo4j/klubok_dev_password
+      - NEO4J_PLUGINS=["apoc"]            # APOC нужен для обхода графа 1-4 хопа (graphrag.py)
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: klubok_qdrant
+    ports:
+      - "6333:6333"   # REST + Dashboard
+      - "6334:6334"   # gRPC
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  api:
+    build: .
+    container_name: klubok_api
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      # внутри compose-сети адресуемся по именам сервисов, а не localhost
+      - NEO4J_URI=bolt://neo4j:7687
+      - QDRANT_URL=http://qdrant:6333
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    command: uvicorn klubok.api.app:app --host 0.0.0.0 --port 8000
+
+  ui:
+    build: .
+    container_name: klubok_ui
+    ports:
+      - "8501:8501"
+    environment:
+      - KLUBOK_API_URL=http://api:8000
+    depends_on:
+      - api
+    command: streamlit run ui/streamlit_app.py --server.address 0.0.0.0 --server.port 8501
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
+  qdrant_data:
