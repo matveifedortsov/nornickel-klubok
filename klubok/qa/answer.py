@@ -28,6 +28,8 @@ class Answer:
     timings_ms: dict = None             # retrieval (vector/seed/graph) + llm_ms (§Y8)
     subgraph_edges: list = None         # рёбра подграфа для визуализации: ретривал
     seed_nodes: list = None             # уже их нашёл — не гонять /subgraph повторно
+    llm_ok: bool = True                 # False = текст ответа — фолбэк (LLM недоступен);
+                                        # потребители проверяют флаг, а не подстроку
 
 
 def generate_answer(ctx: RetrievalContext, llm: LLMClient) -> Answer:
@@ -47,10 +49,12 @@ def generate_answer(ctx: RetrievalContext, llm: LLMClient) -> Answer:
     llm_ms = round((time.perf_counter() - t0) * 1000, 1)
     # пустой/сбойный ответ LLM не должен выглядеть как «пустой ответ» — даём
     # честный фолбэк, но сохраняем найденный подграф/источники (польза для жюри).
-    if not text or not text.strip():
+    llm_ok = bool(text and text.strip())
+    if not llm_ok:
         text = ("Не удалось сгенерировать связный ответ (LLM недоступен или пуст). "
                 "Ниже — найденные связи графа и источники по запросу.")
     return Answer(
+        llm_ok=llm_ok,
         question=ctx.question,
         text=text,
         sources=ctx.cited_docs(),

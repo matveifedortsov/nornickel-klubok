@@ -88,6 +88,16 @@ docker compose up -d                   # Neo4j + Qdrant + API + UI одной к
 python scripts/select_corpus.py --root "<Источники информации>" --out scripts/corpus_subset.txt
 python scripts/ingest_corpus.py --list scripts/corpus_subset.txt
 ```
+
+## Пополнение корпуса из открытых источников
+```bash
+python scripts/fetch_articles.py                 # ~10 тем экспертных вопросов
+python scripts/ingest_corpus.py --list data/openaccess/files.txt
+```
+`fetch_articles.py` скачивает open-access статьи (CyberLeninka CC-BY, DOAJ —
+агрегатор MDPI/Springer OA/Wiley OA) по темам реальных экспертных вопросов:
+обессоливание, шахтные воды, электроэкстракция, техногенный гипс, SO₂,
+штейн/шлак, Pb-Zn. Вежливый rate-limit, повторный запуск докачивает только новое.
 `select_corpus.py` отбирает компактный сабсет (статьи, обзоры, доклады, по 2
 последних номера каждого журнала), исключая рыночную аналитику и архивы.
 `ingest_corpus.py` — батч-ингест с ретраями и чекпоинтом: одна битая статья не

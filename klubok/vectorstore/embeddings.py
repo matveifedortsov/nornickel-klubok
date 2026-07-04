@@ -172,7 +172,14 @@ class FastEmbedEmbedder:
 def get_embedder() -> Embedder:
     backend = settings.embedder_backend
     if backend == "bge":
-        return BGEEmbedder()
+        try:
+            return BGEEmbedder()
+        except ImportError as exc:
+            # sentence-transformers вынесен в опциональные ML-зависимости —
+            # без подсказки голый ModuleNotFoundError на старте API нечитаем
+            raise RuntimeError(
+                "EMBEDDER_BACKEND=bge требует sentence-transformers: "
+                "pip install -r requirements-ml.txt (или используйте fastembed)") from exc
     if backend == "fastembed":
         return FastEmbedEmbedder()
     if backend == "yandex":

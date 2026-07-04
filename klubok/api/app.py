@@ -168,7 +168,8 @@ def ask(req: AskRequest, role: str = Depends(get_role)) -> dict:
                           domain=req.domain, year_from=req.year_from, year_to=req.year_to)
     sources = _visible_sources(_state["client"], role, ans.sources)
     return {
-        "question": ans.question, "answer": ans.text, "sources": sources,
+        "question": ans.question, "answer": ans.text, "llm_ok": ans.llm_ok,
+        "sources": sources,
         "edges_used": ans.edges_used, "passages_used": ans.passages_used,
         "constraints": [c.model_dump() for c in (ans.constraints or [])],
         "geography_filter": ans.geography_filter,

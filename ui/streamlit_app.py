@@ -95,11 +95,21 @@ def _api(method: str, path: str, **kw):
         return False, None
 
 
-def _health() -> dict | None:
-    ok, resp = _api("GET", "/health")
+@st.cache_data(ttl=15, show_spinner=False)
+def _cached_get_json(path: str, role: str, params: tuple = ()) -> dict | None:
+    """GET с коротким кэшем: сайдбар/списки не дёргают API на каждый rerun.
+
+    `role` в ключе кэша — ответы зависят от X-API-Key. TTL малый, чтобы после
+    ингеста/подписки данные обновлялись без перезапуска UI.
+    """
+    ok, resp = _api("GET", path, params=dict(params))
     if ok and resp.status_code == 200:
         return resp.json()
     return None
+
+
+def _health() -> dict | None:
+    return _cached_get_json("/health", st.session_state.get("role", "researcher"))
 
 
 # --------------------------------------------------------------------------
@@ -114,10 +124,11 @@ with st.sidebar:
         st.success(f"API online · узлов в графе: {health.get('nodes', '—')}")
     else:
         st.error("API недоступен. Запустите: `uvicorn klubok.api.app:app`")
-    # бейдж непрочитанных уведомлений
-    ok, resp = _api("GET", "/notifications", params={"unseen_only": True})
-    if ok and resp.status_code == 200:
-        unseen = len(resp.json().get("notifications", []))
+    # бейдж непрочитанных уведомлений (кэш — не дёргаем API на каждый rerun)
+    notif = _cached_get_json("/notifications", st.session_state["role"],
+                             params=(("unseen_only", True),))
+    if notif:
+        unseen = len(notif.get("notifications", []))
         if unseen:
             st.warning(f"🔔 Новое по вашим темам: {unseen}")
 
@@ -195,11 +206,29 @@ def _render_graph(sg: dict) -> None:
                      + (f"  · _{e['evidence']}_" if e.get("evidence") else ""))
 
 
+@st.cache_data(show_spinner=False)
+def _export_payloads(q: str, answer: str, sources: tuple, edges: int | None,
+                     passages: int | None):
+    """Экспортные артефакты (MD/JSON-LD/PDF) один раз на ответ: reportlab-PDF
+    не пересобирается на каждый rerun (клики по фильтрам/вкладкам)."""
+    obj = SimpleNamespace(question=q, text=answer, sources=list(sources),
+                          edges_used=edges, passages_used=passages)
+    md = to_markdown(obj)
+    jld = json.dumps(to_json_ld(obj), ensure_ascii=False, indent=2)
+    try:
+        pdf = to_pdf(obj)
+    except Exception:                                    # noqa: BLE001 — нет reportlab
+        pdf = None
+    return md, jld, pdf
+
+
 def _render_answer(res: dict) -> None:
     """Отрисовать сохранённый результат вопроса (переживает rerun)."""
     r, q = res["ans"], res["q"]
     answer = r.get("answer", "")
-    is_fallback = "Не удалось сгенерировать" in answer
+    # структурный флаг из API; подстрока — только для старых сохранённых ответов
+    is_fallback = (r.get("llm_ok") is False
+                   or (r.get("llm_ok") is None and "Не удалось сгенерировать" in answer))
 
     st.markdown("### Ответ")
     if is_fallback:
@@ -235,16 +264,14 @@ def _render_answer(res: dict) -> None:
 
     # локальный экспорт — без повторного вызова API/LLM
     if _LOCAL_EXPORT:
-        obj = SimpleNamespace(question=q, text=answer, sources=r.get("sources", []),
-                              edges_used=r.get("edges_used"), passages_used=r.get("passages_used"))
+        md, jld, pdf = _export_payloads(q, answer, tuple(r.get("sources", [])),
+                                        r.get("edges_used"), r.get("passages_used"))
         e1, e2, e3 = st.columns(3)
-        e1.download_button("⬇ Markdown", to_markdown(obj), file_name="answer.md")
-        e2.download_button("⬇ JSON-LD",
-                           json.dumps(to_json_ld(obj), ensure_ascii=False, indent=2),
-                           file_name="answer.jsonld")
-        try:
-            e3.download_button("⬇ PDF", to_pdf(obj), file_name="answer.pdf", mime="application/pdf")
-        except Exception:                                # noqa: BLE001
+        e1.download_button("⬇ Markdown", md, file_name="answer.md")
+        e2.download_button("⬇ JSON-LD", jld, file_name="answer.jsonld")
+        if pdf is not None:
+            e3.download_button("⬇ PDF", pdf, file_name="answer.pdf", mime="application/pdf")
+        else:
             e3.caption("PDF недоступен")
 
     st.markdown("### Подграф (доказательная база)")
@@ -356,19 +383,31 @@ if "Дашборд" in tabs:
 
 with tabs["Сравнение"]:
     st.subheader("Сравнение технологий/материалов по параметрам")
-    etype = st.selectbox("Тип сущностей", ["Process", "Material", "Equipment"], index=0)
-    ents = (_guarded_json("/entities", {"type": etype, "limit": 300}) or {}).get("entities", [])
-    if not ents:
-        st.info(f"В графе нет сущностей типа «{etype}».")
+    st.caption("Типы можно выбирать разные — например, Process против Method.")
+    # типы — из онтологии, а не захардкоженный список: новый NodeType сразу
+    # появится в UI; тип выбирается отдельно для А и Б (кросс-типовые сравнения)
+    from klubok.ontology import NodeType
+    _types = [t.value for t in NodeType]
+
+    def _entities_of(etype: str) -> dict[str, str]:
+        data = _cached_get_json("/entities", st.session_state["role"],
+                                params=(("type", etype), ("limit", 300))) or {}
+        return {e["name"]: e["cid"] for e in data.get("entities", [])}
+
+    col1, col2 = st.columns(2)
+    ta = col1.selectbox("Тип А", _types, index=_types.index("Process"))
+    tb = col2.selectbox("Тип Б", _types, index=_types.index("Process"))
+    ents_a, ents_b = _entities_of(ta), _entities_of(tb)
+    if not ents_a or not ents_b:
+        empty = ta if not ents_a else tb
+        st.info(f"В графе нет сущностей типа «{empty}».")
     else:
-        name2cid = {e["name"]: e["cid"] for e in ents}
-        names = list(name2cid.keys())
-        col1, col2 = st.columns(2)
-        a = col1.selectbox("Вариант А", names, index=0)
-        b = col2.selectbox("Вариант Б", names, index=min(1, len(names) - 1))
-        if st.button("Сравнить", type="primary") and a != b:
+        a = col1.selectbox("Вариант А", list(ents_a), index=0)
+        b = col2.selectbox("Вариант Б", list(ents_b),
+                           index=min(1, len(ents_b) - 1) if ta == tb else 0)
+        if st.button("Сравнить", type="primary") and ents_a[a] != ents_b[b]:
             ok, resp = _api("POST", "/compare", json={
-                "cid_a": name2cid[a], "cid_b": name2cid[b], "label_a": a, "label_b": b})
+                "cid_a": ents_a[a], "cid_b": ents_b[b], "label_a": a, "label_b": b})
             if ok and resp.status_code == 200:
                 rows = resp.json().get("rows", [])
                 (st.dataframe(rows, use_container_width=True) if rows
