@@ -55,6 +55,9 @@ EXAMPLE_QUESTIONS = [
     ("🕳 Закачка шахтных вод",
      "Какие способы закачки шахтных вод в глубокие горизонты применялись в России и "
      "за рубежом, и каковы их технико-экономические показатели?"),
+    ("🇬🇧 EN: catholyte flow",
+     "What technical solutions for catholyte circulation in nickel electrowinning are "
+     "described in world practice, and what flow rate is considered optimal?"),
 ]
 
 st.set_page_config(page_title="Научный клубок", layout="wide", page_icon="🧶")
@@ -230,25 +233,33 @@ def _render_answer(res: dict) -> None:
     is_fallback = (r.get("llm_ok") is False
                    or (r.get("llm_ok") is None and "Не удалось сгенерировать" in answer))
 
-    st.markdown("### Ответ")
+    st.markdown("### Ответ" if not res.get("review") else "### Литобзор")
     if is_fallback:
         st.warning("⚠️ Генерация ответа сейчас недоступна (LLM). Ниже — найденные "
                    "связи графа и источники: ретривал полностью рабочий.")
     else:
+        # гео-фильтр был снят, т.к. источников запрошенной практики нет в базе —
+        # честная оговорка (иначе «мировая практика» на отеч. корпусе вводит в заблуждение)
+        if r.get("geography_relaxed"):
+            st.info("🌍 Источников запрошенной географии (напр. зарубежная практика) в "
+                    "базе не найдено — ответ построен по доступным источникам иной "
+                    "географии. Для полноты нужен ингест зарубежных публикаций.")
         st.write(answer)
 
-    cols = st.columns(5)
+    is_review = res.get("review", False)
+    cols = st.columns(3 if is_review else 5)
     cols[0].metric("Связей графа", r.get("edges_used", 0))
     cols[1].metric("Фрагментов", r.get("passages_used", 0))
     cols[2].metric("Источников", len(r.get("sources", [])))
-    geo_label = {"True": "РФ", "False": "мир"}.get(str(r.get("geography_filter")), "—")
-    cols[3].metric("Гео-фильтр", geo_label)
-    tm = r.get("timings_ms") or {}
-    if tm.get("retrieval_total_ms") is not None:
-        cols[4].metric("Поиск, мс", tm["retrieval_total_ms"],
-                       help=f"вектор {tm.get('vector_ms')} · seed {tm.get('seed_ms')} · "
-                            f"граф {tm.get('graph_ms')} · реранк {tm.get('rerank_ms')} · "
-                            f"LLM {tm.get('llm_ms')} мс")
+    if not is_review:
+        geo_label = {"True": "РФ", "False": "мир"}.get(str(r.get("geography_filter")), "—")
+        cols[3].metric("Гео-фильтр", geo_label)
+        tm = r.get("timings_ms") or {}
+        if tm.get("retrieval_total_ms") is not None:
+            cols[4].metric("Поиск, мс", tm["retrieval_total_ms"],
+                           help=f"вектор {tm.get('vector_ms')} · seed {tm.get('seed_ms')} · "
+                                f"граф {tm.get('graph_ms')} · реранк {tm.get('rerank_ms')} · "
+                                f"LLM {tm.get('llm_ms')} мс")
 
     # применённые структурные фильтры — чипами
     chips = []
@@ -274,8 +285,9 @@ def _render_answer(res: dict) -> None:
         else:
             e3.caption("PDF недоступен")
 
-    st.markdown("### Подграф (доказательная база)")
-    _render_graph(res["sg"])
+    if not is_review:
+        st.markdown("### Подграф (доказательная база)")
+        _render_graph(res["sg"])
 
 
 # --------------------------------------------------------------------------
@@ -317,24 +329,40 @@ with tabs["Вопрос"]:
         q = st.text_area("Вопрос на естественном языке", key="q_input", height=80,
                          placeholder="например: какая скорость циркуляции католита оптимальна…")
 
-        if st.button("Спросить", type="primary") and q.strip():
-            payload: dict = {"question": q, "domain": domain or None}
-            if geo_value != "__all__":
-                payload["geography"] = geo_value
-            if year_from:
-                payload["year_from"] = int(year_from)
-            if year_to:
-                payload["year_to"] = int(year_to)
-            with st.spinner("Гибридный поиск (граф + вектор) + реранк + генерация…"):
-                ok, resp = _api("POST", "/ask", json=payload)
-                if ok and resp.status_code == 200:
-                    ans = resp.json()
-                    # подграф приходит в ответе /ask — второй прогон ретривала
-                    # через GET /subgraph не нужен
-                    sg = ans.get("subgraph") or {"edges": []}
-                    st.session_state["ask_result"] = {"q": q, "ans": ans, "sg": sg}
-                else:
-                    st.error("Не удалось получить ответ от API.")
+        bc1, bc2 = st.columns([1, 2])
+        mode = bc2.radio("Режим", ["Ответ", "Литобзор"], horizontal=True,
+                         label_visibility="collapsed",
+                         help="«Литобзор» — структурированный синтез: группировка "
+                              "источников, консенсус vs разногласия, степень уверенности.")
+        if bc1.button("Спросить", type="primary", use_container_width=True) and q.strip():
+            if mode == "Литобзор":
+                with st.spinner("Сбор публикаций по теме + структурированный синтез…"):
+                    ok, resp = _api("POST", "/review", json={"topic": q})
+                    if ok and resp.status_code == 200:
+                        ans = resp.json()
+                        st.session_state["ask_result"] = {
+                            "q": q, "ans": ans, "sg": {"edges": []}, "review": True}
+                    else:
+                        st.error("Не удалось получить литобзор от API.")
+            else:
+                payload: dict = {"question": q, "domain": domain or None}
+                if geo_value != "__all__":
+                    payload["geography"] = geo_value
+                if year_from:
+                    payload["year_from"] = int(year_from)
+                if year_to:
+                    payload["year_to"] = int(year_to)
+                with st.spinner("Гибридный поиск (граф + вектор) + реранк + генерация…"):
+                    ok, resp = _api("POST", "/ask", json=payload)
+                    if ok and resp.status_code == 200:
+                        ans = resp.json()
+                        # подграф приходит в ответе /ask — второй прогон ретривала
+                        # через GET /subgraph не нужен
+                        sg = ans.get("subgraph") or {"edges": []}
+                        st.session_state["ask_result"] = {"q": q, "ans": ans, "sg": sg,
+                                                          "review": False}
+                    else:
+                        st.error("Не удалось получить ответ от API.")
 
         if st.session_state.get("ask_result"):
             st.divider()
@@ -380,6 +408,30 @@ if "Дашборд" in tabs:
                 st.dataframe(d.get("facility_activity", []), use_container_width=True)
                 st.markdown("**Зоны риска (мало подтверждающих источников)**")
                 st.dataframe(d.get("risk_zones", []), use_container_width=True)
+
+        # Ручная корректировка графа экспертом (ТЗ) — добавить/уточнить связь с
+        # фиксацией автора и даты. Узлы должны существовать; связь проверяется
+        # по онтологии на бэкенде (klubok.graph.ingest.upsert_manual_edge).
+        with st.expander("✏️ Ручная корректировка графа (эксперт)"):
+            from klubok.ontology import NodeType as _NT, RelType as _RT
+            gc1, gc2, gc3 = st.columns(3)
+            g_st = gc1.selectbox("Тип источника", [t.value for t in _NT], key="ge_st")
+            g_rel = gc2.selectbox("Связь", [r.value for r in _RT], key="ge_rel")
+            g_dt = gc3.selectbox("Тип цели", [t.value for t in _NT], key="ge_dt")
+            g_src = st.text_input("canonical_id источника", placeholder=f"{g_st}:...")
+            g_dst = st.text_input("canonical_id цели", placeholder=f"{g_dt}:...")
+            g_comment = st.text_input("Комментарий эксперта")
+            if st.button("Записать связь") and g_src and g_dst:
+                ok, resp = _api("POST", "/graph/edge", json={
+                    "src_type": g_st, "src_cid": g_src, "rel": g_rel,
+                    "dst_type": g_dt, "dst_cid": g_dst,
+                    "editor_name": st.session_state["role"], "comment": g_comment or None})
+                if ok and resp.status_code == 200:
+                    st.success("Связь записана (автор/дата зафиксированы на ребре).")
+                elif ok:
+                    st.error(resp.json().get("detail", "Ошибка (проверьте онтологию/узлы)."))
+                else:
+                    st.error("API недоступен.")
 
 with tabs["Сравнение"]:
     st.subheader("Сравнение технологий/материалов по параметрам")
