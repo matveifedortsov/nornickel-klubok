@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Научный клубок — R&D карта знаний · Норникель AI Science Hack</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #F1EEEC;
+  --dark:  #131A16;
+  --mint:  #92E8B5;
+  --blue:  #536BEB;
+  --gray:  #8A918D;
+  --lgray: #D5D2D0;
+  --white: #FFFFFF;
+  --slide-w: 1280px;
+  --slide-h: 720px;
+}
+
+html { scroll-snap-type: y mandatory; overflow-y: scroll; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: 'Manrope', system-ui, -apple-system, sans-serif; background: #1f1d1b; color: var(--dark); padding: 40px 0; }
+
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--mint); width: 0%; z-index: 1000; transition: width 0.15s ease; }
+#slide-counter { position: fixed; bottom: 28px; right: 32px; font-size: 11px; font-weight: 700; color: var(--cream); letter-spacing: 0.1em; z-index: 1000; opacity: 0.7; }
+#nav-dots { position: fixed; right: 24px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lgray); cursor: pointer; transition: all 0.2s; opacity: 0.4; }
+.dot.active { background: var(--mint); opacity: 1; transform: scale(1.6); }
+
+section {
+  scroll-snap-align: center;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  margin: 32px auto;
+  padding: 44px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5), 0 6px 16px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+section.dark  { background: var(--dark);  color: var(--cream); }
+section.cream { background: var(--cream); color: var(--dark);  }
+section.divider { background: var(--blue); color: var(--cream); }
+
+section::-webkit-scrollbar { width: 6px; }
+section::-webkit-scrollbar-thumb { background: rgba(146,232,181,.3); border-radius: 3px; }
+section::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 1360px) {
+  body { padding: 24px 0; }
+  section {
+    transform: scale(calc((100vw - 48px) / var(--slide-w)));
+    transform-origin: top center;
+    margin-bottom: calc(32px - var(--slide-h) * (1 - (100vw - 48px) / var(--slide-w)));
+  }
+}
+
+.arrow { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-size: 17px; color: var(--gray); opacity: 0.45; animation: bob 2.2s infinite; cursor: pointer; user-select: none; }
+.arrow:hover { opacity: 0.9; }
+@keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 55% { transform: translateX(-50%) translateY(7px); } }
+
+.kicker { font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+.kicker::before { content: ''; width: 24px; height: 2px; background: var(--mint); display: inline-block; flex-shrink: 0; }
+
+h1 { font-size: clamp(40px, 5.5vw, 76px); font-weight: 900; line-height: 1.0; letter-spacing: -0.035em; }
+h2 { font-size: clamp(26px, 3.8vw, 46px); font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 22px; }
+p  { font-size: 15px; line-height: 1.7; }
+.muted { color: var(--gray); }
+.inner { max-width: 1120px; width: 100%; }
+.inner.narrow { max-width: 920px; }
+.inner.wide { max-width: 1180px; }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.title-meta { display: flex; gap: 20px; margin-top: 34px; flex-wrap: wrap; }
+.meta-pill { font-size: 12px; font-weight: 600; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+.meta-pill::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--mint); flex-shrink: 0; }
+.org-line { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mint); margin-bottom: 40px; }
+
+.q-num { font-size: 86px; font-weight: 900; line-height: 1; letter-spacing: -0.05em; color: var(--mint); opacity: 0.5; margin-bottom: -6px; }
+.q-title { font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 16px; }
+.q-intro { font-size: 14.5px; line-height: 1.7; margin-bottom: 22px; max-width: 560px; }
+section.dark  .q-intro { color: rgba(241,238,236,.62); }
+section.cream .q-intro { color: var(--gray); }
+
+.context-intro { font-size: 15px; line-height: 1.75; color: var(--gray); margin-bottom: 22px; }
+.context-intro strong { color: var(--dark); }
+section.dark .context-intro strong { color: var(--cream); }
+.code { font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: 12.5px; background: rgba(83,107,235,.09); color: var(--blue); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+section.dark .code { background: rgba(83,107,235,.22); color: #a3b0f7; }
+
+.callout-mint { background: rgba(146,232,181,.14); border-left: 3px solid var(--mint); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; line-height: 1.6; }
+.callout-green { background: var(--mint); color: var(--dark); padding: 16px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; line-height: 1.55; margin-top: 18px; }
+.callout-dark  { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); color: var(--cream); padding: 16px 20px; border-radius: 10px; font-size: 14px; font-weight: 500; line-height: 1.55; margin-top: 18px; }
+.callout-blue { background: rgba(83,107,235,.10); border-left: 3px solid var(--blue); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; line-height: 1.55; color: var(--dark); }
+
+.q-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.q-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.5; padding: 9px 14px; border-radius: 8px; }
+section.cream .q-list li { background: rgba(19,26,22,.04); }
+section.dark  .q-list li { background: rgba(255,255,255,.05); }
+.q-list li::before { content: '→'; color: var(--mint); font-weight: 800; flex-shrink: 0; padding-top: 1px; }
+.q-list strong { font-weight: 800; }
+section.dark .q-list strong { color: var(--cream); }
+
+.data-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.data-table thead tr { border-bottom: 2px solid var(--lgray); }
+section.dark .data-table thead tr { border-bottom-color: rgba(255,255,255,.18); }
+.data-table th { text-align: left; font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); padding: 0 12px 9px 12px; }
+.data-table td { padding: 7px 12px; font-size: 12.5px; border-bottom: 1px solid var(--lgray); vertical-align: top; line-height: 1.45; }
+section.dark .data-table td { border-bottom-color: rgba(255,255,255,.08); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table td.num { text-align: right; font-family: 'Courier New', monospace; font-weight: 700; }
+.data-table tr.highlight td { background: rgba(146,232,181,.15); }
+
+.feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.feature-grid.three { grid-template-columns: repeat(3, 1fr); }
+.feat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 9px; padding: 12px 15px; }
+section.cream .feat { background: rgba(19,26,22,.04); border-color: rgba(19,26,22,.06); }
+.feat-num { font-size: 9.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--mint); margin-bottom: 4px; text-transform: uppercase; }
+.feat-title { font-size: 13.5px; font-weight: 800; margin-bottom: 3px; }
+.feat-body { font-size: 11.5px; color: var(--gray); line-height: 1.45; }
+
+.flow { display: flex; flex-direction: column; gap: 8px; }
+.flow-row { display: flex; align-items: center; gap: 14px; padding: 10px 15px; border-radius: 10px; background: rgba(19,26,22,.04); }
+section.dark .flow-row { background: rgba(255,255,255,.05); }
+.flow-step { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: var(--mint); min-width: 92px; }
+.flow-text { font-size: 13px; line-height: 1.5; flex: 1; }
+.flow-text code { font-family: 'Courier New', monospace; font-size: 12px; color: var(--blue); background: rgba(83,107,235,.08); padding: 1px 5px; border-radius: 3px; }
+section.dark .flow-text code { color: #a3b0f7; background: rgba(83,107,235,.18); }
+
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.stat { padding: 16px 18px; border-radius: 10px; background: rgba(19,26,22,.04); }
+section.dark .stat { background: rgba(255,255,255,.05); }
+.stat-num { font-size: 40px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--mint); margin-bottom: 6px; }
+.stat-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); line-height: 1.4; }
+
+.formula { font-family: 'Courier New', monospace; font-size: 14.5px; font-weight: 700; background: rgba(19,26,22,.05); padding: 14px 18px; border-radius: 10px; margin: 14px 0; line-height: 1.7; text-align: center; }
+section.dark .formula { background: rgba(255,255,255,.05); color: var(--cream); }
+.formula em { color: var(--mint); font-style: normal; font-weight: 800; }
+
+.panel { background: rgba(19,26,22,.04); border: 1px solid rgba(19,26,22,.1); border-radius: 14px; padding: 22px; }
+section.dark .panel { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1); }
+.panel-label { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); margin-bottom: 14px; }
+section.dark .panel-label { color: rgba(241,238,236,.5); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(19,26,22,.1); font-size: 11px; color: var(--gray); }
+section.dark .legend { border-top-color: rgba(255,255,255,.12); }
+.legend span { display: flex; align-items: center; gap: 7px; }
+.chip { display: inline-block; width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="slide-counter"></div>
+<nav id="nav-dots"></nav>
+
+<!-- ╔═══ S01 · TITLE ═══╗ -->
+<section id="s01" class="dark">
+  <div class="inner">
+    <div class="org-line">Норникель · AI Science Hack · Трек «Научный клубок» · 2026</div>
+    <h1>Научный<br>клубок</h1>
+    <p style="font-size:17px;color:rgba(241,238,236,.66);margin-top:26px;max-width:640px;line-height:1.65;">
+      Единая R&D-карта знаний горно-металлургической отрасли. Граф знаний +
+      гибридный поиск отвечают на сложные технические вопросы экспертов —
+      с цитатами, достоверностью и датой актуализации. Не «RAG поверх PDF».
+    </p>
+    <div class="title-meta">
+      <span class="meta-pill">Граф 2100+ узлов, 12 типов</span>
+      <span class="meta-pill">LLM-агностично: YandexGPT / MetalGPT-1</span>
+      <span class="meta-pill">Ретривал ~0,45 c · без GPU</span>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S02 · ПРОБЛЕМА ═══╗ -->
+<section id="s02" class="cream">
+  <div class="inner cols">
+    <div>
+      <div class="q-num">01</div>
+      <div class="q-title">Знания R&D<br>рассеяны</div>
+      <p class="q-intro">
+        В точке ноль проблема не в отсутствии моделей, а в отсутствии
+        <strong>структуры</strong>. Институциональная память отрасли теряется
+        между отчётами, статьями и архивами лабораторий.
+      </p>
+      <div class="callout-blue">
+        Ответ на один технический вопрос эксперта = ручной сбор из десятков
+        источников на несколько дней. Мы сводим это к секундам — с провенансом.
+      </div>
+    </div>
+    <div>
+      <ul class="q-list" style="font-size:13.5px;">
+        <li><strong>Дублирование:</strong> команды повторяют литобзоры, не видя, что работа уже сделана</li>
+        <li><strong>Нет междисциплинарных связей:</strong> «режим обработки → выход металла» не проследить</li>
+        <li><strong>Многопараметрический поиск невозможен:</strong> материал + процесс + условия + гео + годы</li>
+        <li><strong>Противоречия:</strong> выводы разных источников без единой верифицированной базы</li>
+        <li><strong>Численные фильтры теряются:</strong> «сульфаты ≤300 мг/л», «сухой остаток ≤1000 мг/дм³»</li>
+      </ul>
+      <div class="callout-mint" style="margin-top:14px;">
+        Пять болей — дословно из вашего ТЗ. «Научный клубок» закрывает каждую
+        одним графом знаний и одним окном поиска.
+      </div>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S03 · РЕШЕНИЕ ═══╗ -->
+<section id="s03" class="dark">
+  <div class="inner">
+    <div class="q-num">02</div>
+    <div class="q-title">Решение — граф знаний + гибридный поиск</div>
+    <p class="q-intro" style="max-width:820px;">
+      Мы связываем публикации, эксперименты, материалы, процессы, оборудование и
+      экспертов в единый граф. Вектор находит смысл, граф даёт структуру и
+      доказательную базу. Каждый ответ — с источником, уровнем достоверности и датой.
+    </p>
+    <div class="feature-grid three">
+      <div class="feat">
+        <div class="feat-num">Гибридный поиск</div>
+        <div class="feat-title">Граф + вектор, не «RAG поверх PDF»</div>
+        <div class="feat-body">Вектор → seed-узлы → обход графа 1–4 хопа → реранк → генерация. Структура важнее плоского чанка.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Провенанс</div>
+        <div class="feat-title">Цитата, достоверность, актуальность</div>
+        <div class="feat-body">Каждый факт несёт evidence-цитату, уровень верификации и дату. Версионирование фактов.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Фильтры из вопроса</div>
+        <div class="feat-title">Числа · РФ/мир · годы</div>
+        <div class="feat-body">«≤300 мг/л», «за последние 5 лет», «в мировой практике» распознаются прямо из текста запроса.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Аналитика</div>
+        <div class="feat-title">Пробелы · сравнение · эксперты</div>
+        <div class="feat-body">Поиск дыр в данных (вкл. гео-перекос), сравнение технологий, эксперты по теме, литобзор.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Продакшн</div>
+        <div class="feat-title">RBAC + аудит · экспорт · дашборд</div>
+        <div class="feat-body">5 ролей с видимостью данных, аудит, экспорт PDF/MD/JSON-LD, ручная правка графа экспертом.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Развёртывание</div>
+        <div class="feat-title">Без GPU · одна команда</div>
+        <div class="feat-body">docker compose up — Neo4j + Qdrant + API + UI с готовым seed-графом. Или портативно без Docker.</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S04 · ОНТОЛОГИЯ ГРАФА ═══╗ -->
+<section id="s04" class="cream">
+  <div class="inner wide cols" style="grid-template-columns:1fr 1.25fr;gap:36px;">
+    <div>
+      <div class="q-num">03</div>
+      <div class="q-title">Онтология:<br>12 типов сущностей</div>
+      <p class="q-intro">
+        Домен-специфичная схема горно-металлургического R&D. Не generic-NER, а
+        типизированный граф: LLM извлекает триплеты строго по онтологии в JSON,
+        каждый — с evidence-цитатой из источника.
+      </p>
+      <div class="stat-row" style="grid-template-columns:repeat(2,1fr);gap:10px;">
+        <div class="stat"><div class="stat-num" style="font-size:32px;">2111</div><div class="stat-label">узлов графа</div></div>
+        <div class="stat"><div class="stat-num" style="font-size:32px;">1436</div><div class="stat-label">рёбер-связей</div></div>
+        <div class="stat"><div class="stat-num" style="font-size:32px;">12</div><div class="stat-label">типов сущностей</div></div>
+        <div class="stat"><div class="stat-num" style="font-size:32px;">15</div><div class="stat-label">типов связей</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-label">Фрагмент графа знаний</div>
+      <svg viewBox="0 0 560 400" width="100%" style="display:block;" font-family="Manrope, system-ui, sans-serif">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#8A918D"/>
+          </marker>
+        </defs>
+        <!-- edges (все соединяют реальные узлы) -->
+        <g stroke="#8A918D" stroke-width="1.4" fill="none" marker-end="url(#ar)" opacity="0.85">
+          <path d="M 152,80 C 132,108 118,128 110,148"/>        <!-- Эксперимент→Материал (USES) -->
+          <path d="M 205,80 C 250,110 300,130 333,150"/>        <!-- Эксперимент→Процесс (APPLIES) -->
+          <path d="M 300,171 C 250,182 200,176 163,172"/>        <!-- Процесс→Материал (USES_MATERIAL) -->
+          <path d="M 362,186 C 378,214 396,240 418,263"/>       <!-- Процесс→Свойство (RESULTS_IN) -->
+          <path d="M 112,184 C 128,220 155,250 188,268"/>       <!-- Материал→Элемент (CONTAINS) -->
+          <path d="M 348,316 C 350,272 351,225 352,190"/>       <!-- Оборудование→Процесс (APPLIES) -->
+          <path d="M 468,96 C 458,150 448,218 438,263"/>        <!-- Публикация→Свойство (REPORTS) -->
+        </g>
+        <g stroke="#536BEB" stroke-width="2.2" fill="none" marker-end="url(#ar)">
+          <path d="M 448,90 C 400,78 260,70 210,68"/>           <!-- Публикация→Эксперимент (DESCRIBES) -->
+        </g>
+        <text x="300" y="52" text-anchor="middle" font-size="10" font-weight="800" fill="#536BEB">DESCRIBES</text>
+
+        <!-- nodes -->
+        <g font-size="12" font-weight="800">
+          <!-- Experiment (center-top, mint) -->
+          <rect x="120" y="46" width="118" height="34" rx="7" fill="#92E8B5" stroke="#92E8B5"/>
+          <text x="179" y="68" text-anchor="middle" fill="#131A16">Эксперимент</text>
+          <!-- Material -->
+          <rect x="55" y="150" width="105" height="34" rx="7" fill="rgba(19,26,22,.10)" stroke="#131A16" stroke-width="1"/>
+          <text x="107" y="172" text-anchor="middle" fill="#131A16">Материал</text>
+          <!-- Process -->
+          <rect x="300" y="152" width="105" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
+          <text x="352" y="174" text-anchor="middle" fill="#131A16">Процесс</text>
+          <!-- Property (outcome, mint) -->
+          <rect x="378" y="265" width="112" height="34" rx="7" fill="#92E8B5" stroke="#92E8B5"/>
+          <text x="434" y="287" text-anchor="middle" fill="#131A16">Свойство</text>
+          <!-- Element -->
+          <rect x="150" y="270" width="98" height="34" rx="7" fill="rgba(19,26,22,.10)" stroke="#131A16" stroke-width="1"/>
+          <text x="199" y="292" text-anchor="middle" fill="#131A16">Элемент</text>
+          <!-- Equipment -->
+          <rect x="292" y="316" width="112" height="34" rx="7" fill="rgba(19,26,22,.10)" stroke="#131A16" stroke-width="1"/>
+          <text x="348" y="338" text-anchor="middle" fill="#131A16">Оборудование</text>
+          <!-- Publication -->
+          <rect x="415" y="62" width="112" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
+          <text x="471" y="84" text-anchor="middle" fill="#131A16">Публикация</text>
+        </g>
+        <!-- edge labels -->
+        <g font-size="9" font-weight="700" fill="#8A918D">
+          <text x="92" y="118">USES</text>
+          <text x="250" y="120">APPLIES</text>
+          <text x="196" y="160">USES_MATERIAL</text>
+          <text x="398" y="230">RESULTS_IN</text>
+          <text x="104" y="250">CONTAINS</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><span class="chip" style="background:#92E8B5;"></span> эксперимент / свойство</span>
+        <span><span class="chip" style="background:rgba(83,107,235,.5);"></span> публикация / процесс</span>
+        <span><span class="chip" style="background:rgba(19,26,22,.2);"></span> материал / элемент / оборудование</span>
+      </div>
+      <div style="font-size:10.5px;color:var(--gray);margin-top:10px;line-height:1.5;">
+        Плюс: Method, Facility, Condition, Phase, Expert. Каждое ребро несёт
+        <span class="code" style="font-size:10px;">evidence</span>, источник, достоверность и дату.
+      </div>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S05 · АРХИТЕКТУРА ═══╗ -->
+<section id="s05" class="dark">
+  <div class="inner wide">
+    <div class="q-num">04</div>
+    <div class="q-title">Архитектура · LLM-агностичность, без GPU</div>
+    <p class="q-intro" style="color:rgba(241,238,236,.6);max-width:820px;">
+      Один пайплайн, сменные бэкенды. Сегодня — YandexGPT в облаке; в проде
+      Норникеля — тот же код с <strong style="color:var(--cream);">MetalGPT-1 on-prem</strong>,
+      клиент уже написан. Эмбеддинги локальные (ONNX) — без облачной квоты и без GPU.
+    </p>
+
+    <!-- Pipeline SVG -->
+    <div class="panel" style="padding:18px 22px;margin-bottom:16px;">
+      <svg viewBox="0 0 1080 210" width="100%" style="display:block;" font-family="Manrope, system-ui, sans-serif">
+        <defs>
+          <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#92E8B5"/>
+          </marker>
+        </defs>
+        <!-- flow arrows -->
+        <g stroke="#92E8B5" stroke-width="2" fill="none" marker-end="url(#arw)">
+          <line x1="165" y1="58" x2="205" y2="58"/>
+          <line x1="365" y1="58" x2="405" y2="58"/>
+          <line x1="610" y1="58" x2="650" y2="58"/>
+        </g>
+        <!-- ingest stages -->
+        <g font-family="Manrope">
+          <!-- Docs -->
+          <rect x="25" y="34" width="140" height="48" rx="8" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.15)"/>
+          <text x="95" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#F1EEEC">Документы</text>
+          <text x="95" y="71" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">PDF · DOCX · PPTX</text>
+          <!-- Parse -->
+          <rect x="205" y="34" width="160" height="48" rx="8" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.15)"/>
+          <text x="285" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#F1EEEC">Парсинг + чанки</text>
+          <text x="285" y="71" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">нормализация единиц</text>
+          <!-- Extract -->
+          <rect x="405" y="34" width="205" height="48" rx="8" fill="rgba(146,232,181,.14)" stroke="#92E8B5" stroke-width="1.4"/>
+          <text x="507" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#92E8B5">Извлечение · LLM</text>
+          <text x="507" y="71" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.7)">триплеты в JSON по онтологии</text>
+          <!-- Stores -->
+          <rect x="650" y="20" width="175" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
+          <text x="737" y="42" text-anchor="middle" font-size="12.5" font-weight="800" fill="#a3b0f7">Neo4j · граф</text>
+          <rect x="650" y="62" width="175" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
+          <text x="737" y="84" text-anchor="middle" font-size="12.5" font-weight="800" fill="#a3b0f7">Qdrant · вектор</text>
+        </g>
+
+        <!-- query flow (lower row) -->
+        <g stroke="#536BEB" stroke-width="2" fill="none" marker-end="url(#arw)" opacity="0.9">
+          <line x1="180" y1="165" x2="140" y2="165"/>
+          <line x1="405" y1="165" x2="365" y2="165"/>
+          <line x1="650" y1="165" x2="610" y2="165"/>
+          <line x1="875" y1="165" x2="835" y2="165"/>
+        </g>
+        <g font-family="Manrope">
+          <text x="60" y="128" font-size="10" font-weight="800" letter-spacing="0.1em" fill="rgba(241,238,236,.45)">ЗАПРОС ←</text>
+          <rect x="25" y="142" width="115" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
+          <text x="82" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Ответ +</text>
+          <text x="82" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">цитаты, граф</text>
+          <rect x="180" y="142" width="185" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
+          <text x="272" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Реранк + генерация</text>
+          <text x="272" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">bi-encoder → LLM</text>
+          <rect x="405" y="142" width="245" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
+          <text x="527" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Обход графа 1–4 хопа</text>
+          <text x="527" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">фильтры: числа · гео · годы</text>
+          <rect x="690" y="142" width="185" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
+          <text x="782" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Seed-узлы</text>
+          <text x="782" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">fulltext + вектор</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cols" style="gap:26px;">
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mint);margin-bottom:8px;">СМЕННЫЕ БЭКЕНДЫ · ОДНА СТРОКА В .env</div>
+        <div class="flow">
+          <div class="flow-row"><div class="flow-step">LLM</div><div class="flow-text"><code>LLM_BACKEND</code>: yandex → metalgpt (on-prem) → mock</div></div>
+          <div class="flow-row"><div class="flow-step">Эмбеддер</div><div class="flow-text"><code>EMBEDDER_BACKEND</code>: fastembed (ONNX, локально) → yandex → bge</div></div>
+          <div class="flow-row"><div class="flow-step">Хранилища</div><div class="flow-text">Neo4j + Qdrant · embedded или server (docker)</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="callout-dark" style="margin-top:0;">
+          <strong style="color:var(--mint);">Прод-трек готов.</strong> Клиент MetalGPT-1
+          (vLLM, OpenAI-совместимый) уже реализован — переключение бэкенда не требует
+          изменений пайплайна. Данные не покидают периметр.
+        </div>
+        <div class="callout-dark" style="margin-top:10px;">
+          <strong style="color:var(--cream);">Устойчивость:</strong> сбой эмбеддера → graph-only
+          ответ; сбой LLM → структурный флаг <span class="code">llm_ok=false</span> + подграф с
+          источниками. Батч-ингест: ретраи + чекпоинт.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S06 · ГИБРИДНЫЙ ПОИСК ═══╗ -->
+<section id="s06" class="cream">
+  <div class="inner cols">
+    <div>
+      <div class="q-num">05</div>
+      <div class="q-title">Гибридный поиск в деталях</div>
+      <p class="q-intro">
+        Пять ступеней превращают вопрос на естественном языке в ответ с
+        доказательной базой. Структурные фильтры (числа/гео/годы) применяются
+        <strong>внутри обхода графа</strong>, до генерации.
+      </p>
+      <div class="flow">
+        <div class="flow-row"><div class="flow-step">1 · Вектор</div><div class="flow-text">Семантический recall топ-k чанков (fastembed)</div></div>
+        <div class="flow-row"><div class="flow-step">2 · Seed</div><div class="flow-text">Точки входа в граф: fulltext Neo4j + морфология</div></div>
+        <div class="flow-row"><div class="flow-step">3 · Обход</div><div class="flow-text">1–4 хопа + фильтры чисел / гео / годов</div></div>
+        <div class="flow-row"><div class="flow-step">4 · Реранк</div><div class="flow-text">bi-encoder выносит релевантные рёбра вперёд</div></div>
+        <div class="flow-row"><div class="flow-step">5 · Генерация</div><div class="flow-text">LLM отвечает строго по подграфу + цитаты</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <div class="panel-label">Распад времени ретривала · медиана 447 мс</div>
+        <svg viewBox="0 0 460 150" style="width:100%;height:auto;display:block;" font-family="Manrope, system-ui, sans-serif">
+          <!-- stacked horizontal bar -->
+          <g>
+            <rect x="10" y="20" width="180" height="30" fill="#92E8B5" rx="3"/>
+            <rect x="190" y="20" width="55" height="30" fill="rgba(83,107,235,.55)" rx="0"/>
+            <rect x="245" y="20" width="125" height="30" fill="rgba(83,107,235,.85)" rx="0"/>
+            <rect x="370" y="20" width="48" height="30" fill="rgba(146,232,181,.45)" rx="3"/>
+          </g>
+          <g font-size="10.5" font-weight="700" fill="var(--dark)">
+            <text x="100" y="39" text-anchor="middle">вектор ~130</text>
+            <text x="217" y="39" text-anchor="middle" fill="#fff" font-size="9">seed 40</text>
+            <text x="307" y="39" text-anchor="middle" fill="#fff">граф ~90</text>
+            <text x="394" y="39" text-anchor="middle" font-size="9">реранк 35</text>
+          </g>
+          <text x="10" y="70" font-size="10" fill="var(--gray)">0 мс</text>
+          <text x="418" y="70" font-size="10" fill="var(--gray)" text-anchor="end">~450 мс</text>
+          <!-- budget marker -->
+          <text x="10" y="105" font-size="12" font-weight="800" fill="var(--dark)">Бюджет ТЗ: 3000–5000 мс</text>
+          <text x="10" y="126" font-size="11" font-weight="700" fill="#2c8c4f">Запас ×2–×11 · min 129 / max 1365 мс</text>
+        </svg>
+      </div>
+      <div class="callout-mint" style="margin-top:16px;">
+        <strong>Пример многопараметрического вопроса:</strong> «методы обессоливания,
+        если сульфаты/хлориды 200–300 мг/л, сухой остаток ≤1000 мг/дм³» — числовые
+        диапазоны распознаны и применены к подграфу.
+      </div>
+      <div class="callout-blue" style="margin-top:12px;">
+        Гео-откат: если «мировая практика» не находит зарубежных источников — фильтр
+        честно снимается с оговоркой, а не выдаёт «нет данных».
+      </div>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S07 · РЕЗУЛЬТАТЫ В ЦИФРАХ ═══╗ -->
+<section id="s07" class="dark">
+  <div class="inner wide">
+    <div class="q-num">06</div>
+    <div class="q-title">Результаты в цифрах</div>
+    <p class="q-intro" style="color:rgba(241,238,236,.6);max-width:820px;">
+      Всё измерено на реальном стенде (YandexGPT + fastembed + Neo4j), а не оценено
+      «на глаз». Held-out gold-набор не пересекается с few-shot примерами промпта.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">2111</div><div class="stat-label">узлов · 1436 рёбер · 12 типов</div></div>
+      <div class="stat"><div class="stat-num">447<span style="font-size:20px;"> мс</span></div><div class="stat-label">медиана ретривала · бюджет 3–5 с</div></div>
+      <div class="stat"><div class="stat-num">0,66</div><div class="stat-label">F1 извлечения сущностей</div></div>
+      <div class="stat"><div class="stat-num">68</div><div class="stat-label">юнит-тестов зелёных</div></div>
+    </div>
+
+    <div class="cols" style="margin-top:20px;gap:32px;">
+      <div class="panel">
+        <div class="panel-label">Точность извлечения триплетов · held-out gold (RU)</div>
+        <svg viewBox="0 0 460 170" style="width:100%;height:auto;display:block;" font-family="Manrope, system-ui, sans-serif">
+          <!-- baseline -->
+          <line x1="120" y1="135" x2="440" y2="135" stroke="rgba(241,238,236,.15)"/>
+          <line x1="120" y1="30" x2="120" y2="135" stroke="rgba(241,238,236,.15)"/>
+          <!-- 1.0 gridline -->
+          <line x1="120" y1="30" x2="440" y2="30" stroke="rgba(241,238,236,.08)" stroke-dasharray="3 3"/>
+          <text x="114" y="34" font-size="9" fill="rgba(241,238,236,.4)" text-anchor="end">1.0</text>
+          <text x="114" y="138" font-size="9" fill="rgba(241,238,236,.4)" text-anchor="end">0</text>
+          <!-- bars: entities 0.66, relations 0.62, attributes 0.67 ; scale 105px = 1.0 -->
+          <g>
+            <rect x="150" y="66" width="66" height="69" fill="#92E8B5" rx="3"/>
+            <text x="183" y="58" text-anchor="middle" font-size="13" font-weight="900" fill="#92E8B5">0,66</text>
+            <text x="183" y="152" text-anchor="middle" font-size="10.5" fill="rgba(241,238,236,.7)">сущности</text>
+            <rect x="258" y="70" width="66" height="65" fill="rgba(146,232,181,.7)" rx="3"/>
+            <text x="291" y="62" text-anchor="middle" font-size="13" font-weight="900" fill="#92E8B5">0,62</text>
+            <text x="291" y="152" text-anchor="middle" font-size="10.5" fill="rgba(241,238,236,.7)">связи</text>
+            <rect x="366" y="65" width="66" height="70" fill="#536BEB" rx="3"/>
+            <text x="399" y="57" text-anchor="middle" font-size="13" font-weight="900" fill="#a3b0f7">0,67</text>
+            <text x="399" y="152" text-anchor="middle" font-size="10.5" fill="rgba(241,238,236,.7)">атрибуты</text>
+          </g>
+          <text x="120" y="20" font-size="10" font-weight="800" fill="rgba(241,238,236,.5)" letter-spacing="0.1em">F1-МЕРА</text>
+        </svg>
+        <div style="font-size:10.5px;color:rgba(241,238,236,.5);margin-top:8px;line-height:1.5;">
+          Бэкенд YandexGPT, few-shot. Атрибуты (числа/единицы) — критичны для ТЗ:
+          бэкфилл значений из цитат поднял F1 на ~15 п.п.
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mint);margin-bottom:8px;">ЧЕСТНЫЕ ОГОВОРКИ</div>
+        <ul class="q-list" style="font-size:12.5px;">
+          <li><strong>Gold-набор 10 примеров</strong> — индикативно; расширение до 15–20 в бэклоге</li>
+          <li><strong>Кросс-язычное сопоставление меток</strong> — известный пробел (electrowinning ↔ электроэкстракция)</li>
+          <li><strong>Генерация облачная</strong> 4–17 с — на on-prem MetalGPT-1 кратно быстрее; ретривал <1,4 с</li>
+        </ul>
+        <div class="callout-dark" style="margin-top:14px;">
+          <strong style="color:var(--mint);">Мягкая деградация проверена:</strong> сбой
+          эмбеддера → graph-only; сбой LLM → подграф + источники. Ни одна ошибка не
+          роняет ответ целиком.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S08 · ПОКРЫТИЕ ТЗ ═══╗ -->
+<section id="s08" class="cream">
+  <div class="inner wide">
+    <div class="kicker">07 · Соответствие требованиям</div>
+    <h2>Покрытие ТЗ — все блоки закрыты</h2>
+    <p class="q-intro">
+      От импорта документов и онтологии до RBAC, аудита и экспорта отчётов.
+      Каждый пункт — рабочий код с тестами, а не слайд-обещание.
+    </p>
+    <div class="feature-grid three">
+      <div class="feat">
+        <div class="feat-num">Извлечение знаний</div>
+        <div class="feat-title">Онтология 12 типов · триплеты с провенансом</div>
+        <div class="feat-body">Парсинг PDF/DOCX/PPTX, нормализация единиц (мг/л, °C, г/т), канонизация синонимов RU/EN.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Многопараметрический поиск</div>
+        <div class="feat-title">Материал + процесс + условия + гео + годы</div>
+        <div class="feat-body">Числовые диапазоны, РФ↔мир, временные фильтры — распознаются из вопроса и применяются к графу.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Верификация</div>
+        <div class="feat-title">Источник · достоверность · дата</div>
+        <div class="feat-body">Уровни confirmed/preliminary/disputed, версионирование фактов, поиск противоречий.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Аналитика</div>
+        <div class="feat-title">Пробелы · литобзор · сравнение · эксперты</div>
+        <div class="feat-body">Дыры в данных вкл. гео-перекос, структурный литобзор, сравнение технологий, эксперты по теме.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Управление</div>
+        <div class="feat-title">RBAC 5 ролей · аудит · правка графа</div>
+        <div class="feat-body">Видимость внутренних данных по роли, журнал аудита, ручная корректировка связей экспертом.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">Интеграция</div>
+        <div class="feat-title">Экспорт PDF/MD/JSON-LD · уведомления · дашборд</div>
+        <div class="feat-body">Отчёты в техзадания, подписки на темы, дашборд покрытия знаний и активности лабораторий.</div>
+      </div>
+    </div>
+    <div class="callout-green" style="margin-top:16px;">
+      Нефункциональные требования тоже выполнены: ретривал в бюджете 3–5 с (запас
+      ×2–×11), развёртывание без GPU (docker compose или портативно), 68 тестов, RU/EN.
+    </div>
+  </div>
+  <div class="arrow" onclick="scrollNext(this)">↓</div>
+</section>
+
+<!-- ╔═══ S09 · РАЗВИТИЕ / ПРОД-ТРЕК ═══╗ -->
+<section id="s09" class="dark">
+  <div class="inner">
+    <div class="q-num">08</div>
+    <div class="q-title">Прод-трек и развитие</div>
+    <p class="q-intro" style="color:rgba(241,238,236,.6);max-width:800px;">
+      «Научный клубок» готов к пилоту в НИИ уже сейчас, а архитектура рассчитана на
+      промышленный масштаб корпуса Норникеля.
+    </p>
+    <div class="cols" style="gap:36px;">
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mint);margin-bottom:10px;">ДОРОЖНАЯ КАРТА</div>
+        <div class="flow">
+          <div class="flow-row"><div class="flow-step">Сейчас</div><div class="flow-text">Пилот: seed-граф 2100+ узлов, все функции ТЗ, RBAC + аудит</div></div>
+          <div class="flow-row"><div class="flow-step">Шаг 1</div><div class="flow-text">On-prem <code>MetalGPT-1</code> — тот же код, данные в периметре</div></div>
+          <div class="flow-row"><div class="flow-step">Шаг 2</div><div class="flow-text">Полный корпус: отчёты, патенты, лабораторные журналы</div></div>
+          <div class="flow-row"><div class="flow-step">Шаг 3</div><div class="flow-text">Каталог экспериментов, справочники, связи с сотрудниками</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mint);margin-bottom:10px;">ПОЧЕМУ ЭТО РАБОТАЕТ В ПРОДЕ</div>
+        <ul class="q-list" style="font-size:13px;">
+          <li><strong>LLM-агностичность:</strong> смена бэкенда — строка в конфиге, не рефакторинг</li>
+          <li><strong>Периметр безопасности:</strong> on-prem модель + локальные эмбеддинги, данные не уходят в облако</li>
+          <li><strong>Провенанс by design:</strong> каждый факт аудируем до источника и даты</li>
+          <li><strong>Мягкая деградация:</strong> сервис отвечает даже при сбое компонента</li>
+        </ul>
+        <div class="callout-green" style="margin-top:16px;">
+          Готово к развёртыванию: <span style="font-family:'Courier New',monospace;font-weight:800;color:var(--dark);">docker compose up</span>
+          — и жюри видит рабочее демо с данными за минуту.
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:16px;font-weight:800;color:var(--mint);margin-top:26px;letter-spacing:-0.01em;">
+      Спасибо — готовы к вопросам.
+    </p>
+  </div>
+</section>
+
+<script>
+// nav dots + progress + counter
+const sections = Array.from(document.querySelectorAll('section'));
+const nav = document.getElementById('nav-dots');
+sections.forEach((s, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot'; d.title = s.id;
+  d.onclick = () => s.scrollIntoView({behavior:'smooth', block:'center'});
+  nav.appendChild(d);
+});
+const dots = Array.from(nav.children);
+const counter = document.getElementById('slide-counter');
+const bar = document.getElementById('progress-bar');
+function update() {
+  const mid = window.scrollY + window.innerHeight/2;
+  let idx = 0, best = Infinity;
+  sections.forEach((s, i) => {
+    const c = s.offsetTop + s.offsetHeight/2;
+    const dist = Math.abs(c - mid);
+    if (dist < best) { best = dist; idx = i; }
+  });
+  dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+  counter.textContent = `${String(idx+1).padStart(2,'0')} / ${String(sections.length).padStart(2,'0')}`;
+  const total = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (100 * window.scrollY / total) + '%';
+}
+window.addEventListener('scroll', update, {passive:true});
+window.addEventListener('resize', update);
+update();
+function scrollNext(el) {
+  const s = el.closest('section');
+  const i = sections.indexOf(s);
+  if (i < sections.length-1) sections[i+1].scrollIntoView({behavior:'smooth', block:'center'});
+}
+document.addEventListener('keydown', e => {
+  const mid = window.scrollY + window.innerHeight/2;
+  let idx = 0, best = Infinity;
+  sections.forEach((s,i)=>{const c=s.offsetTop+s.offsetHeight/2;const d=Math.abs(c-mid);if(d<best){best=d;idx=i;}});
+  if ((e.key==='ArrowDown'||e.key==='PageDown'||e.key===' ') && idx<sections.length-1){e.preventDefault();sections[idx+1].scrollIntoView({behavior:'smooth',block:'center'});}
+  if ((e.key==='ArrowUp'||e.key==='PageUp') && idx>0){e.preventDefault();sections[idx-1].scrollIntoView({behavior:'smooth',block:'center'});}
+});
+</script>
+</body>
+</html>
