@@ -173,6 +173,7 @@ def ask(req: AskRequest, role: str = Depends(get_role)) -> dict:
         "edges_used": ans.edges_used, "passages_used": ans.passages_used,
         "constraints": [c.model_dump() for c in (ans.constraints or [])],
         "geography_filter": ans.geography_filter,
+        "geography_relaxed": ans.geography_relaxed,
         "year_from": ans.year_from, "year_to": ans.year_to,
         "timings_ms": ans.timings_ms or {},
         # подграф уже найден этим же retrieve — отдаём сразу, чтобы UI не гонял

@@ -28,6 +28,7 @@ class Answer:
     timings_ms: dict = None             # retrieval (vector/seed/graph) + llm_ms (§Y8)
     subgraph_edges: list = None         # рёбра подграфа для визуализации: ретривал
     seed_nodes: list = None             # уже их нашёл — не гонять /subgraph повторно
+    geography_relaxed: bool = False     # гео-фильтр снят (нет источников гео) — оговорка в UI
     llm_ok: bool = True                 # False = текст ответа — фолбэк (LLM недоступен);
                                         # потребители проверяют флаг, а не подстроку
 
@@ -67,6 +68,7 @@ def generate_answer(ctx: RetrievalContext, llm: LLMClient) -> Answer:
         timings_ms={**ctx.timings_ms, "llm_ms": llm_ms},
         subgraph_edges=ctx.subgraph_edges,
         seed_nodes=ctx.seed_nodes,
+        geography_relaxed=ctx.geography_relaxed,
     )
 
 

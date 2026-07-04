@@ -189,6 +189,49 @@ def test_match_topics_no_false_positive():
     assert match_topics(["флотация медной руды"], ["обессоливание воды"]) == []
 
 
+# --- бэкфилл числовых атрибутов Property из цитат (P1: слабейшая метрика) ---
+def test_backfill_property_value_from_evidence():
+    from klubok.extraction.heuristics import backfill_property_values
+    ents = [Entity(name="содержание золота в шлаке", type=NodeType.PROPERTY)]
+    rels = [Relation(src_name="Эксперимент 1", src_type=NodeType.EXPERIMENT,
+                     rel=RelType.RESULTS_IN, dst_name="содержание золота в шлаке",
+                     dst_type=NodeType.PROPERTY,
+                     evidence="содержание золота в шлаке не превышает 0.5 г/т")]
+    filled = backfill_property_values(ents, rels)
+    assert filled == 1
+    assert ents[0].attributes["value"] == 0.5 and ents[0].attributes["unit"] == "g/t"
+
+
+def test_backfill_does_not_overwrite_llm_value():
+    from klubok.extraction.heuristics import backfill_property_values
+    ents = [Entity(name="сухой остаток", type=NodeType.PROPERTY,
+                   attributes={"value": 850, "unit": "мг/дм3"})]
+    rels = [Relation(src_name="Э1", src_type=NodeType.EXPERIMENT, rel=RelType.RESULTS_IN,
+                     dst_name="сухой остаток", dst_type=NodeType.PROPERTY,
+                     evidence="сухой остаток снизился до 999 мг/дм3")]
+    assert backfill_property_values(ents, rels) == 0      # уже есть value — не трогаем
+    assert ents[0].attributes["value"] == 850
+
+
+# --- морфология-толерантный seed-запрос (падежи русского в fulltext) ---
+def test_seed_lucene_prefix_wildcards():
+    from klubok.retrieval.graphrag import _build_seed_lucene
+    q = "циркуляции католита при электроэкстракции никеля"
+    lucene = _build_seed_lucene(q)
+    # окончания срезаны, добавлены wildcard'ы -> ловит именительный падеж узлов
+    assert "электроэкстракци*" in lucene
+    assert "католит*" in lucene
+    assert "циркуляци*" in lucene
+    assert "при" not in lucene            # стоп-слово выкинуто
+
+
+def test_seed_lucene_drops_stopwords_and_short():
+    from klubok.retrieval.graphrag import _build_seed_lucene
+    lucene = _build_seed_lucene("какие методы для очистки")
+    assert "какие" not in lucene and "для" not in lucene   # стоп-слова
+    assert "очистк*" in lucene
+
+
 def test_watchstore_end_to_end(tmp_path):
     from klubok.notify.watchlist import WatchStore
     ws = WatchStore(path=tmp_path / "wl.sqlite")

@@ -33,6 +33,7 @@ class RetrievalContext:
     seed_nodes: list[str] = field(default_factory=list)
     constraints: list[NumericConstraint] = field(default_factory=list)   # разобранные из вопроса
     geography_filter: bool | None = None       # True=РФ, False=зарубеж, None=без фильтра
+    geography_relaxed: bool = False            # гео-фильтр снят, т.к. опустошал подграф
     year_from: int | None = None               # временной диапазон (ТЗ: «за 5 лет»)
     year_to: int | None = None
     timings_ms: dict[str, float] = field(default_factory=dict)  # vector_ms/seed_ms/graph_ms (§Y8)
@@ -52,7 +53,13 @@ class RetrievalContext:
                 meta_bits.append(f"актуально на: {e['actualized_at']}")
             meta = f"  ({'; '.join(meta_bits)})" if meta_bits else ""
             lines.append(f"- {e['src']} —{e['rel']}→ {e['dst']}{doc}{ev}{meta}")
-        return "\n".join(lines) if lines else "(связей в графе не найдено)"
+        body = "\n".join(lines) if lines else "(связей в графе не найдено)"
+        if self.geography_relaxed:
+            note = ("(!) Источников запрошенной географии (напр. зарубежная практика) "
+                    "в базе не найдено — ниже приведены доступные связи иной географии; "
+                    "укажи это в ответе.\n")
+            body = note + body
+        return body
 
     def passages_text(self) -> str:
         if not self.passages:
@@ -179,14 +186,57 @@ LIMIT $limit
 """
 
 
+# Стоп-слова вопроса: не несут сущности, но раздувают wildcard-запрос.
+_SEED_STOPWORDS = {
+    "какие", "какая", "какой", "каких", "что", "как", "где", "когда", "чем",
+    "для", "при", "про", "под", "над", "без", "или", "если", "это", "эти",
+    "описаны", "описан", "существуют", "применялись", "применяют", "используют",
+    "используются", "считается", "считаются", "покажите", "перечислите", "обзор",
+    "литобзор", "сравнение", "анализ", "решения", "решений", "методы", "методов",
+    "способы", "способов", "практике", "практика", "мировой", "мировая", "россии",
+    "рубежом", "зарубежных", "отечественной", "последних", "которые", "также",
+    "which", "what", "how", "the", "and", "for", "with", "are", "were",
+}
+# слово вопроса: кириллица/латиница/дефис, длиной ≥4
+_SEED_WORD_RE = _re.compile(r"[А-Яа-яЁёA-Za-z][А-Яа-яЁёA-Za-z\-]{3,}")
+
+
+def _build_seed_lucene(query: str) -> str:
+    """Собрать префиксный wildcard-запрос из значимых слов вопроса.
+
+    Стандартный анализатор fulltext Neo4j НЕ стеммит русский: «электроэкстракции»
+    (родительный) не матчит индексированное «электроэкстракция». Отбрасываем
+    окончание и добавляем `*` — `электроэкстракци*` ловит все падежи. Повышает
+    recall seed-узлов; downstream реранкинг/фильтры отсекают лишнее.
+    """
+    terms: list[str] = []
+    for w in _SEED_WORD_RE.findall(query):
+        low = w.lower()
+        if low in _SEED_STOPWORDS:
+            continue
+        stem = low[:-1] if len(low) > 5 else low       # срезаем 1 символ окончания
+        terms.append(stem + "*")
+    return " ".join(dict.fromkeys(terms))              # уник, сохраняя порядок
+
+
 def find_seed_nodes(client: Neo4jClient, query: str, limit: int = 8) -> list[dict]:
-    # экранируем спецсимволы lucene по минимуму
-    safe = query.replace('"', " ").replace("~", " ")
-    try:
-        rows = client.run(_SEED_QUERY, q=safe, limit=limit)
-    except Exception:                                  # noqa: BLE001 — индекса может не быть
-        return []
-    return [dict(r) for r in rows]
+    """Seed-узлы графа по вопросу. Сначала морфология-толерантный wildcard-запрос
+    (падежи русского), при пустом результате — исходный текст как fallback."""
+    seen: dict[str, dict] = {}
+    for q in (_build_seed_lucene(query), query.replace('"', " ").replace("~", " ")):
+        if not q.strip():
+            continue
+        try:
+            rows = client.run(_SEED_QUERY, q=q, limit=limit)
+        except Exception:                              # noqa: BLE001 — индекс/синтаксис
+            continue
+        for r in rows:
+            d = dict(r)
+            if d.get("cid") and d["cid"] not in seen:
+                seen[d["cid"]] = d
+        if len(seen) >= limit:
+            break
+    return list(seen.values())[:limit]
 
 
 def expand_subgraph(client: Neo4jClient, seeds: list[str], limit: int = 60,
@@ -370,6 +420,20 @@ def retrieve(question: str, vector_store, client: Neo4jClient,
         is_domestic=ctx.geography_filter, domain=domain, max_hops=max_hops,
         limit=graph_limit, excluded_docs=excluded_docs,
     )
+    # Мягкий откат гео-фильтра: если строгий фильтр опустошил подграф (в корпусе
+    # нет источников запрошенной практики — типично для «мировой практики» на
+    # преимущественно отечественном корпусе), повторяем без гео и помечаем —
+    # честнее ответить с оговоркой «зарубежных источников нет, вот доступные»,
+    # чем «нет информации». Числовые ограничения при этом сохраняем.
+    if not ctx.subgraph_edges and ctx.geography_filter is not None and ctx.seed_nodes:
+        relaxed = filtered_expand(
+            client, ctx.seed_nodes, constraints=ctx.constraints,
+            is_domestic=None, domain=domain, max_hops=max_hops,
+            limit=graph_limit, excluded_docs=excluded_docs,
+        )
+        if relaxed:
+            ctx.subgraph_edges = relaxed
+            ctx.geography_relaxed = True
     t_graph = time.perf_counter()
 
     # 4) реранкинг рёбер по релевантности вопросу (bi-encoder) — обход даёт рёбра

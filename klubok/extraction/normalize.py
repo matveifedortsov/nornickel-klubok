@@ -63,6 +63,8 @@ _UNIT_ALIASES = {
     "л/мин": "L/min", "l/min": "L/min", "л/ч": "L/h", "l/h": "L/h",
     "т/сут": "t/day", "т/сутки": "t/day", "t/day": "t/day",
     "а/м2": "A/m2", "а/м²": "A/m2", "a/m2": "A/m2",
+    "г/т": "g/t", "g/t": "g/t", "г/тонн": "g/t",     # содержание металла в руде/шлаке
+    "кг/т": "kg/t", "kg/t": "kg/t",
 }
 
 # отсортированный по длине список вариантов для жадного матча
@@ -120,6 +122,7 @@ _DIMENSION = {
     "mg/L": "concentration", "g/L": "concentration",
     "m3/h": "flow_rate", "L/min": "flow_rate", "L/h": "flow_rate",
     "t/day": "throughput", "A/m2": "current_density",
+    "g/t": "grade", "kg/t": "grade",
 }
 
 

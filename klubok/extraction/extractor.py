@@ -16,7 +16,7 @@ from klubok.ontology import (
 )
 from klubok.extraction.prompts import EXTRACTION_SYSTEM, build_extraction_prompt
 from klubok.extraction.llm_client import LLMClient
-from klubok.extraction.heuristics import verification_from_evidence
+from klubok.extraction.heuristics import verification_from_evidence, backfill_property_values
 
 log = logging.getLogger(__name__)
 
@@ -119,6 +119,9 @@ def parse_extraction(raw: str, doc_id: str, chunk_id: str | None) -> ExtractionR
                               entities=entities, relations=relations)
     # фильтр галлюцинаций: оставляем только связи, разрешённые онтологией
     result.relations = result.schema_valid_relations()
+    # добор числовых атрибутов Property из цитат (fill-if-empty) — усиливает
+    # слабейшую метрику извлечения, не перезаписывая значения от LLM
+    backfill_property_values(result.entities, result.relations)
     return result
 
 
