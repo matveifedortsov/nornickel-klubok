@@ -140,4 +140,71 @@ GOLD_SET: list[dict] = [
             ],
         },
     },
+
+    # --- Обессоливание воды (вопрос ТЗ №1) ---
+    {
+        "text": (
+            "Для обессоливания воды обогатительной фабрики применяли обратный осмос. "
+            "Исходная вода содержала сульфаты около 280 мг/л. После очистки сухой "
+            "остаток снизился до 850 мг/дм3."
+        ),
+        "output": {
+            "entities": [
+                {"name": "вода обогатительной фабрики", "type": "Material", "attributes": {}},
+                {"name": "обратный осмос", "type": "Process", "attributes": {}},
+                {"name": "сухой остаток", "type": "Property",
+                 "attributes": {"value": 850, "unit": "мг/дм3"}},
+                {"name": "Эксперимент 1", "type": "Experiment", "attributes": {}},
+            ],
+            "relations": [
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "USES",
+                 "dst_name": "вода обогатительной фабрики", "dst_type": "Material",
+                 "evidence": "обессоливания воды обогатительной фабрики"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "обратный осмос", "dst_type": "Process",
+                 "evidence": "применяли обратный осмос"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "RESULTS_IN",
+                 "dst_name": "сухой остаток", "dst_type": "Property",
+                 "evidence": "сухой остаток снизился до 850 мг/дм3"},
+            ],
+        },
+    },
+
+    # --- Английский пример (мультиязычность RU/EN, вопрос ТЗ про electrowinning) ---
+    {
+        "text": (
+            "Nickel electrowinning was carried out at a current density of 250 A/m2 with "
+            "catholyte circulation. The cathode current efficiency reached 95%. X-ray "
+            "diffraction (XRD) confirmed the deposition of pure nickel."
+        ),
+        "output": {
+            "entities": [
+                {"name": "nickel", "type": "Material", "attributes": {}},
+                {"name": "electrowinning", "type": "Process",
+                 "attributes": {"current_density": 250, "unit": "A/m2"}},
+                {"name": "cathode current efficiency", "type": "Property",
+                 "attributes": {"value": 95, "unit": "%"}},
+                {"name": "XRD", "type": "Method", "attributes": {}},
+                {"name": "pure nickel", "type": "Phase", "attributes": {}},
+                {"name": "Experiment 1", "type": "Experiment", "attributes": {}},
+            ],
+            "relations": [
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "USES",
+                 "dst_name": "nickel", "dst_type": "Material",
+                 "evidence": "Nickel electrowinning was carried out"},
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "electrowinning", "dst_type": "Process",
+                 "evidence": "at a current density of 250 A/m2 with catholyte circulation"},
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "MEASURES",
+                 "dst_name": "cathode current efficiency", "dst_type": "Property",
+                 "evidence": "The cathode current efficiency reached 95%"},
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "CONTAINS_PHASE",
+                 "dst_name": "pure nickel", "dst_type": "Phase",
+                 "evidence": "confirmed the deposition of pure nickel"},
+                {"src_name": "pure nickel", "src_type": "Phase", "rel": "OBSERVED_BY",
+                 "dst_name": "XRD", "dst_type": "Method",
+                 "evidence": "X-ray diffraction (XRD) confirmed the deposition"},
+            ],
+        },
+    },
 ]

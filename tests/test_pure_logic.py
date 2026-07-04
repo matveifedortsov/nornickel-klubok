@@ -226,6 +226,12 @@ def test_parse_extraction_garbage_is_safe():
 
 
 # --- чанкинг ---
+def test_chunk_text_empty_returns_nothing():
+    # скан/пустой документ -> нет чанков -> pipeline пропустит его до LLM
+    assert chunk_text("", doc_id="d") == []
+    assert chunk_text("   \n\n\t  ", doc_id="d") == []
+
+
 def test_chunk_text_respects_max_chars():
     text = "Абзац один.\n\n" + ("Длинное предложение. " * 200)
     chunks = chunk_text(text, doc_id="d", page=1, max_chars=500)
@@ -283,6 +289,96 @@ def test_fewshot_examples_parse_through_extractor():
         assert len(res.relations) == len(ex["output"]["relations"])
 
 
+# --- эвристики верификации/гео/домена ---
+def test_verification_from_evidence():
+    from klubok.extraction.heuristics import verification_from_evidence
+    assert verification_from_evidence("твёрдость составила 168 HV") == "confirmed"
+    assert verification_from_evidence("предполагается рост извлечения") == "preliminary"
+    assert verification_from_evidence("образцы сплава CuNi") == "unverified"
+    assert verification_from_evidence(None) == "unverified"
+
+
+def test_detect_is_domestic():
+    from klubok.extraction.heuristics import detect_is_domestic
+    ru = "Обеднение шлаков медеплавильного производства методом электротермии " * 8
+    en = "Copper matte converting and slag cleaning in flash smelting furnace " * 8
+    assert detect_is_domestic(ru) == (True, "Россия")
+    assert detect_is_domestic(en)[0] is False
+    assert detect_is_domestic("короткий текст") == (None, None)   # мало текста
+
+
+def test_detect_domain():
+    from klubok.extraction.heuristics import detect_domain
+    assert detect_domain("электроэкстракция никеля, циркуляция католита, раствор") == "гидрометаллургия"
+    assert detect_domain("плавка в печи взвешенной плавки, штейн и шлак") == "пирометаллургия"
+    assert detect_domain("флотация руды и обогащение концентрата") == "обогащение"
+    assert detect_domain("нейтральный текст без ключевых слов") is None
+
+
+# --- временной фильтр из вопроса ---
+def test_extract_year_filter_last_n_years():
+    from klubok.retrieval.graphrag import extract_year_filter
+    assert extract_year_filter("публикации за последние 5 лет", now_year=2026) == (2021, None)
+
+
+def test_extract_year_filter_range():
+    from klubok.retrieval.graphrag import extract_year_filter
+    assert extract_year_filter("эксперименты за 2018–2022", now_year=2026) == (2018, 2022)
+    assert extract_year_filter("с 2018 по 2022", now_year=2026) == (2018, 2022)
+
+
+def test_extract_year_filter_since_and_before():
+    from klubok.retrieval.graphrag import extract_year_filter
+    assert extract_year_filter("работы с 2019 года", now_year=2026) == (2019, None)
+    assert extract_year_filter("статьи до 2015", now_year=2026) == (None, 2015)
+
+
+def test_extract_year_filter_none_and_no_false_positive():
+    from klubok.retrieval.graphrag import extract_year_filter
+    assert extract_year_filter("методы обессоливания воды", now_year=2026) == (None, None)
+    # концентрации/температуры не должны попадать в годы
+    assert extract_year_filter("сульфаты 300 мг/л при 80 C", now_year=2026) == (None, None)
+
+
+def test_passes_year_unknown_kept():
+    from klubok.retrieval.graphrag import _passes_year
+    assert _passes_year(None, 2020, None) is True       # неизвестный год не отбрасываем
+    assert _passes_year(2019, 2020, None) is False
+    assert _passes_year(2021, 2020, 2022) is True
+    assert _passes_year(2023, None, 2022) is False
+
+
+# --- реранкинг рёбер по релевантности вопросу ---
+def test_rerank_edges_orders_by_relevance():
+    from klubok.retrieval.rerank import rerank_edges
+    from klubok.vectorstore.embeddings import MockEmbedder
+    edges = [
+        {"src": "вода", "rel": "APPLIES", "dst": "закачка шахтных вод", "evidence": ""},
+        {"src": "шлак", "rel": "RESULTS_IN", "dst": "обеднение шлаков", "evidence": "обеднение"},
+    ]
+    ranked = rerank_edges("обеднение шлаков", edges, MockEmbedder(dim=512), top_k=40)
+    assert ranked[0]["dst"] == "обеднение шлаков"        # релевантное ребро — первым
+    assert "rerank_score" in ranked[0]
+
+
+def test_rerank_edges_respects_top_k_and_empty():
+    from klubok.retrieval.rerank import rerank_edges
+    from klubok.vectorstore.embeddings import MockEmbedder
+    emb = MockEmbedder(dim=128)
+    many = [{"src": f"m{i}", "rel": "USES", "dst": f"d{i}", "evidence": ""} for i in range(50)]
+    assert len(rerank_edges("запрос", many, emb, top_k=10)) == 10
+    assert rerank_edges("q", [], emb) == []
+
+
+def test_rerank_edges_embedder_failure_is_safe():
+    from klubok.retrieval.rerank import rerank_edges
+    class _BadEmb:
+        def encode(self, *a, **k): raise RuntimeError("down")
+        def encode_query(self, *a, **k): raise RuntimeError("down")
+    edges = [{"src": "a", "rel": "USES", "dst": "b"}, {"src": "c", "rel": "USES", "dst": "d"}]
+    assert rerank_edges("q", edges, _BadEmb(), top_k=1) == edges[:1]   # фолбэк без краша
+
+
 # --- метрики оценки извлечения ---
 def test_prf_perfect_and_partial():
     from klubok.eval.metrics import prf_from_sets
@@ -338,6 +434,25 @@ def test_gold_set_relations_schema_valid():
             assert r.is_schema_valid()
             assert (r.src_name, r.src_type) in defined
             assert (r.dst_name, r.dst_type) in defined
+
+
+# --- устойчивость генерации ответа к пустому/падающему LLM ---
+def test_generate_answer_empty_llm_fallback():
+    from klubok.retrieval.graphrag import RetrievalContext
+    from klubok.qa.answer import generate_answer
+
+    class _EmptyLLM:
+        def complete(self, prompt, system=""): return "   "
+
+    class _RaisingLLM:
+        def complete(self, prompt, system=""): raise RuntimeError("HTTP 429 quota")
+
+    ctx = RetrievalContext(question="вопрос",
+                           passages=[{"doc_id": "d1", "text": "t"}], subgraph_edges=[])
+    for llm in (_EmptyLLM(), _RaisingLLM()):
+        ans = generate_answer(ctx, llm)
+        assert "Не удалось сгенерировать" in ans.text     # фолбэк, не краш
+        assert ans.sources == ["d1"]                       # источники сохранены
 
 
 # --- mock LLM прогоняет извлечение без GPU ---

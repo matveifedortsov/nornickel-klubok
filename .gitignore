@@ -22,11 +22,19 @@ __pycache__/
 .venv/
 venv/
 
-# Прогресс/логи ингеста
+# Прогресс/логи ингеста (run-артефакты, не часть кода)
 *.log
-scripts/*_checkpoint.json
+scripts/*checkpoint*
+scripts/*_report.json
+scripts/corpus_full.txt
+
+# Локальный тулинг Claude Code (не часть решения)
+.claude/
 
 # ОС/IDE
 .DS_Store
 .idea/
 .vscode/
+
+# Портативные среды выполнения (JDK/Neo4j) — не в VCS
+runtime/

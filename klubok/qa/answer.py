@@ -23,7 +23,11 @@ class Answer:
     passages_used: int
     constraints: list = None            # NumericConstraint из вопроса, см. graphrag.py
     geography_filter: bool | None = None
+    year_from: int | None = None        # временной диапазон (ТЗ), см. graphrag.py
+    year_to: int | None = None
     timings_ms: dict = None             # retrieval (vector/seed/graph) + llm_ms (§Y8)
+    subgraph_edges: list = None         # рёбра подграфа для визуализации: ретривал
+    seed_nodes: list = None             # уже их нашёл — не гонять /subgraph повторно
 
 
 def generate_answer(ctx: RetrievalContext, llm: LLMClient) -> Answer:
@@ -34,8 +38,18 @@ def generate_answer(ctx: RetrievalContext, llm: LLMClient) -> Answer:
         passages=ctx.passages_text(),
     )
     t0 = time.perf_counter()
-    text = llm.complete(prompt, system=ANSWER_SYSTEM)
+    try:
+        text = llm.complete(prompt, system=ANSWER_SYSTEM)
+    except Exception as exc:                              # noqa: BLE001 — квота/сеть LLM
+        import logging
+        logging.getLogger(__name__).warning("генерация ответа не удалась (%s)", exc)
+        text = ""
     llm_ms = round((time.perf_counter() - t0) * 1000, 1)
+    # пустой/сбойный ответ LLM не должен выглядеть как «пустой ответ» — даём
+    # честный фолбэк, но сохраняем найденный подграф/источники (польза для жюри).
+    if not text or not text.strip():
+        text = ("Не удалось сгенерировать связный ответ (LLM недоступен или пуст). "
+                "Ниже — найденные связи графа и источники по запросу.")
     return Answer(
         question=ctx.question,
         text=text,
@@ -44,7 +58,11 @@ def generate_answer(ctx: RetrievalContext, llm: LLMClient) -> Answer:
         passages_used=len(ctx.passages),
         constraints=ctx.constraints,
         geography_filter=ctx.geography_filter,
+        year_from=ctx.year_from,
+        year_to=ctx.year_to,
         timings_ms={**ctx.timings_ms, "llm_ms": llm_ms},
+        subgraph_edges=ctx.subgraph_edges,
+        seed_nodes=ctx.seed_nodes,
     )
 
 

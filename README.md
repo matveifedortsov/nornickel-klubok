@@ -8,18 +8,29 @@
 верификацией**, **числовыми/гео-фильтрами**, **визуализацией подграфа** и **поиском пробелов
 в данных**.
 
-## Главная идея архитектуры
-Все «тяжёлые» компоненты (LLM, эмбеддер) спрятаны за интерфейсами с двумя
-реализациями:
+## Главная идея архитектуры — LLM/эмбеддер-агностичность
+Все «тяжёлые» компоненты спрятаны за интерфейсами с несколькими взаимозаменяемыми
+реализациями. Один и тот же пайплайн работает на разных бэкендах — переключение
+одной строкой в `.env` (`LLM_BACKEND`, `EMBEDDER_BACKEND`):
 
-| Слой       | Без GPU (разработка)      | С железом (боевой режим)        |
-|------------|---------------------------|---------------------------------|
-| LLM        | `MockLLM`                 | `MetalGPTClient` (MetalGPT-1)   |
-| Эмбеддинги | `MockEmbedder`            | `BGEEmbedder` (BAAI/bge-m3)     |
-| Вектор     | `InMemoryVectorStore`     | `QdrantStore`                   |
+| Слой | `mock` (разработка) | `yandex` (боевой) | `fastembed`/локальный | on-prem (прод Норникеля) |
+|------|------|------|------|------|
+| **LLM** | `MockLLM` | **YandexGPT** (Yandex AI Studio) | — | `MetalGPTClient` (MetalGPT-1 через vLLM) |
+| **Эмбеддинги** | `MockEmbedder` | Yandex textEmbedding | **`FastEmbedEmbedder`** (ONNX, локально, без квоты) | `BGEEmbedder` (bge-m3) |
+| **Вектор** | `InMemoryVectorStore` | `QdrantStore` (server/**local**) | — | `QdrantStore` |
 
-Переключение — через `.env` (`LLM_BACKEND`, `EMBEDDER_BACKEND`). Поэтому **весь
-пайплайн пишется и тестируется заранее**, до выделения вычислительных мощностей.
+Архитектурная выгода: сегодня — Yandex AI Studio, в проде Норникеля **тот же код**
+работает с on-prem MetalGPT-1 (клиент уже написан). Эмбеддинги вынесены на
+локальный ONNX (`fastembed`) — векторный слой **не зависит от облачной квоты**.
+
+📐 Схема архитектуры: [docs/architecture.svg](docs/architecture.svg).
+
+### Гибридный конвейер запроса
+`вопрос` → распознавание фильтров (числа/гео/годы) → **векторный recall** (fastembed)
+→ **seed-узлы** (fulltext Neo4j) → **обход графа 1–4 хопа** (APOC) со структурными
+фильтрами → **реранкинг рёбер** по релевантности (bi-encoder, локально) →
+**генерация ответа** с цитатами и верификацией. Ретривал полностью локальный
+(~0.1–2.6 с, в бюджете ТЗ «3–5 с»); от облака зависит только генерация текста.
 
 ## Что можно запустить прямо сейчас (без GPU)
 ```bash
@@ -42,11 +53,35 @@ python scripts/eval_extraction.py --no-few-shot       # zero-shot baseline
 
 ## Что добавляется, когда подняли инфраструктуру (всё ещё без GPU)
 ```bash
-docker compose up -d                   # Neo4j + Qdrant
-uvicorn klubok.api.app:app --reload    # API
-streamlit run ui/streamlit_app.py      # демо-интерфейс
+docker compose up -d                   # Neo4j + Qdrant + API + UI одной командой
 ```
 На этом этапе LLM/эмбеддер ещё Mock — но граф, ретривал, gap-анализ и UI уже живые.
+
+## Боевой запуск на Yandex AI Studio (проверено, без Docker)
+Если Docker недоступен — Neo4j запускается портативно, Qdrant работает во
+встроенном режиме (без сервера), LLM/эмбеддинги — через Yandex AI Studio.
+
+1. **`.env`** (ключи только здесь, не в git):
+   ```
+   LLM_BACKEND=yandex
+   EMBEDDER_BACKEND=yandex
+   QDRANT_MODE=local            # встроенный Qdrant в data/qdrant_local
+   YANDEX_API_KEY=...
+   YANDEX_FOLDER_ID=...
+   YANDEX_RPS=0.15              # под квоту Yandex (~10 запросов/мин)
+   ```
+2. **Смоук-тест** ключа/квоты/сети: `python scripts/check_yandex.py`
+3. **Neo4j**: `docker compose up -d neo4j` ИЛИ портативно (JDK+Neo4j в `runtime/`).
+4. **Ингест** (встроенный Qdrant → API и ingest не запускать одновременно):
+   `python scripts/ingest_corpus.py --list runtime/pilot.txt`
+5. **API + UI** (после ингеста):
+   `uvicorn klubok.api.app:app` и `streamlit run ui/streamlit_app.py`
+
+> **Квота Yandex.** Дефолтная квота Text Generation ≈10 запросов/мин — на батч-ингест
+> её мало. В коде: `YANDEX_RPS=0.15` (без 429) + кэш извлечения по чанкам
+> ([extract_cache.py](klubok/extraction/extract_cache.py), ретраи не жгут квоту) +
+> кэш эмбеддингов. Для полного корпуса (176 файлов) **поднимите квоту** в Yandex
+> Cloud console; для демо достаточно пилота + десятков файлов.
 
 ## Ингест реального корпуса
 ```bash

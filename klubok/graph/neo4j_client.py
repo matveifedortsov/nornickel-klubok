@@ -15,10 +15,17 @@ class Neo4jClient:
     def __init__(self, uri: str | None = None, user: str | None = None,
                  password: str | None = None) -> None:
         from neo4j import GraphDatabase
-        self._driver = GraphDatabase.driver(
-            uri or settings.neo4j_uri,
-            auth=(user or settings.neo4j_user, password or settings.neo4j_password),
-        )
+        # Заглушаем серверные нотификации (schema "already exists", "missing
+        # property" при первом insert) — это ожидаемый шум, заваливающий логи
+        # ингеста. Параметр появился в драйвере 5.7; на старых — тихий fallback.
+        kwargs = dict(auth=(user or settings.neo4j_user, password or settings.neo4j_password))
+        try:
+            self._driver = GraphDatabase.driver(
+                uri or settings.neo4j_uri,
+                notifications_min_severity="OFF", **kwargs,
+            )
+        except (TypeError, ValueError):
+            self._driver = GraphDatabase.driver(uri or settings.neo4j_uri, **kwargs)
 
     def close(self) -> None:
         self._driver.close()

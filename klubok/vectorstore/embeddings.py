@@ -21,6 +21,11 @@ from typing import Protocol
 import numpy as np
 
 from config import settings
+from klubok.extraction.llm_client import RateLimiter
+
+# Троттлинг эмбеддингов Yandex (общий на все экземпляры). Квота эмбеддингов
+# обычно выше генерации, поэтому отдельный, более быстрый rps.
+_emb_rate_limiter = RateLimiter(settings.yandex_emb_rps)
 
 
 class Embedder(Protocol):
@@ -86,6 +91,9 @@ class YandexEmbedder:
     ingest-скрипта. Авторизация — 'Authorization: Api-Key <key>'.
     """
 
+    remote = True   # 1 текст = 1 троттлированный HTTP-вызов: массовые encode
+                    # (реранк рёбер и т.п.) на таком эмбеддере недопустимы
+
     def __init__(self) -> None:
         import requests
         if not settings.yandex_api_key or not settings.yandex_folder_id:
@@ -110,8 +118,9 @@ class YandexEmbedder:
         model_uri = self._query_uri if kind == "query" else self._doc_uri
         payload = {"modelUri": model_uri, "text": text[:8000]}
         last_exc: Exception | None = None
-        for attempt in range(settings.yandex_max_retries + 1):
+        for attempt in range(settings.yandex_emb_max_retries + 1):
             try:
+                _emb_rate_limiter.wait()      # троттлинг под квоту (burst index_chunks)
                 resp = self._requests.post(self._url, headers=self._headers,
                                            json=payload, timeout=settings.yandex_timeout)
                 if resp.status_code in (429, 500, 502, 503, 504):
@@ -121,8 +130,8 @@ class YandexEmbedder:
                 return _l2_normalize(vec[None, :])[0]
             except Exception as exc:                          # noqa: BLE001
                 last_exc = exc
-                if attempt < settings.yandex_max_retries:
-                    time.sleep(min(2 ** attempt, 30) + random.uniform(0, 0.5))
+                if attempt < settings.yandex_emb_max_retries:
+                    time.sleep(min(2 ** attempt, 8) + random.uniform(0, 0.5))
         raise RuntimeError(f"Yandex textEmbedding не удался: {last_exc}")
 
     def encode(self, texts: list[str], kind: str = "doc") -> np.ndarray:
@@ -134,10 +143,38 @@ class YandexEmbedder:
         return self._embed_one(text, "query")
 
 
+class FastEmbedEmbedder:
+    """Локальный эмбеддер на ONNX-runtime (fastembed) — БЕЗ torch и БЕЗ квоты.
+
+    Нужен там, где sentence-transformers/torch падает (segfault на новых Python)
+    или недоступна облачная квота. Мультиязычная модель (RU/EN). Модель ~120МБ
+    качается один раз в кэш fastembed.
+    """
+
+    def __init__(self, model_name: str | None = None) -> None:
+        from fastembed import TextEmbedding
+        kw = {"cache_dir": settings.fastembed_cache} if settings.fastembed_cache else {}
+        self._model = TextEmbedding(model_name or settings.fastembed_model, **kw)
+        # определяем размерность пробным эмбеддингом
+        self.dim = int(np.asarray(next(iter(self._model.embed(["probe"])))).shape[0])
+
+    def encode(self, texts: list[str], kind: str = "doc") -> np.ndarray:
+        if not texts:
+            return np.zeros((0, self.dim), dtype=np.float32)
+        gen = self._model.query_embed(texts) if kind == "query" else self._model.embed(texts)
+        arr = np.asarray(list(gen), dtype=np.float32)
+        return _l2_normalize(arr)
+
+    def encode_query(self, text: str) -> np.ndarray:
+        return self.encode([text], kind="query")[0]
+
+
 def get_embedder() -> Embedder:
     backend = settings.embedder_backend
     if backend == "bge":
         return BGEEmbedder()
+    if backend == "fastembed":
+        return FastEmbedEmbedder()
     if backend == "yandex":
         from klubok.vectorstore.emb_cache import CachedEmbedder
         return CachedEmbedder(YandexEmbedder())

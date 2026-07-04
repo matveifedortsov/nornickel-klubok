@@ -8,7 +8,40 @@ question ИЛИ topic (duck typing — не завязываемся на кон
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
+
+_FONTS_DIR = Path(__file__).with_name("fonts")
+_FONT_REGISTERED: str | None = None       # кэш имени зарегистрированного шрифта
+
+
+def _ensure_cyrillic_font() -> tuple[str, str]:
+    """Зарегистрировать кириллический шрифт в reportlab (идемпотентно).
+
+    Возвращает (regular_name, bold_name). Дефолтные шрифты reportlab (Helvetica)
+    НЕ содержат кириллицы — русский текст в PDF выходил бы пустым. Бандлим
+    DejaVuSans в klubok/export/fonts, чтобы работало и локально, и в Docker.
+    При отсутствии файла — тихий откат на Helvetica (лучше латиница, чем краш).
+    """
+    global _FONT_REGISTERED
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+
+    if _FONT_REGISTERED == "dejavu":
+        return "DejaVuSans", "DejaVuSans-Bold"
+    if _FONT_REGISTERED == "helvetica":
+        return "Helvetica", "Helvetica-Bold"
+
+    reg, bold = _FONTS_DIR / "DejaVuSans.ttf", _FONTS_DIR / "DejaVuSans-Bold.ttf"
+    try:
+        pdfmetrics.registerFont(TTFont("DejaVuSans", str(reg)))
+        pdfmetrics.registerFont(TTFont("DejaVuSans-Bold", str(bold if bold.exists() else reg)))
+        pdfmetrics.registerFontFamily("DejaVuSans", normal="DejaVuSans", bold="DejaVuSans-Bold")
+        _FONT_REGISTERED = "dejavu"
+        return "DejaVuSans", "DejaVuSans-Bold"
+    except Exception:                      # noqa: BLE001 — шрифта нет/битый
+        _FONT_REGISTERED = "helvetica"
+        return "Helvetica", "Helvetica-Bold"
 
 
 def _title(result: Any) -> str:
@@ -46,9 +79,13 @@ def to_pdf(result: Any) -> bytes:
     from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
     from reportlab.lib.styles import getSampleStyleSheet
 
+    regular, bold = _ensure_cyrillic_font()
     buf = BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=A4)
     styles = getSampleStyleSheet()
+    # переопределяем шрифт стилей на кириллический
+    for name, font in (("Title", bold), ("Heading2", bold), ("BodyText", regular)):
+        styles[name].fontName = font
 
     story = [Paragraph(_title(result), styles["Title"]), Spacer(1, 12)]
     for para in result.text.split("\n\n"):

@@ -1,0 +1,747 @@
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Обзоры\\Использование хвостов обогащения в качестве составляющих закладочных смесей.docx", "authors": [], "title": "Использование хвостов обогащения в качестве составляющих закладочных смесей", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "name": "Использование хвостов обогащения в качестве составляющих закладочных смесей", "canonical_id": "Publication:Использование хвостов обогащения в качес_9950be8e", "domain": "обогащение"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:хвосты обогащения", "name": "хвосты обогащения", "domain": "обогащение"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:закладочные смеси", "name": "закладочные смеси", "domain": "пирометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "СССР", "canonical_id": "Facility:пышминский рудник", "name": "Пышминский рудник", "domain": "обогащение", "actualized_at": "1950-01-01"}}
+{"labels": ["Facility"], "props": {"geography": "КазССР", "name": "Миргалимсайский рудник", "canonical_id": "Facility:миргалимсайский рудник", "domain": "обогащение", "actualized_at": "1961-01-01"}}
+{"labels": ["Facility"], "props": {"geography": "СССР", "name": "Ачполиметалл", "canonical_id": "Facility:ачполиметалл", "domain": "обогащение", "actualized_at": "1977-01-01"}}
+{"labels": ["Facility"], "props": {"geography": "СССР", "canonical_id": "Facility:ленинагорский гок", "name": "Ленинагорский ГОК", "domain": "обогащение", "actualized_at": "1977-01-01"}}
+{"labels": ["Facility"], "props": {"geography": "СССР", "canonical_id": "Facility:комбинат «печенганикель»", "name": "комбинат «Печенганикель»", "domain": "обогащение", "actualized_at": "1984-01-01"}}
+{"labels": ["Facility"], "props": {"geography": "СССР", "canonical_id": "Facility:норильский комбинат", "name": "Норильский комбинат", "domain": "обогащение", "actualized_at": "1986-01-01"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:технологическая инструкция по производству закладочных работ", "name": "технологическая инструкция по производству закладочных работ", "domain": "обогащение", "date": "1986"}}
+{"labels": ["Experiment"], "props": {"geography": "Россия", "is_domestic": true, "name": "Эксперимент 1", "canonical_id": "Experiment:эксперимент 1", "domain": "гидрометаллургия", "time_frame": "1970-1980"}}
+{"labels": ["Facility"], "props": {"canonical_id": "Facility:орловский рудник", "name": "Орловский рудник", "domain": "обогащение"}}
+{"labels": ["Facility"], "props": {"name": "Гайский рудник", "canonical_id": "Facility:гайский рудник", "domain": "обогащение"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:закладочная смесь", "name": "закладочная смесь", "domain": "обогащение"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:технология закладочных работ", "name": "технология закладочных работ", "domain": "обогащение"}}
+{"labels": ["Experiment"], "props": {"geography": "Россия", "is_domestic": true, "name": "Эксперимент 2", "canonical_id": "Experiment:эксперимент 2", "domain": "гидрометаллургия", "time_frame": "1990-е"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Обзоры\\Закладка_май2018.docx", "authors": [], "title": "Закладка_май2018", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "name": "Закладка_май2018", "canonical_id": "Publication:Закладка_май2018_a30f258c", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:закладка пустой породой", "name": "закладка пустой породой", "domain": "геомеханика"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:цементированная закладка", "name": "цементированная закладка", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:пастовая закладка", "name": "пастовая закладка", "domain": "геомеханика"}}
+{"labels": ["Facility"], "props": {"planned_depth_unit": "m", "start_year": 1965, "name": "рудник Kidd Creek", "canonical_id": "Facility:рудник kidd creek", "domain": "переработка отходов", "actualized_at": "1965", "planned_depth": 3100, "depth_unit": "m", "depth": 2000}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:обзор «закладочные комплексы»", "name": "обзор «Закладочные комплексы»", "domain": "переработка отходов", "year": 2017}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:подэтажная выемка", "name": "подэтажная выемка", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:цементированная пустая порода", "name": "цементированная пустая порода", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:пастовая закладка", "name": "пастовая закладка", "domain": "переработка отходов"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:система конвейеров", "name": "система конвейеров", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:цементный раствор", "name": "цементный раствор", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:гидравлическая закладка", "name": "гидравлическая закладка", "domain": "геомеханика"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:напряжения в породе", "name": "напряжения в породе"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:быстрое заполнение пустот", "name": "быстрое заполнение пустот"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:прочность закладки", "name": "прочность закладки", "domain": "переработка отходов"}}
+{"labels": ["Property"], "props": {"unit": "%", "canonical_id": "Property:затраты на закладку", "name": "затраты на закладку", "domain": "переработка отходов", "value": 30}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:метод подэтажной выемки", "name": "метод подэтажной выемки", "domain": "геомеханика"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:выемка с отбойкой скважинами", "name": "выемка с отбойкой скважинами", "domain": "геомеханика"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:выемка обратным ходом с помощью вертикальной воронки", "name": "выемка обратным ходом с помощью вертикальной воронки", "domain": "геомеханика"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:вертикальная выемка блока (ввб)", "name": "вертикальная выемка блока (ВВБ)", "domain": "геомеханика"}}
+{"labels": ["Process"], "props": {"name": "закладка", "canonical_id": "Process:закладка", "domain": "геомеханика"}}
+{"labels": ["Facility"], "props": {"geography": "Канада", "is_domestic": false, "name": "рудник Birchtree", "canonical_id": "Facility:рудник birchtree", "domain": "переработка отходов"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:прочность цементированной породной закладки", "name": "прочность цементированной породной закладки", "domain": "геомеханика"}}
+{"labels": ["Experiment"], "props": {"geography": "Канада", "is_domestic": false, "canonical_id": "Experiment:тесты по определению прочности при неограниченном сжатии", "name": "тесты по определению прочности при неограниченном сжатии", "domain": "переработка отходов"}}
+{"labels": ["Publication"], "props": {"title": "Определение прочности цементированной породной закладки крупномасштабными тестами по определению прочности при неограниченном сжатии в условиях рудника", "canonical_id": "Publication:диссертация на звание магистра технических наук", "name": "диссертация на звание Магистра технических наук", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:цементированная закладка", "name": "цементированная закладка", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"name": "пустая порода", "canonical_id": "Material:пустая порода", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:каменная мелочь", "name": "каменная мелочь", "domain": "переработка отходов"}}
+{"labels": ["Condition"], "props": {"name": "соотношение 3:1", "canonical_id": "Condition:соотношение 3:1", "domain": "переработка отходов", "constraints_json": "[{\"param\": \"соотношение крупной и тонкой каменной мелочи\", \"operator\": \"=\", \"value\": 3.0, \"value_high\": 1.0, \"unit\": \"\"}]"}}
+{"labels": ["Material"], "props": {"name": "связующее", "canonical_id": "Material:связующее", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"name": "хлорид кальция", "canonical_id": "Material:хлорид кальция", "domain": "переработка отходов"}}
+{"labels": ["Property"], "props": {"name": "время выдержки", "canonical_id": "Property:время выдержки", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"geography": "Австралия", "name": "Mt Isa", "canonical_id": "Facility:mt isa", "domain": "переработка отходов", "actualized_at": "1973"}}
+{"labels": ["Facility"], "props": {"geography": "Турция", "name": "Cayeli", "canonical_id": "Facility:cayeli", "domain": "переработка отходов", "actualized_at": "2001"}}
+{"labels": ["Facility"], "props": {"geography": "Канада", "name": "Polaris", "canonical_id": "Facility:polaris", "domain": "переработка отходов", "actualized_at": "1990-е"}}
+{"labels": ["Process"], "props": {"name": "медный рудник", "canonical_id": "Process:медный рудник"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:подэтажное обрушение с закладкой", "name": "подэтажное обрушение с закладкой", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:цементированный шлак", "name": "цементированный шлак", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"name": "порода", "canonical_id": "Material:порода"}}
+{"labels": ["Process"], "props": {"name": "гидрозакладка", "canonical_id": "Process:гидрозакладка", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:выемка с отбойкой глубокими скважинами", "name": "выемка с отбойкой глубокими скважинами", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:отсроченная закладка", "name": "отсроченная закладка", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:цементированная поровая закладка", "name": "цементированная поровая закладка"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:нецементированная отвалом закладка", "name": "нецементированная отвалом закладка"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:цементированная пастовая закладка", "name": "цементированная пастовая закладка"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:карьерная каменная мелочь", "name": "карьерная каменная мелочь"}}
+{"labels": ["Material"], "props": {"name": "порланд-цемент", "canonical_id": "Material:порланд-цемент"}}
+{"labels": ["Facility"], "props": {"geography": "Манитоба, Канада", "canonical_id": "Facility:cu-ni сульфидный рудник namew lake", "name": "Cu-Ni сульфидный рудник Namew Lake", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:породная закладка", "name": "породная закладка", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"geography": "Невада, США", "year_info": "2001, 2007", "name": "Meikle", "canonical_id": "Facility:meikle", "domain": "переработка отходов", "notes": "Рудное тело залегает неглубоко. Метод-выемка с открытым забоем с «отсроченной» закладкой и выемка с закладкой месторождений – спутников", "target_metal": "Au"}}
+{"labels": ["Facility"], "props": {"geography": "Невада, США", "name": "Bullfrog", "canonical_id": "Facility:bullfrog", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"geography": "Невада, США", "name": "Turquoise Ridge", "canonical_id": "Facility:turquoise ridge"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:подэтажная выемка с отсроченной закладкой цементированной породой", "name": "подэтажная выемка с отсроченной закладкой цементированной породой", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"name": "золото", "canonical_id": "Material:Au"}}
+{"labels": ["Material"], "props": {"name": "серебро", "canonical_id": "Material:Ag"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Cu", "name": "медь", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Zn", "name": "цинк"}}
+{"labels": ["Material"], "props": {"name": "никель", "canonical_id": "Material:Ni", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Обзоры\\Обеднение_шлаков.docx", "authors": [], "title": "Обеднение_шлаков", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "name": "Обеднение_шлаков", "canonical_id": "Publication:Обеднение_шлаков_f832c37d", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:измельчённая пустая порода", "name": "измельчённая пустая порода"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:температура замерзания связующего", "name": "температура замерзания связующего", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:породное закладочное вещество", "name": "породное закладочное вещество", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"geography": "Невада, США", "name": "Deep Post", "canonical_id": "Facility:deep post", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"geography": "Невада, США", "name": "Carlin East", "canonical_id": "Facility:carlin east", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"name": "Deep Star", "canonical_id": "Facility:deep star", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"geography": "Онтарио, Канада", "canonical_id": "Facility:rodeo", "name": "Rodeo", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"name": "Turuoise Ridge", "canonical_id": "Facility:turuoise ridge", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"name": "Kidd Creek", "canonical_id": "Facility:kidd creek", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"name": "Bousquet", "canonical_id": "Facility:bousquet", "domain": "переработка отходов"}}
+{"labels": ["Facility"], "props": {"name": "Birchtree", "canonical_id": "Facility:birchtree", "domain": "переработка отходов"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Au", "name": "Au", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"name": "El Teniente Converter", "canonical_id": "Process:el teniente converter", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"moisture": 0.2, "canonical_id": "Material:сухой концентрат", "name": "сухой концентрат", "domain": "пирометаллургия", "moisture_unit": "%"}}
+{"labels": ["Material"], "props": {"name": "белый матт", "canonical_id": "Material:белый матт", "domain": "пирометаллургия", "Cu_content": 75, "Cu_content_unit": "%"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:конвертер пирса-смита", "name": "конвертер Пирса-Смита", "domain": "пирометаллургия"}}
+{"labels": ["Phase"], "props": {"name": "магнетит", "canonical_id": "Phase:магнетит", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "шлак", "canonical_id": "Material:шлак", "domain": "пирометаллургия", "Cu_content": 1, "Cu_content_unit": "%"}}
+{"labels": ["Element"], "props": {"unit": "g/l", "concentration": 35, "canonical_id": "Element:Cu", "name": "Cu", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "магнетит", "canonical_id": "Material:магнетит", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "кремнезём", "canonical_id": "Material:кремнезём", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "штейн", "canonical_id": "Material:штейн", "domain": "пирометаллургия", "Cu_content": 72, "Cu_content_unit": "%"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:пирометаллургическое обеднение шлаков", "name": "пирометаллургическое обеднение шлаков", "domain": "пирометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:вдувание пылевидного угля", "name": "вдувание пылевидного угля", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:обеднительная печь teniente", "name": "обеднительная печь Teniente", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"Cu_content_high": 70, "name": "богатый штейн", "canonical_id": "Material:богатый штейн", "domain": "пирометаллургия", "Cu_content": 60, "Cu_content_unit": "%"}}
+{"labels": ["Equipment"], "props": {"name": "электропечь", "canonical_id": "Equipment:электропечь", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "кокс", "canonical_id": "Material:кокс", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:пылевидный уголь", "name": "пылевидный уголь"}}
+{"labels": ["Material"], "props": {"name": "отвальный шлак", "canonical_id": "Material:отвальный шлак", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"name": "Публикация 1", "canonical_id": "Publication:публикация 1"}}
+{"labels": ["Material"], "props": {"name": "углевод", "canonical_id": "Material:углевод", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "штейновый шлам", "canonical_id": "Material:штейновый шлам", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:переработка конвертерных шлаков", "name": "переработка конвертерных шлаков", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:медленное охлаждение/затвердевание", "name": "медленное охлаждение/затвердевание", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "дробление", "canonical_id": "Process:дробление", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:измельчение/пенная флотация", "name": "измельчение/пенная флотация", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:оборудование для обогащения медной руды", "name": "оборудование для обогащения медной руды", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:реагенты для обогащения медной руды", "name": "реагенты для обогащения медной руды", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "печные шлаки", "canonical_id": "Material:печные шлаки", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "старые отвалы", "canonical_id": "Material:старые отвалы", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "белый матт (Cu2S)", "canonical_id": "Material:белый матт (Cu2S)", "domain": "пирометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:магнитный способ", "name": "магнитный способ", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:шаровая мельница", "name": "шаровая мельница", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"name": "Extractive Metallurgy of Copper", "canonical_id": "Publication:extractive metallurgy of copper"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:конвертерные шлаки", "name": "конвертерные шлаки", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:шлаки печи-миксера", "name": "шлаки печи-миксера", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "флотация", "canonical_id": "Process:флотация", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "SAG мельница", "canonical_id": "Equipment:sag мельница", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:пневмофлотация", "name": "пневмофлотация", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "ячейки Jameson", "canonical_id": "Equipment:ячейки jameson", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "Jameson Cell E2532/6", "canonical_id": "Equipment:jameson cell e2532/6", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:традиционная перечистная флотация", "name": "традиционная перечистная флотация", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:колонная перечистная флотация", "name": "колонная перечистная флотация", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:сортность продукта", "name": "сортность продукта", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:извлечение меди", "name": "извлечение меди", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"извлечение меди\", \"operator\": \"between\", \"value\": 95.5, \"value_high\": 97.4, \"unit\": \"%\"}]"}}
+{"labels": ["Experiment"], "props": {"geography": "Филиппины", "name": "Эксперимент 3", "canonical_id": "Experiment:эксперимент 3", "domain": "пирометаллургия", "time_frame": "2002"}}
+{"labels": ["Expert"], "props": {"name": "M.F.Young", "canonical_id": "Expert:m.f.young", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "K.E.Barnes", "canonical_id": "Expert:k.e.barnes", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"title": "Jameson Cell: The ‘Comeback’ in Base Metals Applications using Improved Design and Flow Sheets", "pages": "311-332", "canonical_id": "Publication:publication 1", "name": "Publication 1", "domain": "пирометаллургия", "year": 2006, "conference": "38th Annual Meeting of the Canadian Mineral Processors"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:мельница самоизмельчения/полусамоизмельчения/шаровая", "name": "мельница самоизмельчения/полусамоизмельчения/шаровая"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:флотация шлаков", "name": "флотация шлаков", "domain": "обогащение"}}
+{"labels": ["Material"], "props": {"name": "штейны", "canonical_id": "Material:штейны", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "M.Sanchez", "canonical_id": "Expert:m.sanchez", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Mark E. Schlesinger", "canonical_id": "Expert:mark e. schlesinger", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Matthew J. King", "canonical_id": "Expert:matthew j. king", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Kathryn C. Sole", "canonical_id": "Expert:kathryn c. sole", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "William G. Davenport", "canonical_id": "Expert:william g. davenport", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:reutilisation of primary metallurgical wastes: copper slag as a source of copper, molybdenum, and iron – brief review of test work and the proposed way forward", "name": "Reutilisation of Primary Metallurgical Wastes: Copper Slag as a Source of Copper, Molybdenum, and Iron – Brief Review of Test Work and the Proposed Way Forward"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:extractive metallurgy of copper (fifth edition)", "name": "Extractive Metallurgy of Copper (Fifth Edition)"}}
+{"labels": ["Material"], "props": {"name": "концентрат", "canonical_id": "Material:концентрат", "domain": "пирометаллургия", "Cu_content": 42, "Cu_content_unit": "%"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:обеднительная печь", "name": "обеднительная печь", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:содержание меди в отвальном шлаке", "name": "содержание меди в отвальном шлаке", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:BFS", "name": "BFS", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"Cu\", \"operator\": \"between\", \"value\": 15.0, \"value_high\": 25.0, \"unit\": \"%\"}]"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:обеднительная электропечь", "name": "обеднительная электропечь", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Ni", "name": "Ni", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Co", "name": "Co", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:частичное восстановление", "name": "частичное восстановление", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:обогащение шлака", "name": "обогащение шлака", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Outokumpu", "canonical_id": "Expert:outokumpu", "domain": "пирометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:метод флотации шлаков", "name": "метод флотации шлаков", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:выбросы в атмосферу", "name": "выбросы в атмосферу", "domain": "экология"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:переработка комплексных шлаков", "name": "переработка комплексных шлаков", "domain": "переработка отходов"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:комплексные шлаки", "name": "комплексные шлаки"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:As", "name": "As"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Sb", "name": "Sb", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "t/day", "canonical_id": "Property:производительность", "name": "производительность", "domain": "пирометаллургия", "value": 1530}}
+{"labels": ["Equipment"], "props": {"name": "мельница SAG", "canonical_id": "Equipment:мельница sag", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "флотоячейки", "canonical_id": "Equipment:флотоячейки", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "пресс-фильтр", "canonical_id": "Equipment:пресс-фильтр", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "С.Queirolo", "canonical_id": "Expert:с.queirolo", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "G.Richter P.", "canonical_id": "Expert:g.richter p.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "C. Carrasco O.", "canonical_id": "Expert:c. carrasco o.", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"location": "Сантьяго, Чили", "canonical_id": "Publication:new slag flotation plant for potrerillos smelter", "name": "New Slag Flotation Plant for Potrerillos Smelter", "domain": "пирометаллургия", "date": "2013-12-01/2013-12-04", "conference": "Copper International Conference"}}
+{"labels": ["Publication"], "props": {"location": "Сантьяго, Чили", "name": "Development Plan Caletones Smelter", "canonical_id": "Publication:development plan caletones smelter", "domain": "пирометаллургия", "date": "2013-12-01/2013-12-04", "conference": "Copper International Conference"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:медный концентрат", "name": "медный концентрат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "отвал", "canonical_id": "Material:отвал"}}
+{"labels": ["Material"], "props": {"mass_flow_rate": 1700, "mass_flow_rate_unit": "t/day", "name": "плавильный шлак", "canonical_id": "Material:плавильный шлак", "domain": "пирометаллургия", "Cu_content": 6, "Cu_content_unit": "%"}}
+{"labels": ["Material"], "props": {"weight": 0, "mass_flow_rate": 300, "mass_flow_rate_unit": "t/day", "canonical_id": "Material:конвертерный шлак", "name": "конвертерный шлак", "domain": "пирометаллургия", "Cu_content": 8.33, "weight_unit": "t/day", "Cu_content_unit": "%"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:продукт флотации", "name": "продукт флотации", "domain": "пирометаллургия", "Cu_content": 42, "Cu_content_unit": "%"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:хвосты флотации", "name": "хвосты флотации", "domain": "пирометаллургия", "Cu_content": 0.65, "Cu_content_unit": "%"}}
+{"labels": ["Property"], "props": {"unit": "%", "name": "извлечение Cu", "canonical_id": "Property:извлечение cu", "domain": "пирометаллургия", "value": 90, "value_high": 95}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:метод затвердевания", "name": "метод затвердевания", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"duration": 1, "final_medium": "вода", "duration_unit": "h", "name": "охлаждение", "canonical_id": "Process:охлаждение", "domain": "пирометаллургия", "medium": "воздух"}}
+{"labels": ["Process"], "props": {"name": "измельчение", "canonical_id": "Process:измельчение", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "SAG дробилка", "canonical_id": "Equipment:sag дробилка", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:вибрационная дробилка", "name": "вибрационная дробилка", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:конусная дробилка", "name": "конусная дробилка", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:гираторная дробилка", "name": "гираторная дробилка", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:мех.мешалка agitair 48", "name": "Мех.мешалка Agitair 48", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "ячейка Jameson", "canonical_id": "Equipment:ячейка jameson", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"name": "NH4+", "canonical_id": "Element:NH4+", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Na+", "name": "Na+", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:дибутил-дитиофосфат", "name": "дибутил-дитиофосфат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Тионокарбамат", "canonical_id": "Material:Тионокарбамат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:SIPX Na изопропил ксантат", "name": "SIPX Na изопропил ксантат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:UZ200 Тионокабамат", "name": "UZ200 Тионокабамат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "PAX Danafloat 245", "canonical_id": "Material:PAX Danafloat 245", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Penfloat TM3", "canonical_id": "Material:Penfloat TM3", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "K-амилксантат", "canonical_id": "Material:K-амилксантат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Пропилен гликоль", "name": "Пропилен гликоль", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Сосновое масло", "canonical_id": "Material:Сосновое масло", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:MF550 Сосновое масло", "name": "MF550 Сосновое масло", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Сосновое масло NF 183", "name": "Сосновое масло NF 183", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:CaO+", "name": "CaO+", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:конвертеры пирса-смита", "name": "Конвертеры Пирса-Смита", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "кг/т", "name": "кг на 1 т шлака", "canonical_id": "Property:кг на 1 т шлака", "domain": "пирометаллургия", "value": 8.8}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Обзоры\\ОИП-05-2019 Параметры Cu EW.docx", "authors": [], "title": "ОИП-05-2019 Параметры Cu EW", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:ОИП-05-2019 Параметры Cu EW_8ca12151", "name": "ОИП-05-2019 Параметры Cu EW", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:электроэкстракция меди", "name": "электроэкстракция меди", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"position": "Заведующий лабораторией пирометаллургии, д.т.н.", "name": "Л.Б. Цымбулов", "canonical_id": "Expert:л.б. цымбулов", "domain": "пирометаллургия", "affiliation": "ООО «Институт Гипроникель»"}}
+{"labels": ["Expert"], "props": {"position": "Специалист 1 категории", "name": "Подоханова С.В.", "canonical_id": "Expert:подоханова с.в.", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:работа [4]", "name": "работа [4]", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:работа [1]", "name": "работа [1]", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:cu ew", "name": "Cu EW", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:ванна электроэкстракции", "name": "ванна электроэкстракции", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:количество катодов на ванну", "name": "количество катодов на ванну", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:уровень производства", "name": "уровень производства", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "E.L. Forner", "canonical_id": "Expert:e.l. forner", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "J. Scheepers", "canonical_id": "Expert:j. scheepers", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "A.J. du Toit", "canonical_id": "Expert:a.j. du toit", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "G.M. Miller", "canonical_id": "Expert:g.m. miller", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:the journal of the southem african institute of mining and metallurgy", "name": "The Journal of the Southem African Institute of Mining and Metallurgy", "volume": 118, "month": "November", "domain": "гидрометаллургия", "year": 2018}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:anderson, c.g., giralico, m.a., post, t.a., robinson, t.g., and tinkler, o.s.", "name": "ANDERSON, C.G., GIRALICO, M.A., POST, T.A., ROBINSON, T.G., and TINKLER, O.S.", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:robinson, t., davenport, w.g., jenkins, j., king, m., and rasmussen, s.", "name": "ROBINSON, T., DAVENPORT, W.G., JENKINS, J., KING, M., and RASMUSSEN, S.", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:robinson, t.g., sole, k.c., sandoval, s., moats, m.s., siegmund, a., and davenport, w.g.", "name": "ROBINSON, T.G., SOLE, K.C., SANDOVAL, S., MOATS, M.S., SIEGMUND, A., and DAVENPORT, W.G.", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:selection equipment sizing and flowsheet applications in copper solvent extraction", "name": "selection equipment sizing and flowsheet applications in copper solvent extraction", "domain": "гидрометаллургия", "year": 2009}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:electrolytic copper electrowinning – 2003 world tankhouse operating data", "name": "Electrolytic copper electrowinning – 2003 world tankhouse operating data", "domain": "гидрометаллургия", "year": 2003}}
+{"labels": ["Publication"], "props": {"geography": "Chile", "name": "Copper electrowinning – 2013 world tankhouse operating data", "canonical_id": "Publication:copper electrowinning – 2013 world tankhouse operating data", "domain": "гидрометаллургия", "year": 2013, "actualized_at": "2013"}}
+{"labels": ["Publication"], "props": {"geography": "Spain", "name": "NI 43-101 Technical Report", "canonical_id": "Publication:ni 43-101 technical report", "domain": "гидрометаллургия", "actualized_at": "2015"}}
+{"labels": ["Publication"], "props": {"organization": "XSTRATA CANADA CORPORATION", "geography": "Chile", "canonical_id": "Publication:technical report. mineral resources and mineral reserves, collahuasi copper mine", "name": "TECHNICAL REPORT. Mineral Resources and Mineral Reserves, Collahuasi Copper Mine", "domain": "гидрометаллургия", "actualized_at": "2012-03-29"}}
+{"labels": ["Publication"], "props": {"organization": "COMPAСНA MINERA DOСA INЙS DE COLLAHUASI", "geography": "Chile", "name": "SUSTAINABLE DEVELOPMENT REPORT 2015", "canonical_id": "Publication:sustainable development report 2015", "domain": "гидрометаллургия", "actualized_at": "2015"}}
+{"labels": ["Property"], "props": {"range_high": 290, "canonical_id": "Property:плотность тока", "range_low": 230, "value3": 300, "industrial_value": 297, "range_high2": 280, "value_low": 150, "value2": 214, "value_high": 275, "unit": "A/m2", "has_conflicting_versions": true, "value_history": "[{\"value\": 320, \"unit\": \"A/m2\"}, {\"value\": 276.5, \"unit\": \"A/m2\"}, {\"value\": 320, \"unit\": \"A/m2\"}, {\"value\": 276.5, \"unit\": \"A/m2\"}, {\"value\": 320, \"unit\": \"A/m2\"}, {\"value\": 276.5, \"unit\": \"A/m2\"}, {\"value\": 320, \"unit\": \"A/m2\"}]", "name": "плотность тока", "range_low2": 220, "domain": "гидрометаллургия", "value": 276.5, "max_value": 366}}
+{"labels": ["Property"], "props": {"unit": "%", "name": "выход по току", "canonical_id": "Property:выход по току", "domain": "гидрометаллургия", "value": 85}}
+{"labels": ["Property"], "props": {"unit": "g/l", "canonical_id": "Property:cu в поступающем электролите", "name": "Cu в поступающем электролите", "domain": "гидрометаллургия", "value": 50}}
+{"labels": ["Property"], "props": {"unit": "g/l", "canonical_id": "Property:cu в отработанном электролите", "name": "Cu в отработанном электролите", "domain": "гидрометаллургия", "value": 35}}
+{"labels": ["Material"], "props": {"name": "катод", "canonical_id": "Material:катод", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"voltage_design": 2.3, "name": "ванна", "canonical_id": "Equipment:ванна", "domain": "гидрометаллургия", "voltage_operational": 2.1}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:производство катодов", "name": "производство катодов", "domain": "металлургия"}}
+{"labels": ["Facility"], "props": {"geography": "Чили", "name": "Collahuasi", "canonical_id": "Facility:collahuasi", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "Чили", "name": "Minera El Abra", "canonical_id": "Facility:minera el abra", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "Чили", "name": "Escondida Oxide", "canonical_id": "Facility:escondida oxide", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "Чили", "name": "Escondida Sulfide", "canonical_id": "Facility:escondida sulfide", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "Чили", "canonical_id": "Facility:gaby или gabriela mistral", "name": "Gaby или Gabriela Mistral", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"name": "Anderson и др., 2009", "canonical_id": "Publication:anderson и др., 2009"}}
+{"labels": ["Publication"], "props": {"name": "Robinson и др., 2003", "canonical_id": "Publication:robinson и др., 2003"}}
+{"labels": ["Publication"], "props": {"name": "Robinson и др., 2013", "canonical_id": "Publication:robinson и др., 2013"}}
+{"labels": ["Material"], "props": {"name": "НЖ", "canonical_id": "Material:НЖ", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"concentration": 1.12, "name": "свинец", "canonical_id": "Element:Pb", "domain": "гидрометаллургия", "concentration_unit": "g/l"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:S", "name": "сера", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"name": "железо", "canonical_id": "Element:Fe", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "марганец", "canonical_id": "Element:Mn", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"concentration\", \"operator\": \"between\", \"value\": 70.0, \"value_high\": 400.0, \"unit\": \"mg/l\"}]"}}
+{"labels": ["Element"], "props": {"name": "кислород", "canonical_id": "Element:кислород", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Sn", "name": "олово", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "теллур", "canonical_id": "Element:Te", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Zn", "name": "цинк", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "алюминий", "canonical_id": "Element:Al", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "свинец (анод)", "canonical_id": "Material:Pb", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "титан (анод)", "canonical_id": "Material:Ti", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "кальций", "canonical_id": "Element:Ca", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:ванна электролиза", "name": "ванна электролиза", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "электролит", "canonical_id": "Material:электролит", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "H2SO4", "canonical_id": "Element:H2SO4", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"concentration\", \"operator\": \"between\", \"value\": 165.0, \"value_high\": 200.0, \"unit\": \"g/l\"}]"}}
+{"labels": ["Property"], "props": {"unit": "kA", "range_high": 25, "max_value3": 35, "name": "ток на ванну", "canonical_id": "Property:ток на ванну", "max_value2": 37, "domain": "гидрометаллургия", "value": 33, "range_low": 20, "max_value": 22, "value_low": 10, "value_high": 30}}
+{"labels": ["Property"], "props": {"unit": "%", "canonical_id": "Property:катодный выход по току", "name": "катодный выход по току", "domain": "гидрометаллургия", "value": 90, "constraints_json": "[{\"param\": \"катодный выход по току\", \"operator\": \">=\", \"value\": 85.0, \"value_high\": null, \"unit\": \"%\"}]", "value_low": 88, "value_high": 95}}
+{"labels": ["Property"], "props": {"unit": "V", "has_conflicting_versions": true, "value_history": "[{\"value\": 1.89, \"unit\": \"V\"}, {\"value\": 2, \"unit\": \"V\"}, {\"value\": 1.89, \"unit\": \"V\"}, {\"value\": 2, \"unit\": \"V\"}, {\"value\": 1.89, \"unit\": \"V\"}, {\"value\": 2, \"unit\": \"V\"}, {\"value\": 1.89, \"unit\": \"V\"}]", "name": "напряжение на ванне", "canonical_id": "Property:напряжение на ванне", "domain": "гидрометаллургия", "value": 2, "constraints_json": "[{\"param\": \"напряжение на ванне\", \"operator\": \"between\", \"value\": 1.8, \"value_high\": 2.1, \"unit\": \"V\"}]", "value_low": 1.8, "value_high": 2}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:температура электролита", "name": "температура электролита", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"температура электролита\", \"operator\": \"between\", \"value\": 35.0, \"value_high\": 55.0, \"unit\": \"°C\"}]"}}
+{"labels": ["Material"], "props": {"name": "Электролит", "canonical_id": "Material:Электролит", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "Fe+2", "canonical_id": "Element:Fe+2", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"concentration\", \"operator\": \"between\", \"value\": 0.25, \"value_high\": 1.5, \"unit\": \"g/l\"}]"}}
+{"labels": ["Element"], "props": {"name": "Fe+3", "canonical_id": "Element:Fe+3", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"concentration\", \"operator\": \"between\", \"value\": 1.8, \"value_high\": 2.5, \"unit\": \"g/l\"}]"}}
+{"labels": ["Element"], "props": {"name": "Co+2", "canonical_id": "Element:Co+2", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"concentration\", \"operator\": \"between\", \"value\": 15.0, \"value_high\": 170.0, \"unit\": \"mg/l\"}]"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Cl-", "name": "Cl-", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"concentration\", \"operator\": \"between\", \"value\": 10.0, \"value_high\": 35.0, \"unit\": \"mg/l\"}]"}}
+{"labels": ["Condition"], "props": {"name": "температура", "canonical_id": "Condition:температура", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"температура\", \"operator\": \"between\", \"value\": 33.0, \"value_high\": 48.0, \"unit\": \"°C\"}]"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Свинцовый сплав", "name": "Свинцовый сплав", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "анод", "canonical_id": "Equipment:анод", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "m3", "canonical_id": "Property:общий объем электролита", "name": "общий объем электролита", "domain": "гидрометаллургия", "value": 400}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:поток электролита", "name": "поток электролита", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"поток электролита\", \"operator\": \"between\", \"value\": 0.11, \"value_high\": 0.45, \"unit\": \"m3/min\"}]"}}
+{"labels": ["Property"], "props": {"name": "содержание Cu", "canonical_id": "Property:содержание cu", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"содержание Cu\", \"operator\": \"between\", \"value\": 44.0, \"value_high\": 46.0, \"unit\": \"g/l\"}]"}}
+{"labels": ["Property"], "props": {"name": "H2SO4", "canonical_id": "Property:h2so4", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"H2SO4\", \"operator\": \"between\", \"value\": 165.0, \"value_high\": 170.0, \"unit\": \"g/l\"}]"}}
+{"labels": ["Property"], "props": {"unit": "°C", "canonical_id": "Property:температура электролита", "name": "температура электролита", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"температура электролита\", \"operator\": \"between\", \"value\": 45.0, \"value_high\": 48.0, \"unit\": \"°C\"}]", "value_low": 32, "value_high": 41}}
+{"labels": ["Facility"], "props": {"geography": "ЮАР", "commissioning_year": 1992, "design_capacity": 4400, "name": "Lonmin Base Metal Refinery", "canonical_id": "Facility:lonmin base metal refinery", "domain": "гидрометаллургия", "production": 424, "year_of_production": 2012}}
+{"labels": ["Facility"], "props": {"geography": "ЮАР", "commissioning_year": 1992, "design_capacity": 1085, "name": "Northam Base Metal Refinery", "canonical_id": "Facility:northam base metal refinery", "domain": "гидрометаллургия", "production": 47627, "year_of_production": 2015}}
+{"labels": ["Facility"], "props": {"geography": "Перу", "commissioning_year": 1977, "design_capacity": 90000, "canonical_id": "Facility:cerro verde", "name": "Cerro Verde", "domain": "гидрометаллургия", "production": 24000, "year_of_production": 2015}}
+{"labels": ["Facility"], "props": {"geography": "Перу", "commissioning_year": 1970, "design_capacity": 56200, "canonical_id": "Facility:toquepala", "name": "Toquepala", "domain": "гидрометаллургия", "production": 14514, "year_of_production": 2016}}
+{"labels": ["Facility"], "props": {"geography": "США", "design_capacity": 16000, "name": "Bagdad", "canonical_id": "Facility:bagdad", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "анод", "canonical_id": "Material:анод", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "титановый анод", "canonical_id": "Material:титановый анод", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"canonical_id": "Element:Mg", "name": "Mg", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Катод", "canonical_id": "Material:Катод"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Анод (свинцовый)", "name": "Анод (свинцовый)"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:электролизная ванна", "name": "электролизная ванна", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"name": "ток на ванну", "canonical_id": "Condition:ток на ванну", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"ток на ванну\", \"operator\": \"between\", \"value\": 20.0, \"value_high\": 68.0, \"unit\": \"kA\"}]"}}
+{"labels": ["Condition"], "props": {"name": "плотность тока", "canonical_id": "Condition:плотность тока", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"плотность тока\", \"operator\": \"between\", \"value\": 200.0, \"value_high\": 444.0, \"unit\": \"A/m2\"}]"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\59 ТНК МЕДНОГО НИКЕЛЬСОДЕРЖАЩЕГО СЫРЬЯ.docx", "authors": [], "title": "59 ТНК МЕДНОГО НИКЕЛЬСОДЕРЖАЩЕГО СЫРЬЯ", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:59 ТНК МЕДНОГО НИКЕЛЬСОДЕРЖАЩЕГО СЫРЬЯ_2b0eb4ae", "name": "59 ТНК МЕДНОГО НИКЕЛЬСОДЕРЖАЩЕГО СЫРЬЯ"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:медное никельсодержащее сырьё", "name": "медное никельсодержащее сырьё", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:горизонтальные конверторы пирса-смита", "name": "горизонтальные конверторы Пирса-Смита", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:сульфидная масса", "name": "сульфидная масса", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"name": "выбросы SO2", "canonical_id": "Property:выбросы so2", "domain": "экология"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:конвертирование медных штейнов", "name": "конвертирование медных штейнов", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "С.Ю. Ерошевич", "canonical_id": "Expert:с.ю. ерошевич", "domain": "пирометаллургия", "affiliation": "Департамент управления инвестиционными проектами Группа медного производства ПАО «ГМК «Норильский Никель»"}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:с.с. озеров", "name": "С.С. Озеров", "domain": "пирометаллургия", "affiliation": "ООО «Институт Гипроникель»"}}
+{"labels": ["Expert"], "props": {"name": "В.Б. Грицких", "canonical_id": "Expert:в.б. грицких", "domain": "пирометаллургия", "affiliation": "Департамент управления инвестиционными проектами Группа медного производства ПАО «ГМК «Норильский Никель»"}}
+{"labels": ["Expert"], "props": {"name": "Ю.В. Васильев", "canonical_id": "Expert:ю.в. васильев", "domain": "пирометаллургия", "affiliation": "ООО «Институт Гипроникель»"}}
+{"labels": ["Expert"], "props": {"name": "Р.А. Пахомов", "canonical_id": "Expert:р.а. пахомов", "domain": "пирометаллургия", "affiliation": "ООО «Институт Гипроникель»"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:медные никельсодержащие штейны", "name": "медные никельсодержащие штейны", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:сухие свёрнутые никелевые шлаки", "name": "сухие свёрнутые никелевые шлаки", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:традиционная технология конвертирования", "name": "традиционная технология конвертирования", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:непрерывное конвертирование", "name": "непрерывное конвертирование", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:получение стабильного потока высококонцентрированных so2 содержащих газов", "name": "получение стабильного потока высококонцентрированных SO2 содержащих газов", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:минимальный расход топлива", "name": "минимальный расход топлива", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:получение кондиционной черновой меди", "name": "получение кондиционной черновой меди", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:получение жидкотекучих шлаков", "name": "получение жидкотекучих шлаков", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"description": "комплекс из трёх печей", "name": "Mitsubishi", "canonical_id": "Process:mitsubishi", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "Kennecott-Outokumpu", "canonical_id": "Process:kennecott-outokumpu", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:кислородно-взвешенное конвертирование vale inco", "name": "кислородно-взвешенное конвертирование Vale Inco", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "Ausmelt-С3", "canonical_id": "Process:ausmelt-с3", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "Isaconvert", "canonical_id": "Process:isaconvert", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:технология непрерывного конвертирования", "name": "технология непрерывного конвертирования", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "печи Ванюкова", "canonical_id": "Equipment:печи ванюкова", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:медный никельсодержащий штейн", "name": "медный никельсодержащий штейн", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:высокая удельная производительность", "name": "высокая удельная производительность", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:переработка материалов различной крупности и влажности", "name": "переработка материалов различной крупности и влажности", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:использование различных видов топлива", "name": "использование различных видов топлива", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:низкий расход топлива", "name": "низкий расход топлива", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:максимальное обогащение дутья кислородом", "name": "максимальное обогащение дутья кислородом", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "%", "canonical_id": "Property:низкий пылевынос", "name": "низкий пылевынос", "domain": "пирометаллургия", "value": 1}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:низкие капитальные и эксплуатационные затраты", "name": "низкие капитальные и эксплуатационные затраты", "domain": "пирометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:термодинамический анализ", "name": "термодинамический анализ", "domain": "пирометаллургия"}}
+{"labels": ["Experiment"], "props": {"canonical_id": "Experiment:лабораторные исследования", "name": "лабораторные исследования", "domain": "пирометаллургия"}}
+{"labels": ["Experiment"], "props": {"canonical_id": "Experiment:исследования свойств шлаковых расплавов", "name": "исследования свойств шлаковых расплавов", "domain": "пирометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "Санкт-Петербург, Россия", "is_domestic": true, "canonical_id": "Facility:ооо «институт гипроникель»", "name": "ООО «Институт Гипроникель»", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"canonical_id": "Facility:пао «гмк «норильский никель»", "name": "ПАО «ГМК «Норильский Никель»", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "огнеупоры", "canonical_id": "Material:огнеупоры", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Cu-Ni-Fe сплав", "name": "Cu-Ni-Fe сплав", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:процесс обеднения шлака", "name": "процесс обеднения шлака", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:печь ванюкова конвертерная (пвк)", "name": "печь Ванюкова конвертерная (ПВК)", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:печь ванюкова обеднительная (пво)", "name": "печь Ванюкова обеднительная (ПВО)", "domain": "пирометаллургия"}}
+{"labels": ["Facility"], "props": {"canonical_id": "Facility:комплекс непрерывного конвертирования (кнк)", "name": "комплекс непрерывного конвертирования (КНК)", "domain": "пирометаллургия"}}
+{"labels": ["Facility"], "props": {"canonical_id": "Facility:экспериментальная база института гипроникель", "name": "экспериментальная база института Гипроникель", "domain": "пирометаллургия"}}
+{"labels": ["Facility"], "props": {"canonical_id": "Facility:опу пв комбината «североникель»", "name": "ОПУ ПВ комбината «Североникель»", "domain": "пирометаллургия"}}
+{"labels": ["Facility"], "props": {"canonical_id": "Facility:надеждинский металлургический завод (нмз)", "name": "Надеждинский металлургический завод (НМЗ)", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "медный штейн", "canonical_id": "Material:медный штейн", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:узел грануляции", "name": "узел грануляции", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "гидромонитор", "canonical_id": "Equipment:гидромонитор", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:грануляционный бак", "name": "грануляционный бак", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "эрлифт", "canonical_id": "Equipment:эрлифт", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:стационарный обезвоживатель", "name": "стационарный обезвоживатель", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:распределитель", "name": "распределитель", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "коробки", "canonical_id": "Equipment:коробки", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "конденсатор", "canonical_id": "Equipment:конденсатор", "domain": "пирометаллургия", "feature": "оборудован спрейерами"}}
+{"labels": ["Equipment"], "props": {"name": "спрейеры", "canonical_id": "Equipment:спрейеры", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "пар", "canonical_id": "Material:пар", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "оборотная вода", "canonical_id": "Material:оборотная вода", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:грануляция медного штейна", "name": "грануляция медного штейна"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:конденсация пара", "name": "конденсация пара", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:накопленный конденсат", "name": "накопленный конденсат", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "файнштейн", "canonical_id": "Material:файнштейн", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "грануляция", "canonical_id": "Process:грануляция", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "переработка", "canonical_id": "Process:переработка", "domain": "переработка отходов"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:плавка в конвертерной печи ванюкова", "name": "плавка в конвертерной печи Ванюкова", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "концентрат ОРФ", "canonical_id": "Material:концентрат ОРФ", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "отходящие газы", "canonical_id": "Material:отходящие газы", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:анодное рафинирование", "name": "анодное рафинирование", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"name": "содержание S", "canonical_id": "Property:содержание s", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"содержание S\", \"operator\": \"<=\", \"value\": 0.05, \"value_high\": null, \"unit\": \"%\"}]"}}
+{"labels": ["Property"], "props": {"name": "содержание Ni", "canonical_id": "Property:содержание ni", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"содержание Ni\", \"operator\": \"<=\", \"value\": 0.5, \"value_high\": null, \"unit\": \"%\"}]"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:шлаковый расплав", "name": "шлаковый расплав", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:металлсодержащая шихта", "name": "металлсодержащая шихта", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "кислород", "canonical_id": "Material:кислород", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "природный газ", "canonical_id": "Material:природный газ", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:процесс конвертирования", "name": "процесс конвертирования", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:окислительный потенциал", "name": "окислительный потенциал", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:колебания состава штейна", "name": "колебания состава штейна", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"Cu\", \"operator\": \"between\", \"value\": 53.0, \"value_high\": 68.0, \"unit\": \"%\"}]"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:содержание никеля", "name": "содержание никеля", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:содержание серы", "name": "содержание серы", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"содержание серы\", \"operator\": \"between\", \"value\": 22.0, \"value_high\": 22.8, \"unit\": \"%\"}]"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:содержание меди в шлаке", "name": "содержание меди в шлаке", "domain": "пирометаллургия"}}
+{"labels": ["Method"], "props": {"delay_unit": "h", "canonical_id": "Method:традиционный анализ", "name": "традиционный анализ", "domain": "пирометаллургия", "delay": 2}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:непрерывный контроль", "name": "непрерывный контроль", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:потоковые анализаторы", "name": "потоковые анализаторы", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "квенчер", "canonical_id": "Equipment:квенчер", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "охладитель", "canonical_id": "Equipment:охладитель", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:циркуляционный раствор", "name": "циркуляционный раствор", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:комплекс очистки газов (ког)", "name": "комплекс очистки газов (КОГ)", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:блок труб-коагуляторов вентури (бтк)", "name": "блок труб-коагуляторов Вентури (БТК)", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:каплеуловитель", "name": "каплеуловитель", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "МЭФ", "canonical_id": "Equipment:мэф", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:температура охлаждения", "name": "температура охлаждения", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"температура\", \"operator\": \"between\", \"value\": 60.0, \"value_high\": 70.0, \"unit\": \"°C\"}]"}}
+{"labels": ["Material"], "props": {"name": "газ ПВК", "canonical_id": "Material:газ ПВК", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:влажные аспирационные газы", "name": "влажные аспирационные газы", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "диоксид серы", "canonical_id": "Material:диоксид серы", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:пульподелитель", "name": "пульподелитель", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "сгустители", "canonical_id": "Equipment:сгустители", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:сборник циркуляционных растворов", "name": "сборник циркуляционных растворов", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "сборник пульпы", "canonical_id": "Equipment:сборник пульпы", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "бак-дегазатор", "canonical_id": "Equipment:бак-дегазатор", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:сборник фильтрата", "name": "сборник фильтрата", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:газоанализаторы", "name": "газоанализаторы", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:охладитель газов", "name": "охладитель газов", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "трубы Вентури", "canonical_id": "Equipment:трубы вентури", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:ламельные сгустители", "name": "ламельные сгустители", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "фильтр-прессы", "canonical_id": "Equipment:фильтр-прессы", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:конвертерная печь комплекса", "name": "конвертерная печь комплекса", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "дегазация", "canonical_id": "Process:дегазация", "domain": "пирометаллургия", "medium": "водяной пар и сжатый воздух"}}
+{"labels": ["Process"], "props": {"name": "фильтрация", "canonical_id": "Process:фильтрация", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"name": "нейтрализация", "canonical_id": "Process:нейтрализация", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:объединённый осветлённый раствор", "name": "объединённый осветлённый раствор", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:кожухотрубный теплообменник", "name": "кожухотрубный теплообменник", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:замкнутая система оборотного водоснабжения", "name": "замкнутая система оборотного водоснабжения", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "градирня", "canonical_id": "Equipment:градирня", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:насосная станция", "name": "насосная станция", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:конвертерный шлак ПВК", "name": "конвертерный шлак ПВК", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:обеднительная печь ванюкова", "name": "обеднительная печь Ванюкова", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:шлак отвальных кондиций", "name": "шлак отвальных кондиций", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:восстановительная атмосфера", "name": "восстановительная атмосфера", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:твёрдый восстановитель", "name": "твёрдый восстановитель", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "вода", "canonical_id": "Material:вода", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "исходная вода", "canonical_id": "Material:исходная вода"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:Отходящие газы ПВО", "name": "Отходящие газы ПВО", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"name": "диоксид серы", "canonical_id": "Element:диоксид серы", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"name": "окись углерода", "canonical_id": "Element:окись углерода", "domain": "пирометаллургия"}}
+{"labels": ["Element"], "props": {"name": "водород", "canonical_id": "Element:водород", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "камера дожига", "canonical_id": "Equipment:камера дожига", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:вентиляторный воздух", "name": "вентиляторный воздух", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:башня охлаждения", "name": "башня охлаждения", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"temperature_unit": "°C", "canonical_id": "Equipment:скруббер испарительного охлаждения", "name": "скруббер испарительного охлаждения", "domain": "пирометаллургия", "temperature": 400}}
+{"labels": ["Material"], "props": {"name": "пыль", "canonical_id": "Material:пыль", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:групповой циклон", "name": "групповой циклон", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "дымосос", "canonical_id": "Equipment:дымосос", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:газы обеднительной печи Ванюкова", "name": "газы обеднительной печи Ванюкова", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "топочные газы", "canonical_id": "Material:топочные газы", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:воздух вытяжных зонтов пресс-фильтров", "name": "воздух вытяжных зонтов пресс-фильтров", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:сборный газоход", "name": "сборный газоход", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "труба", "canonical_id": "Equipment:труба", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:уловленная пыль", "name": "уловленная пыль", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:кек газоочистки", "name": "кек газоочистки", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "ПВК", "canonical_id": "Equipment:пвк", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "печь Ванюкова", "canonical_id": "Equipment:печь ванюкова", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "миксер", "canonical_id": "Equipment:миксер", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "желоб", "canonical_id": "Equipment:желоб", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:ковшевой элеватор", "name": "ковшевой элеватор", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Cu-Ni-Fe", "canonical_id": "Material:CuFeNi", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:конвертерный передел", "name": "конвертерный передел", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:загрузка сплава на стадии 'варки' файнштейна", "name": "загрузка сплава на стадии 'варки' файнштейна", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "t/year", "name": "выбросы диоксида серы", "canonical_id": "Property:выбросы диоксида серы", "domain": "пирометаллургия", "value": 28000}}
+{"labels": ["Property"], "props": {"unit": "t/year", "name": "выход файнштейна", "canonical_id": "Property:выход файнштейна", "domain": "пирометаллургия", "value": 144500}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:крупность частиц сплава", "name": "крупность частиц сплава", "domain": "пирометаллургия", "constraints_json": "[{\"param\": \"крупность частиц сплава\", \"operator\": \"<=\", \"value\": 30.0, \"value_high\": null, \"unit\": \"cm\"}]"}}
+{"labels": ["Property"], "props": {"unit": "t/year", "canonical_id": "Property:снижение серы в окружающую среду", "name": "снижение серы в окружающую среду", "domain": "пирометаллургия", "value": -28000}}
+{"labels": ["Material"], "props": {"name": "жидкий шлак", "canonical_id": "Material:жидкий шлак", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"count": 2, "canonical_id": "Equipment:установка грануляции", "name": "установка грануляции", "domain": "пирометаллургия", "redundancy": "100%"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:грануляция шлака", "name": "грануляция шлака", "domain": "переработка отходов"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:бассейновая технология грануляции", "name": "бассейновая технология грануляции", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:предварительное дробление", "name": "предварительное дробление", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:обезвоживатель", "name": "обезвоживатель", "domain": "пирометаллургия", "type": "вращающийся карусельный"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:обезвоживание шлака", "name": "обезвоживание шлака", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:отвальный шлак ПВО КНК", "name": "отвальный шлак ПВО КНК", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:прочностные характеристики", "name": "прочностные характеристики", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "цемент", "canonical_id": "Material:цемент", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"end_date": "2022-07-01", "canonical_id": "Process:технология непрерывного конвертирования медных штейнов", "name": "технология непрерывного конвертирования медных штейнов", "domain": "пирометаллургия", "start_date": "2019-10-01"}}
+{"labels": ["Publication"], "props": {"name": "патент", "canonical_id": "Publication:патент", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Цемехман Л.Ш.", "canonical_id": "Expert:цемехман л.ш.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Цымбулов Л.Б.", "canonical_id": "Expert:цымбулов л.б.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Князев М.В.", "canonical_id": "Expert:князев м.в.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Фёдоров М.С.", "canonical_id": "Expert:фёдоров м.с.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Галанцев В.Н.", "canonical_id": "Expert:галанцев в.н.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Пигарев С.П.", "canonical_id": "Expert:пигарев с.п.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Жак Е.", "canonical_id": "Expert:жак е.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Колосова Е.Ю.", "canonical_id": "Expert:колосова е.ю.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Селиванов Е.Н.", "canonical_id": "Expert:селиванов е.н.", "domain": "пирометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Чумарев В.М.", "canonical_id": "Expert:чумарев в.м.", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:окислительная плавка", "name": "окислительная плавка", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:конвертирование", "name": "конвертирование", "domain": "пирометаллургия"}}
+{"labels": ["Equipment"], "props": {"canonical_id": "Equipment:двухзонная печь ванюкова", "name": "двухзонная печь Ванюкова", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"name": "концентраты", "canonical_id": "Material:концентраты", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:температура ликвидуса", "name": "температура ликвидуса", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:расход флюсующих компонентов", "name": "расход флюсующих компонентов", "domain": "пирометаллургия"}}
+{"labels": ["Condition"], "props": {"name": "отношение SiO2/CaO", "canonical_id": "Condition:отношение sio2/cao", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"journal": "Цветные металлы", "pages": "36-42", "issue": 12, "canonical_id": "Publication:поведение меди и никеля при окислительной плавке медных маложелезистых никельсодержащих штейнов и концентратов на черновую медь", "name": "Поведение меди и никеля при окислительной плавке медных маложелезистых никельсодержащих штейнов и концентратов на черновую медь", "domain": "пирометаллургия", "year": 2004}}
+{"labels": ["Publication"], "props": {"journal": "Цветные металлы", "pages": "62-72", "issue": "8/9", "canonical_id": "Publication:термодинамический анализ процесса конвертирования медных штейнов и концентратов в двухзонной печи ванюкова", "name": "Термодинамический анализ процесса конвертирования медных штейнов и концентратов в двухзонной печи Ванюкова", "domain": "пирометаллургия", "year": 2011}}
+{"labels": ["Publication"], "props": {"journal": "Цветные металлы", "pages": "30-36", "issue": 7, "canonical_id": "Publication:термодинамический анализ равновесия между шлаком и черновой медью в двухзонной конверторной печи ванюкова", "name": "Термодинамический анализ равновесия между шлаком и черновой медью в двухзонной конверторной печи Ванюкова", "domain": "пирометаллургия", "year": 2009}}
+{"labels": ["Publication"], "props": {"journal": "Металлы", "pages": "3-14", "issue": 3, "name": "Строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. Часть I", "canonical_id": "Publication:строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. часть i", "domain": "пирометаллургия", "year": 2011}}
+{"labels": ["Publication"], "props": {"journal": "Металлы", "pages": "3-11", "issue": 2, "name": "Строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. Часть II", "canonical_id": "Publication:строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. часть ii", "domain": "пирометаллургия", "year": 2012}}
+{"labels": ["Material"], "props": {"name": "огнеупор", "canonical_id": "Material:огнеупор", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:магнезитовый огнеупор", "name": "магнезитовый огнеупор", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:перирклазохромитовый огнеупор", "name": "перирклазохромитовый огнеупор", "domain": "пирометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:хромитовый огнеупор", "name": "хромитовый огнеупор", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:поверхностное натяжение", "name": "поверхностное натяжение", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"name": "плотность", "canonical_id": "Property:плотность", "domain": "пирометаллургия"}}
+{"labels": ["Property"], "props": {"name": "вязкость", "canonical_id": "Property:вязкость", "domain": "пирометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:взаимодействие шлаков с огнеупорами", "name": "взаимодействие шлаков с огнеупорами", "domain": "пирометаллургия"}}
+{"labels": ["Experiment"], "props": {"canonical_id": "Experiment:исследование взаимодействия шлаков с высокой концентрацией оксидной меди и оксидного никеля с магнезитовыми, перирклазохромитовыми и хромитовыми огнеупорами", "name": "Исследование взаимодействия шлаков с высокой концентрацией оксидной меди и оксидного никеля с магнезитовыми, перирклазохромитовыми и хромитовыми огнеупорами", "domain": "пирометаллургия"}}
+{"labels": ["Experiment"], "props": {"canonical_id": "Experiment:влияние состава шлака на поверхностное натяжение и плотность шлаков", "name": "Влияние состава шлака на поверхностное натяжение и плотность шлаков", "domain": "пирометаллургия"}}
+{"labels": ["Experiment"], "props": {"canonical_id": "Experiment:влияние температуры и состава шлака на вязкость шлаковых расплавов", "name": "Влияние температуры и состава шлака на вязкость шлаковых расплавов", "domain": "пирометаллургия"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. часть iii", "name": "Строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. Часть III"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. часть iv", "name": "Строение и свойства шлаков непрерывного конвертирования медных никельсодержащих штейнов и концентратов. Часть IV"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:исследование взаимодействия шлаков с высокой концентрацией оксидной меди и оксидного никеля с магнезитовыми, перирклазохромитовыми и хромитовыми огнеупорами", "name": "Исследование взаимодействия шлаков с высокой концентрацией оксидной меди и оксидного никеля с магнезитовыми, перирклазохромитовыми и хромитовыми огнеупорами"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\9 статья (2).docx", "authors": [], "title": "9 статья (2)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:9 статья (2)_f0072d93", "name": "9 статья (2)"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:сорбционная очистка", "name": "сорбционная очистка", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:хлоридно-сульфатные никелевые растворы", "name": "хлоридно-сульфатные никелевые растворы", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"name": "примесь свинца", "canonical_id": "Property:примесь свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Блохин А.А.", "canonical_id": "Expert:блохин а.а.", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Павлов А.Ю.", "canonical_id": "Expert:павлов а.ю.", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Саблина Е.В.", "canonical_id": "Expert:саблина е.в.", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Мурашкин Ю.В.", "canonical_id": "Expert:мурашкин ю.в.", "domain": "гидрометаллургия"}}
+{"labels": ["Expert"], "props": {"name": "Четверкин А.Ю.", "canonical_id": "Expert:четверкин а.ю.", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "Санкт-Петербург, Россия", "is_domestic": true, "canonical_id": "Facility:санкт-петербургский государственный технологический институт (технический университет)", "name": "Санкт-Петербургский государственный технологический институт (технический университет)", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:электроэкстракция никеля", "name": "электроэкстракция никеля", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:сульфатный раствор", "name": "сульфатный раствор", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:хлоридный раствор", "name": "хлоридный раствор", "domain": "гидрометаллургия"}}
+{"labels": ["Facility"], "props": {"geography": "РФ", "is_domestic": true, "name": "Кольская ГМК", "canonical_id": "Facility:кольская гмк", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "V", "element": "Pb", "canonical_id": "Property:окислительно-восстановительный потенциал", "name": "окислительно-восстановительный потенциал", "domain": "гидрометаллургия", "value": -0.126}}
+{"labels": ["Property"], "props": {"unit": "V", "name": "окислительно-восстановительный потенциал никеля", "canonical_id": "Property:окислительно-восстановительный потенциал никеля", "domain": "гидрометаллургия", "value": -0.24}}
+{"labels": ["Phase"], "props": {"canonical_id": "Phase:хлоридные комплексы", "name": "хлоридные комплексы", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "катод", "canonical_id": "Equipment:катод", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:мелкодисперсные порошкообразные включения", "name": "мелкодисперсные порошкообразные включения", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:катодные осадки", "name": "катодные осадки", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:выход никеля по току", "name": "выход никеля по току", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:наводороживание металла", "name": "наводороживание металла", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:содержание свинца в электролите", "name": "содержание свинца в электролите", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"содержание свинца\", \"operator\": \"<=\", \"value\": 0.1, \"value_high\": null, \"unit\": \"g/L\"}]"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:исходный раствор", "name": "исходный раствор", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"содержание свинца\", \"operator\": \"between\", \"value\": 1.0, \"value_high\": 2.0, \"unit\": \"g/L\"}]"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:осадительные методы", "name": "осадительные методы", "domain": "гидрометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:электрохимические методы", "name": "электрохимические методы", "domain": "гидрометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:экстракционные методы", "name": "экстракционные методы", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:растворы хлоридов никеля и кобальта", "name": "растворы хлоридов никеля и кобальта", "domain": "гидрометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:сорбционный метод", "name": "сорбционный метод", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"form": "гранулы неправильной формы", "name": "анионит ЭДЭ-10П", "canonical_id": "Material:анионит ЭДЭ-10П", "domain": "гидрометаллургия", "functional_groups": "полиаминные"}}
+{"labels": ["Expert"], "props": {"name": "Н.П. Колонина", "canonical_id": "Expert:н.п. колонина", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:исходная концентрация свинца", "name": "исходная концентрация свинца"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:колоночный объем", "name": "колоночный объем"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:гидрометаллургическая технология", "name": "гидрометаллургическая технология", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:полимеризационные иониты", "name": "полимеризационные иониты", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:полиаминные аниониты", "name": "полиаминные аниониты", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:раствор хлорида никеля", "name": "раствор хлорида никеля", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:раствор хлорида кобальта", "name": "раствор хлорида кобальта", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация хлорид-иона", "name": "концентрация хлорид-иона", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"концентрация хлорид-иона\", \"operator\": \"between\", \"value\": 1.5, \"value_high\": 2.5, \"unit\": \"mol/L\"}]"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация никеля или кобальта", "name": "концентрация никеля или кобальта", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"концентрация никеля или кобальта\", \"operator\": \"<=\", \"value\": 1.25, \"value_high\": null, \"unit\": \"mol/L\"}, {\"param\": \"концентрация никеля или кобальта\", \"operator\": \"<=\", \"value\": 74.0, \"value_high\": null, \"unit\": \"g/L\"}]"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:глубокая очистка растворов", "name": "глубокая очистка растворов", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:механическая и осмотическая стойкость", "name": "механическая и осмотическая стойкость"}}
+{"labels": ["Publication"], "props": {"canonical_id": "Publication:работа [14]", "name": "работа [14]"}}
+{"labels": ["Material"], "props": {"name": "анионит", "canonical_id": "Material:анионит", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:глубокая очистка растворов", "name": "глубокая очистка растворов", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:аниониты с полиаминными функциональными группами", "name": "аниониты с полиаминными функциональными группами", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"name": "сорбция свинца", "canonical_id": "Process:сорбция свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:десорбция свинца", "name": "десорбция свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Purolite S984", "canonical_id": "Material:Purolite S984", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Purolite S985", "canonical_id": "Material:Purolite S985", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Puromet MTS9841", "canonical_id": "Material:Puromet MTS9841", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Lewatit А365", "canonical_id": "Material:Lewatit А365", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "Purolite А110", "canonical_id": "Material:Purolite А110", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:дистиллированная вода", "name": "дистиллированная вода", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "раствор HCl", "canonical_id": "Material:раствор HCl", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"concentration": 100, "element": "Ni", "name": "раствор NiCl2", "canonical_id": "Material:раствор NiCl2", "domain": "гидрометаллургия", "concentration_unit": "g/l"}}
+{"labels": ["Material"], "props": {"mass": 0.2, "condition": "абсолютно сухой", "name": "аниониты", "canonical_id": "Material:аниониты", "domain": "гидрометаллургия", "mass_unit": "g"}}
+{"labels": ["Experiment"], "props": {"canonical_id": "Experiment:эксперимент подготовки анионитов", "name": "эксперимент подготовки анионитов", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:относительная влажность", "name": "относительная влажность", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:удельный объем в воде", "name": "удельный объем в воде", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:удельный объем в растворе nicl2", "name": "удельный объем в растворе NiCl2", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:реактивы квалификации хч и чда", "name": "реактивы квалификации хч и чда", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:раствор Трилона Б", "name": "раствор Трилона Б", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:буферные растворы для pH-метрии", "name": "буферные растворы для pH-метрии", "domain": "гидрометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:комплексонометрическое титрование", "name": "комплексонометрическое титрование", "domain": "гидрометаллургия"}}
+{"labels": ["Method"], "props": {"name": "pH-метрия", "canonical_id": "Method:ph-метрия", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "шейкер Memmert ONE 14", "canonical_id": "Equipment:шейкер memmert one 14", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "раствор", "canonical_id": "Material:раствор", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:равновесная массовая емкость", "name": "равновесная массовая емкость", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:объемная емкость", "name": "объемная емкость", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:коэффициент распределения", "name": "коэффициент распределения", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:анионит товарного зернения", "name": "анионит товарного зернения", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "свинец(II)", "canonical_id": "Element:свинец(II)", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"name": "сорбция", "canonical_id": "Process:сорбция", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"name": "десорбция", "canonical_id": "Process:десорбция", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"unit": "к.о./ч", "unit_low": "см/мин", "canonical_id": "Condition:скорость пропускания", "name": "скорость пропускания", "domain": "гидрометаллургия", "value": 1.0, "value_low": 0.26, "value_high": 0.27}}
+{"labels": ["Property"], "props": {"unit": "г/л", "canonical_id": "Property:концентрация свинца", "name": "концентрация свинца", "domain": "гидрометаллургия", "value": 0.48}}
+{"labels": ["Property"], "props": {"unit": "г/л", "name": "концентрация никеля", "canonical_id": "Property:концентрация никеля", "domain": "гидрометаллургия", "value": 100}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:ph раствора", "name": "pH раствора", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "колонки", "canonical_id": "Equipment:колонки", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "Thermostat U10", "canonical_id": "Equipment:thermostat u10", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "iCAP 6000 Duo", "canonical_id": "Equipment:icap 6000 duo", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "iCAP 7600 Radial", "canonical_id": "Equipment:icap 7600 radial", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "ЭСК-106", "canonical_id": "Equipment:эск-106", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "рН-410", "canonical_id": "Equipment:рн-410", "domain": "гидрометаллургия"}}
+{"labels": ["Method"], "props": {"canonical_id": "Method:атомно-эмиссионная спектрометрия", "name": "атомно-эмиссионная спектрометрия", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"concentration": 100, "canonical_id": "Material:NiCl2", "name": "NiCl2", "domain": "гидрометаллургия", "concentration_unit": "g/l"}}
+{"labels": ["Material"], "props": {"name": "анионит А365", "canonical_id": "Material:анионит А365", "domain": "гидрометаллургия", "property": "высокая полная обменная ёмкость"}}
+{"labels": ["Material"], "props": {"name": "анионит MTS9841", "canonical_id": "Material:анионит MTS9841", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:анионит S984", "name": "анионит S984", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:анионит S985", "name": "анионит S985", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "анионит А110", "canonical_id": "Material:анионит А110", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"name": "pH растворов", "canonical_id": "Condition:ph растворов", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:коэффициент распределения свинца", "name": "коэффициент распределения свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Phase"], "props": {"canonical_id": "Phase:хлоридный комплекс свинца", "name": "хлоридный комплекс свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:анионообменный механизм", "name": "анионообменный механизм", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:ph раствора", "name": "pH раствора", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"pH\", \"operator\": \"between\", \"value\": 3.0, \"value_high\": 3.5, \"unit\": \"\"}]"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:оптимальное значение рн", "name": "оптимальное значение рН", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"рН\", \"operator\": \"between\", \"value\": 3.0, \"value_high\": 3.5, \"unit\": \"pH\"}]"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:хлоридный электролит", "name": "хлоридный электролит", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:оборотный раствор", "name": "оборотный раствор", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "сульфат-ион", "canonical_id": "Element:сульфат-ион", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "ион натрия", "canonical_id": "Element:ион натрия", "domain": "гидрометаллургия"}}
+{"labels": ["Element"], "props": {"name": "хлорид-ион", "canonical_id": "Element:хлорид-ион", "domain": "гидрометаллургия"}}
+{"labels": ["Equipment"], "props": {"name": "анионит", "canonical_id": "Equipment:анионит", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация никеля", "name": "концентрация никеля", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"концентрация никеля\", \"operator\": \"between\", \"value\": 100.0, \"value_high\": 120.0, \"unit\": \"g/l\"}]"}}
+{"labels": ["Condition"], "props": {"unit": "g/L", "name": "концентрация свинца", "canonical_id": "Condition:концентрация свинца", "domain": "гидрометаллургия", "value": 0.49}}
+{"labels": ["Condition"], "props": {"unit": "", "name": "рН раствора", "canonical_id": "Condition:рн раствора", "domain": "гидрометаллургия", "value": 3.0, "constraints_json": "[{\"param\": \"рН\", \"operator\": \"<=\", \"value\": 3.0, \"value_high\": 3.5, \"unit\": \"pH\"}]"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:емкость анионитов по свинцу", "name": "емкость анионитов по свинцу", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"concentration": 119, "name": "хлорид никеля", "canonical_id": "Material:хлорид никеля", "domain": "гидрометаллургия", "concentration_unit": "g/l"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация хлорида никеля", "name": "концентрация хлорида никеля", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"концентрация хлорида никеля\", \"operator\": \"between\", \"value\": 50.0, \"value_high\": 100.0, \"unit\": \"g/l\"}]"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:изотерма сорбции свинца", "name": "изотерма сорбции свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"name": "рН раствора", "canonical_id": "Property:рн раствора", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"рН\", \"operator\": \"between\", \"value\": 3.0, \"value_high\": 3.6, \"unit\": \"\"}]"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:емкость по свинцу", "name": "емкость по свинцу", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:равновесная концентрация свинца", "name": "равновесная концентрация свинца", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"равновесная концентрация свинца\", \"operator\": \"=\", \"value\": 1.0, \"value_high\": null, \"unit\": \"g/l\"}, {\"param\": \"равновесная концентрация свинца\", \"operator\": \"=\", \"value\": 0.66, \"value_high\": null, \"unit\": \"g/l\"}]"}}
+{"labels": ["Material"], "props": {"name": "анионит MTS984", "canonical_id": "Material:анионит MTS984", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "g/l", "canonical_id": "Property:равновесная концентрация свинца", "name": "равновесная концентрация свинца", "domain": "гидрометаллургия", "value": 1}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:емкость по свинцу(ii)", "name": "емкость по свинцу(II)", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:насыщенный раствор свинца", "name": "насыщенный раствор свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:малорастворимый сульфат свинца", "name": "малорастворимый сульфат свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "%", "canonical_id": "Property:полнота десорбции", "name": "полнота десорбции", "domain": "гидрометаллургия", "value": 5}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:насыщение анионита свинцом", "name": "насыщение анионита свинцом", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "%", "name": "степень десорбции свинца", "canonical_id": "Property:степень десорбции свинца", "domain": "гидрометаллургия", "value": 95.2}}
+{"labels": ["Property"], "props": {"unit": "%", "name": "степень десорбции свинца при наличии сульфат-иона", "canonical_id": "Property:степень десорбции свинца при наличии сульфат-иона", "domain": "гидрометаллургия", "value": 91.3}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация сульфат-иона", "name": "концентрация сульфат-иона", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"концентрация сульфат-иона\", \"operator\": \"<=\", \"value\": 30.0, \"value_high\": null, \"unit\": \"g/l\"}]"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:повышенная температура", "name": "повышенная температура", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:гидроксид натрия", "name": "гидроксид натрия", "domain": "гидрометаллургия"}}
+{"labels": ["Phase"], "props": {"canonical_id": "Phase:гидроксокомплексы свинца", "name": "гидроксокомплексы свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Phase"], "props": {"canonical_id": "Phase:гидроксокомплексы", "name": "гидроксокомплексы", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"temperature_unit": "°C", "canonical_id": "Process:обработка водой при повышенной температуре", "name": "обработка водой при повышенной температуре", "domain": "гидрометаллургия", "temperature": 48}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:обработка 1 m раствором naoh", "name": "обработка 1 M раствором NaOH", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:скорость десорбции свинца", "name": "скорость десорбции свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:модельный раствор", "name": "модельный раствор", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"concentration": 30, "name": "сульфат натрия", "canonical_id": "Material:сульфат натрия", "domain": "гидрометаллургия", "concentration_unit": "g/l"}}
+{"labels": ["Material"], "props": {"concentration": 1, "name": "NaCl", "canonical_id": "Material:ClNa", "domain": "гидрометаллургия", "concentration_unit": "M"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:HNaO", "name": "NaOH", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:сорбционное удаление свинца", "name": "сорбционное удаление свинца", "domain": "экология"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:отмывка анионитов", "name": "отмывка анионитов", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"temperature_unit": "°C", "canonical_id": "Condition:температура 50 °c", "name": "температура 50 °C", "domain": "гидрометаллургия", "temperature": 50}}
+{"labels": ["Material"], "props": {"nickel_concentration_unit": "g/l", "nickel_concentration": 119, "lead_concentration_unit": "g/l", "canonical_id": "Material:хлоридно-сульфатный раствор никеля", "name": "хлоридно-сульфатный раствор никеля", "lead_concentration": 1.12, "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:содержание примеси свинца", "name": "содержание примеси свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:раствор NaOH", "name": "раствор NaOH", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"name": "PbCl2", "canonical_id": "Material:PbCl2", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация раствора", "name": "концентрация раствора", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"количество к.о. воды\", \"operator\": \"between\", \"value\": 4.0, \"value_high\": 4.5, \"unit\": \"\"}]"}}
+{"labels": ["Material"], "props": {"name": "Puromet MTS984", "canonical_id": "Material:Puromet MTS984", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:анионит с полиаминными функциональными группами", "name": "анионит с полиаминными функциональными группами", "matrix": "акрилатная", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:аниониты Lewatit А365 и Puromet MTS984", "name": "аниониты Lewatit А365 и Puromet MTS984", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:избирательность к свинцу(ii)", "name": "избирательность к свинцу(II)", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:концентрация никеля(ii)", "name": "концентрация никеля(II)", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"концентрация никеля\", \"operator\": \"between\", \"value\": 100.0, \"value_high\": 120.0, \"unit\": \"g/L\"}]"}}
+{"labels": ["Material"], "props": {"unit": "M", "concentration": 1, "name": "1 М раствор NaOH", "canonical_id": "Material:1 М раствор NaOH", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:десорбция свинца(ii)", "name": "десорбция свинца(II)", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:глубокое удаление свинца(ii)", "name": "глубокое удаление свинца(II)", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"title": "Производство никеля и кобальта. Информационно-технический справочник по наилучшим доступным технологиям", "name": "ИТС 12–2016", "canonical_id": "Publication:итс 12–2016", "domain": "гидрометаллургия", "year": 2016}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:хомченко о. а., садовская г. и., дубровский в. л. и др.", "name": "Хомченко О. А., Садовская Г. И., Дубровский В. Л. и др.", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"name": "Falconbridge chlorine leach process", "canonical_id": "Process:falconbridge chlorine leach process", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"journal": "Journal of the South African Institute of Mining and Metallurgy", "authors": "Bacon G., Mihaylov I.", "pages": "435–444", "issue": 8, "canonical_id": "Publication:solvent extraction as an enabling technology in the nickel industry", "name": "Solvent extraction as an enabling technology in the nickel industry", "volume": 102, "domain": "гидрометаллургия", "year": 2002}}
+{"labels": ["Publication"], "props": {"authors": "Имамура, Т. Сугиура", "MПК": "B01D 11/04", "name": "Пат. 2169601 РФ", "canonical_id": "Publication:пат. 2169601 рф", "application_date": "22.03.1999", "domain": "гидрометаллургия", "bulletin_number": 1, "publication_date": "10.01.2001", "country": "РФ"}}
+{"labels": ["Publication"], "props": {"journal": "Журн. прикл. Химии", "authors": "Касиков А.Г., Дьякова Л.В., Багрова Е.Г.", "pages": "629–634", "issue": 5, "canonical_id": "Publication:экстракционное извлечение свинца(ii) смесями на основе третичных аминов из хлоридных никелевых растворов", "name": "Экстракционное извлечение свинца(II) смесями на основе третичных аминов из хлоридных никелевых растворов", "volume": 90, "domain": "гидрометаллургия", "year": 2017}}
+{"labels": ["Publication"], "props": {"journal": "Журнал прикладной химии", "authors": "Колонина Н. П.", "pages": "2475–2480", "issue": 16, "canonical_id": "Publication:удаление малых количеств меди, свинца и цинка из никелевых и кобальтовых хлоридных растворов методом ионного обмена", "name": "Удаление малых количеств меди, свинца и цинка из никелевых и кобальтовых хлоридных растворов методом ионного обмена", "volume": 33, "domain": "гидрометаллургия", "year": 1960}}
+{"labels": ["Publication"], "props": {"journal": "Записки Горного института", "authors": "Плешков М.А., Соколова Н.А, Новожилова К.С.", "pages": "141–143", "name": "Исследование возможности очистки никелевых и кобальтовых растворов от свинца и марганца сорбционными методами", "canonical_id": "Publication:исследование возможности очистки никелевых и кобальтовых растворов от свинца и марганца сорбционными методами", "volume": 165, "domain": "гидрометаллургия", "year": 2005}}
+{"labels": ["Publication"], "props": {"journal": "Цвет. мет.", "authors": "Клименко И. В., Сундуров А. В., Павлов А. Ю., Тарасенко Н. М.", "pages": "33–42", "issue": 11, "canonical_id": "Publication:результаты исследований в области перспективного производства никеля высокопремиальных марок", "name": "Результаты исследований в области перспективного производства никеля высокопремиальных марок", "domain": "гидрометаллургия", "year": 2024}}
+{"labels": ["Expert"], "props": {"name": "Bacon G., Mihaylov I.", "canonical_id": "Expert:bacon g., mihaylov i."}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:имамура, т. сугиура", "name": "Имамура, Т. Сугиура"}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:касиков а.г., дьякова л.в., багрова е.г.", "name": "Касиков А.Г., Дьякова Л.В., Багрова Е.Г."}}
+{"labels": ["Expert"], "props": {"name": "Колонина Н. П.", "canonical_id": "Expert:колонина н. п."}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:плешков м.а., соколова н.а , новожилова к.с.", "name": "Плешков М.А., Соколова Н.А , Новожилова К.С."}}
+{"labels": ["Expert"], "props": {"canonical_id": "Expert:клименко и. в., сундуров а. в., павлов а. ю., тарасенко н. м.", "name": "Клименко И. В., Сундуров А. В., Павлов А. Ю., Тарасенко Н. М."}}
+{"labels": ["Publication"], "props": {"authors": "Шварценбах Г., Флашка Г.", "pages": 360, "name": "Комплексонометрическое титрование", "canonical_id": "Publication:комплексонометрическое титрование", "domain": "гидрометаллургия", "year": 1970, "publisher": "Химия"}}
+{"labels": ["Publication"], "props": {"author": "Полянский, Н. Г.", "pages": 357, "name": "Свинец", "canonical_id": "Publication:свинец", "domain": "гидрометаллургия", "year": 1986, "publisher": "Наука"}}
+{"labels": ["Publication"], "props": {"authors": "Martell A.E., Smith R.M.", "pages": 257, "name": "Critical stability constants. Volume 4. Inorganic Complexes", "canonical_id": "Publication:critical stability constants. volume 4. inorganic complexes", "domain": "гидрометаллургия", "year": 1976, "publisher": "Springer"}}
+{"labels": ["Publication"], "props": {"journal": "Цветные металлы", "authors": "Гиндин Л. М., Бобиков П. И., Патюков К.П., Селезнёва И.А., Ильенко Г.В., Иванова С.Н., Тараненко Л.А.", "pages": "22–26", "issue": 12, "canonical_id": "Publication:экстракционно-электролизный способ получения кобальта высокой чистоты", "name": "Экстракционно-электролизный способ получения кобальта высокой чистоты", "domain": "гидрометаллургия", "year": 1961}}
+{"labels": ["Publication"], "props": {"author": "Инцеди Я.", "pages": 376, "name": "Применение комплексов в аналитической химии", "canonical_id": "Publication:применение комплексов в аналитической химии", "domain": "гидрометаллургия", "year": 1978, "publisher": "Мир"}}
+{"labels": ["Expert"], "props": {"name": "Шварценбах Г.", "canonical_id": "Expert:шварценбах г."}}
+{"labels": ["Expert"], "props": {"name": "Флашка Г.", "canonical_id": "Expert:флашка г."}}
+{"labels": ["Expert"], "props": {"name": "Полянский, Н. Г.", "canonical_id": "Expert:полянский, н. г."}}
+{"labels": ["Expert"], "props": {"name": "Martell A.E.", "canonical_id": "Expert:martell a.e."}}
+{"labels": ["Expert"], "props": {"name": "Smith R.M.", "canonical_id": "Expert:smith r.m."}}
+{"labels": ["Expert"], "props": {"name": "Гиндин Л. М.", "canonical_id": "Expert:гиндин л. м."}}
+{"labels": ["Expert"], "props": {"name": "Инцеди Я.", "canonical_id": "Expert:инцеди я."}}
+{"labels": ["Phase"], "props": {"canonical_id": "Phase:хлоридный комплекс", "name": "хлоридный комплекс", "domain": "гидрометаллургия"}}
+{"labels": ["Condition"], "props": {"canonical_id": "Condition:ph", "name": "pH", "domain": "гидрометаллургия", "constraints_json": "[{\"param\": \"pH\", \"operator\": \"<=\", \"value\": 3.5, \"value_high\": null, \"unit\": \"\"}]"}}
+{"labels": ["Property"], "props": {"unit": "кратность", "canonical_id": "Property:очистка от свинца", "name": "очистка от свинца", "domain": "гидрометаллургия", "value": 1000}}
+{"labels": ["Material"], "props": {"concentration_Pb": 1.12, "concentration_unit_Pb": "g/L", "concentration_unit_Na2SO4": "g/L", "name": "раствор с примесями свинца", "canonical_id": "Material:раствор с примесями свинца", "domain": "гидрометаллургия", "concentration_Na2SO4": 30}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:анионит Puromet MTS9841", "name": "анионит Puromet MTS9841", "domain": "гидрометаллургия"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:анионит Lewatit А365", "name": "анионит Lewatit А365", "domain": "гидрометаллургия"}}
+{"labels": ["Process"], "props": {"canonical_id": "Process:очистка от свинца", "name": "очистка от свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"unit": "кратность", "canonical_id": "Property:степень очистки", "name": "степень очистки", "domain": "гидрометаллургия", "value": 1000}}
+{"labels": ["Material"], "props": {"name": "Хлорид никеля", "canonical_id": "Material:Хлорид никеля", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:концентрация so42-иона", "name": "концентрация SO42-иона", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:десорбировано свинца", "name": "десорбировано свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:процент десорбции", "name": "процент десорбции", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:удельное количество десорбированного свинца", "name": "удельное количество десорбированного свинца", "domain": "гидрометаллургия"}}
+{"labels": ["Property"], "props": {"canonical_id": "Property:удельное количество вымытого никеля", "name": "удельное количество вымытого никеля", "domain": "гидрометаллургия"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\1 Моделирование тектонических нарушений с применением связей конечной жёсткости с интеграцией в CAE Fidesys (002).docx", "authors": [], "title": "1 Моделирование тектонических нарушений с применением связей конечной жёсткости с интеграцией в CAE Fidesys (002)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:1 Моделирование тектонических нарушений _12bf194a", "name": "1 Моделирование тектонических нарушений с применением связей конечной жёсткости с интеграцией в CAE Fidesys (002)"}}
+{"labels": ["Material"], "props": {"canonical_id": "Material:CuNi", "name": "CuNi"}}
+{"labels": ["Process"], "props": {"unit": "°C", "name": "отжиг", "canonical_id": "Process:отжиг", "temperature": 800}}
+{"labels": ["Experiment"], "props": {"name": "Эксперимент", "canonical_id": "Experiment:эксперимент"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\10 Статья по ХВ МФ-2025-14.docx", "authors": [], "title": "10 Статья по ХВ МФ-2025-14", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:10 Статья по ХВ МФ-2025-14_7450add6", "name": "10 Статья по ХВ МФ-2025-14"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\11 KorzhakovAA 811.docx", "authors": [], "title": "11 KorzhakovAA 811", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:11 KorzhakovAA 811_4b1a705d", "name": "11 KorzhakovAA 811"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\13 Приложение. Статья.pdf", "authors": [], "title": "13 Приложение. Статья", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:13 Приложение. Статья_b2b0f4fb", "name": "13 Приложение. Статья"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\14 Влияние на здание сейсмического действия взрывов и других факторов (ИТОГ_2).docx", "authors": [], "title": "14 Влияние на здание сейсмического действия взрывов и других факторов (ИТОГ_2)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:14 Влияние на здание сейсмического дейст_c4013907", "name": "14 Влияние на здание сейсмического действия взрывов и других факторов (ИТОГ_2)"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\15 Исследования составов продуктов передела медеочистки ОРИД и фильтрации пульпы медеочистки.docx", "authors": [], "title": "15 Исследования составов продуктов передела медеочистки ОРИД и фильтрации пульпы медеочистки", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:15 Исследования составов продуктов перед_cb2097c9", "name": "15 Исследования составов продуктов передела медеочистки ОРИД и фильтрации пульпы медеочистки"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\16 Статья для рецензирования Ахтямов К.Д., Фазылов И.Р..docx", "authors": [], "title": "16 Статья для рецензирования Ахтямов К.Д., Фазылов И.Р.", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:16 Статья для рецензирования Ахтямов К.Д_d098c824", "name": "16 Статья для рецензирования Ахтямов К.Д., Фазылов И.Р."}}
+{"labels": ["Expert"], "props": {"name": "Ахтямов К.Д.", "canonical_id": "Expert:ахтямов к.д."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\17 ИССЛЕДОВАНИЕ ВЛИЯНИЯ ТЕМПЕРАТУРНОГО РЕЖИМА ПРОЦЕССА ОБЕДНЕНИЯ ШЛАКА НА КОАЛЕСЦЕНЦИЮ ЧАСТИЦ МЕТАЛЛИЧЕСКОЙ ФАЗЫ.docx", "authors": [], "title": "17 ИССЛЕДОВАНИЕ ВЛИЯНИЯ ТЕМПЕРАТУРНОГО РЕЖИМА ПРОЦЕССА ОБЕДНЕНИЯ ШЛАКА НА КОАЛЕСЦЕНЦИЮ ЧАСТИЦ МЕТАЛЛИЧЕСКОЙ ФАЗЫ", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:17 ИССЛЕДОВАНИЕ ВЛИЯНИЯ ТЕМПЕРАТУРНОГО Р_b248cac1", "name": "17 ИССЛЕДОВАНИЕ ВЛИЯНИЯ ТЕМПЕРАТУРНОГО РЕЖИМА ПРОЦЕССА ОБЕДНЕНИЯ ШЛАКА НА КОАЛЕСЦЕНЦИЮ ЧАСТИЦ МЕТАЛЛИЧЕСКОЙ ФАЗЫ"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\18 Статья потенциал удароропасности.docx", "authors": [], "title": "18 Статья потенциал удароропасности", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:18 Статья потенциал удароропасности_8febaf97", "name": "18 Статья потенциал удароропасности"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\19 Статья по хлорированию - ГОТОВО.docx", "authors": [], "title": "19 Статья по хлорированию - ГОТОВО", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:19 Статья по хлорированию - ГОТОВО_7da6e798", "name": "19 Статья по хлорированию - ГОТОВО"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\2 Lukanina.pdf", "authors": [], "title": "2 Lukanina", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:2 Lukanina_1b7ac3cc", "name": "2 Lukanina"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\20 Применение современных способов контроля процессов для повышения технико-экономических показателей производства.docx", "authors": [], "title": "20 Применение современных способов контроля процессов для повышения технико-экономических показателей производства", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:20 Применение современных способов контр_4a56c6e7", "name": "20 Применение современных способов контроля процессов для повышения технико-экономических показателей производства"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\21 Статья фидер корр.docx", "authors": [], "title": "21 Статья фидер корр", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:21 Статья фидер корр_69abe7bd", "name": "21 Статья фидер корр"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\23 О_ВЛИЯНИИ_ОДНОРОДНОСТИ_ПОРОД_НА_УДАРООПАСНОСТЬ_МЕСТОРОЖДЕНИЙ.docx", "authors": [], "title": "23 О_ВЛИЯНИИ_ОДНОРОДНОСТИ_ПОРОД_НА_УДАРООПАСНОСТЬ_МЕСТОРОЖДЕНИЙ", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:23 О_ВЛИЯНИИ_ОДНОРОДНОСТИ_ПОРОД_НА_УДАРО_1617ee73", "name": "23 О_ВЛИЯНИИ_ОДНОРОДНОСТИ_ПОРОД_НА_УДАРООПАСНОСТЬ_МЕСТОРОЖДЕНИЙ"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\24 Статья.docx", "authors": [], "title": "24 Статья", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:24 Статья_d6f71678", "name": "24 Статья"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\25 Статья - Бикетова Л.В. (ЛГМ).docx", "authors": [], "title": "25 Статья - Бикетова Л.В. (ЛГМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:25 Статья - Бикетова Л.В. (ЛГМ)_bc18c1f4", "name": "25 Статья - Бикетова Л.В. (ЛГМ)"}}
+{"labels": ["Expert"], "props": {"name": "Бикетова Л.В.", "canonical_id": "Expert:бикетова л.в."}}
+{"labels": ["Facility"], "props": {"name": "ЛГМ", "canonical_id": "Facility:лгм"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\26 Статья - Великая Т.И. (ИАЦ).docx", "authors": [], "title": "26 Статья - Великая Т.И. (ИАЦ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:26 Статья - Великая Т.И. (ИАЦ)_8cd50d4f", "name": "26 Статья - Великая Т.И. (ИАЦ)"}}
+{"labels": ["Expert"], "props": {"name": "Великая Т.И.", "canonical_id": "Expert:великая т.и."}}
+{"labels": ["Facility"], "props": {"name": "ИАЦ", "canonical_id": "Facility:иац"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\27 Статья - Владимиров Е.С. (ЛПМ).docx", "authors": [], "title": "27 Статья - Владимиров Е.С. (ЛПМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:27 Статья - Владимиров Е.С. (ЛПМ)_4330b456", "name": "27 Статья - Владимиров Е.С. (ЛПМ)"}}
+{"labels": ["Expert"], "props": {"name": "Владимиров Е.С.", "canonical_id": "Expert:владимиров е.с."}}
+{"labels": ["Facility"], "props": {"name": "ЛПМ", "canonical_id": "Facility:лпм"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\28 Статья - Клименко И.В. (ЛГМ).docx", "authors": [], "title": "28 Статья - Клименко И.В. (ЛГМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:28 Статья - Клименко И.В. (ЛГМ)_83a099ef", "name": "28 Статья - Клименко И.В. (ЛГМ)"}}
+{"labels": ["Expert"], "props": {"name": "Клименко И.В.", "canonical_id": "Expert:клименко и.в."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\29 Статья - Косов Я.И. (ЛГМ).docx", "authors": [], "title": "29 Статья - Косов Я.И. (ЛГМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:29 Статья - Косов Я.И. (ЛГМ)_5e6b1fa1", "name": "29 Статья - Косов Я.И. (ЛГМ)"}}
+{"labels": ["Expert"], "props": {"name": "Косов Я.И.", "canonical_id": "Expert:косов я.и."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\30 Статья - Лисаков Ю.Н. (ЛГМ).docx", "authors": [], "title": "30 Статья - Лисаков Ю.Н. (ЛГМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:30 Статья - Лисаков Ю.Н. (ЛГМ)_56df49ca", "name": "30 Статья - Лисаков Ю.Н. (ЛГМ)"}}
+{"labels": ["Expert"], "props": {"name": "Лисаков Ю.Н.", "canonical_id": "Expert:лисаков ю.н."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\31 Статья - Савинова Ю.А. (ЛПМ).docx", "authors": [], "title": "31 Статья - Савинова Ю.А. (ЛПМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:31 Статья - Савинова Ю.А. (ЛПМ)_d23f504c", "name": "31 Статья - Савинова Ю.А. (ЛПМ)"}}
+{"labels": ["Expert"], "props": {"name": "Савинова Ю.А.", "canonical_id": "Expert:савинова ю.а."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\32 Статья - Салтыков П.М. (ЛГМ).docx", "authors": [], "title": "32 Статья - Салтыков П.М. (ЛГМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:32 Статья - Салтыков П.М. (ЛГМ)_7e125806", "name": "32 Статья - Салтыков П.М. (ЛГМ)"}}
+{"labels": ["Expert"], "props": {"name": "Салтыков П.М.", "canonical_id": "Expert:салтыков п.м."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\33 Статья - Хашковская Т.Н..docx", "authors": [], "title": "33 Статья - Хашковская Т.Н.", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:33 Статья - Хашковская Т.Н._ea023242", "name": "33 Статья - Хашковская Т.Н."}}
+{"labels": ["Expert"], "props": {"name": "Хашковская Т.Н.", "canonical_id": "Expert:хашковская т.н."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\35 Динамический_метод_расчета_каркаса_промышленного_здания_на_действие_сейсмической_нагрузки_17-экспертиза.docx", "authors": [], "title": "35 Динамический_метод_расчета_каркаса_промышленного_здания_на_действие_сейсмической_нагрузки_17-экспертиза", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:35 Динамический_метод_расчета_каркаса_пр_f549d5d7", "name": "35 Динамический_метод_расчета_каркаса_промышленного_здания_на_действие_сейсмической_нагрузки_17-экспертиза"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\36 Статья_Готовая..pdf", "authors": [], "title": "36 Статья_Готовая.", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:36 Статья_Готовая._3a93c558", "name": "36 Статья_Готовая."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\37 Статья шахта Ангидрит рудника Кайерканский (1).docx", "authors": [], "title": "37 Статья шахта Ангидрит рудника Кайерканский (1)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:37 Статья шахта Ангидрит рудника Кайерка_4e70975a", "name": "37 Статья шахта Ангидрит рудника Кайерканский (1)"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\38 Статья ЦМ_В АО Кольская ГМК получены первые слитки аффинированных металлов.docx", "authors": [], "title": "38 Статья ЦМ_В АО Кольская ГМК получены первые слитки аффинированных металлов", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:38 Статья ЦМ_В АО Кольская ГМК получены _dee07f4c", "name": "38 Статья ЦМ_В АО Кольская ГМК получены первые слитки аффинированных металлов"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\39 ИССЛЕДОВАНИЕ ПЕРСПЕКТИВНЫХ СОСТАВОВ ДЛЯ ОТЛИВКИ МЕДНЫХ АНОДОВ.docx", "authors": [], "title": "39 ИССЛЕДОВАНИЕ ПЕРСПЕКТИВНЫХ СОСТАВОВ ДЛЯ ОТЛИВКИ МЕДНЫХ АНОДОВ", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:39 ИССЛЕДОВАНИЕ ПЕРСПЕКТИВНЫХ СОСТАВОВ Д_9f14014c", "name": "39 ИССЛЕДОВАНИЕ ПЕРСПЕКТИВНЫХ СОСТАВОВ ДЛЯ ОТЛИВКИ МЕДНЫХ АНОДОВ"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\39 Статья_Применение сульфита натрия для осаждения Au из Pt-Pd растворов сложного состава.docx", "authors": [], "title": "39 Статья_Применение сульфита натрия для осаждения Au из Pt-Pd растворов сложного состава", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:39 Статья_Применение сульфита натрия для_58b94467", "name": "39 Статья_Применение сульфита натрия для осаждения Au из Pt-Pd растворов сложного состава"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\4 Doping NCM pCAM article.docx", "authors": [], "title": "4 Doping NCM pCAM article", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:4 Doping NCM pCAM article_4e2773ab", "name": "4 Doping NCM pCAM article"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\40 Анализ аффинированных СЕРЕБРА и ПЛАТИНЫ. ЦВЕТНЫЕ МЕТАЛЛЫ rev 22-05-23.docx", "authors": [], "title": "40 Анализ аффинированных СЕРЕБРА и ПЛАТИНЫ. ЦВЕТНЫЕ МЕТАЛЛЫ rev 22-05-23", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:40 Анализ аффинированных СЕРЕБРА и ПЛАТИ_945e07df", "name": "40 Анализ аффинированных СЕРЕБРА и ПЛАТИНЫ. ЦВЕТНЫЕ МЕТАЛЛЫ rev 22-05-23"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\41 Оценка физико-механических свойств горных пород при применении противоуд....docx", "authors": [], "title": "41 Оценка физико-механических свойств горных пород при применении противоуд...", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:41 Оценка физико-механических свойств го_27dbbe59", "name": "41 Оценка физико-механических свойств горных пород при применении противоуд..."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\43 Повышение селективности концентратов МПГ в химико-металлургическом цехе КГМК.docx", "authors": [], "title": "43 Повышение селективности концентратов МПГ в химико-металлургическом цехе КГМК", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:43 Повышение селективности концентратов _14d02683", "name": "43 Повышение селективности концентратов МПГ в химико-металлургическом цехе КГМК"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\44 ИССЛЕДОВАНИЕ ПРОЦЕССА ГРАНУЛЯЦИИ МЕДНО-НИКЕЛЕВЫХ ШТЕЙНОВ.docx", "authors": [], "title": "44 ИССЛЕДОВАНИЕ ПРОЦЕССА ГРАНУЛЯЦИИ МЕДНО-НИКЕЛЕВЫХ ШТЕЙНОВ", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:44 ИССЛЕДОВАНИЕ ПРОЦЕССА ГРАНУЛЯЦИИ МЕДН_336ecc3c", "name": "44 ИССЛЕДОВАНИЕ ПРОЦЕССА ГРАНУЛЯЦИИ МЕДНО-НИКЕЛЕВЫХ ШТЕЙНОВ"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\45 Статья. Магнитная сепарация. Часть 1.docx", "authors": [], "title": "45 Статья. Магнитная сепарация. Часть 1", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:45 Статья. Магнитная сепарация. Часть 1_5995d06f", "name": "45 Статья. Магнитная сепарация. Часть 1"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\46 Статья. Магнитная сепарация. Часть 2.docx", "authors": [], "title": "46 Статья. Магнитная сепарация. Часть 2", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:46 Статья. Магнитная сепарация. Часть 2_7bd50f2c", "name": "46 Статья. Магнитная сепарация. Часть 2"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\47 Трубчатые печи статья 1.2.docx", "authors": [], "title": "47 Трубчатые печи статья 1.2", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:47 Трубчатые печи статья 1.2_5450c1ff", "name": "47 Трубчатые печи статья 1.2"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\48 Поведение силикатной составляющей при переработке Ni к-та -в редакцию Цв.металлы.docx", "authors": [], "title": "48 Поведение силикатной составляющей при переработке Ni к-та -в редакцию Цв.металлы", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:48 Поведение силикатной составляющей при_8ef76e7c", "name": "48 Поведение силикатной составляющей при переработке Ni к-та -в редакцию Цв.металлы"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\49 Моделирование разгрузки.docx", "authors": [], "title": "49 Моделирование разгрузки", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:49 Моделирование разгрузки_10e60e50", "name": "49 Моделирование разгрузки"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\5 Статья для ГЖ №1.docx", "authors": [], "title": "5 Статья для ГЖ №1", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:5 Статья для ГЖ №1_d031210d", "name": "5 Статья для ГЖ №1"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\50 Статья адаптация геометрии.docx", "authors": [], "title": "50 Статья адаптация геометрии", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:50 Статья адаптация геометрии_e64ed6c6", "name": "50 Статья адаптация геометрии"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\52 Solid household and industrial waste paper 28-09-2021-rus.docx", "authors": [], "title": "52 Solid household and industrial waste paper 28-09-2021-rus", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:52 Solid household and industrial waste _54ff4464", "name": "52 Solid household and industrial waste paper 28-09-2021-rus"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\54 Поведение селена и теллура при электроэкстракции меди.docx", "authors": [], "title": "54 Поведение селена и теллура при электроэкстракции меди", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:54 Поведение селена и теллура при электр_6e0da771", "name": "54 Поведение селена и теллура при электроэкстракции меди"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\55 Приложение. Текст статьи.docx", "authors": [], "title": "55 Приложение. Текст статьи", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:55 Приложение. Текст статьи_d85c81d5", "name": "55 Приложение. Текст статьи"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\57 Статья- Новожилова О.С. (ЛПМ).docx", "authors": [], "title": "57 Статья- Новожилова О.С. (ЛПМ)", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:57 Статья- Новожилова О.С. (ЛПМ)_95d11231", "name": "57 Статья- Новожилова О.С. (ЛПМ)"}}
+{"labels": ["Expert"], "props": {"name": "Новожилова О.С.", "canonical_id": "Expert:новожилова о.с."}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\58 Статья Электроды.docx", "authors": [], "title": "58 Статья Электроды", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:58 Статья Электроды_43acd871", "name": "58 Статья Электроды"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\6 Влияние различных факторов на окисление железа, часть 2 v3.docx", "authors": [], "title": "6 Влияние различных факторов на окисление железа, часть 2 v3", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:6 Влияние различных факторов на окислени_c3aebe0c", "name": "6 Влияние различных факторов на окисление железа, часть 2 v3"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\7 Хранение САМ_версия 25.05.20.docx", "authors": [], "title": "7 Хранение САМ_версия 25.05.20", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:7 Хранение САМ_версия 25.05.20_4121839e", "name": "7 Хранение САМ_версия 25.05.20"}}
+{"labels": ["Publication"], "props": {"source_path": "data\\Задача 2. Научный клубок\\Источники информации\\Статьи\\8 Статья_ЦМ.docx", "authors": [], "title": "8 Статья_ЦМ", "publication_type": "статья", "geography": "Россия", "is_domestic": true, "sensitivity": "internal", "canonical_id": "Publication:8 Статья_ЦМ_dfa991b5", "name": "8 Статья_ЦМ"}}

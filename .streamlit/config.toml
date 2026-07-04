@@ -1,0 +1,13 @@
+# Тема интерфейса — корпоративная палитра (синий Норникеля на светлом фоне).
+[theme]
+primaryColor = "#0072CE"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#EEF3F8"
+textColor = "#14212E"
+font = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

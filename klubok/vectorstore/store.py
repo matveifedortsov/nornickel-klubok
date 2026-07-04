@@ -24,24 +24,59 @@ class QdrantStore:
 
         self.embedder = embedder
         self.collection = collection or settings.qdrant_collection
-        self._client = QdrantClient(url=url or settings.qdrant_url)
+        # local -> встроенный Qdrant в файле (без сервера/докера); server -> внешний
+        if settings.qdrant_mode == "local":
+            self._client = self._open_local(QdrantClient)
+        else:
+            self._client = QdrantClient(url=url or settings.qdrant_url)
         self._VectorParams = VectorParams
         self._Distance = Distance
 
+    @staticmethod
+    def _open_local(QdrantClient):
+        """Открыть встроенный Qdrant, сняв stale `.lock` от жёстко убитого процесса.
+
+        Встроенный режим — строго однопроцессный (API ЛИБО ingest, никогда
+        вместе). Поэтому если при старте видим lock — предыдущий владелец мёртв,
+        и lock устарел: пробуем открыть, при ошибке блокировки удаляем `.lock` и
+        повторяем один раз. Для server-режима это неактуально.
+        """
+        from pathlib import Path
+        path = Path(settings.qdrant_path)
+        try:
+            return QdrantClient(path=str(path))
+        except Exception as exc:                          # noqa: BLE001
+            if "already accessed" not in str(exc) and "lock" not in str(exc).lower():
+                raise
+            lock = path / ".lock"
+            if lock.exists():
+                import warnings
+                warnings.warn(f"Снимаю stale Qdrant-lock {lock} (владелец мёртв).")
+                lock.unlink(missing_ok=True)
+            return QdrantClient(path=str(path))
+
+    def close(self) -> None:
+        """Корректно закрыть клиент (в local-режиме снимает файловый lock)."""
+        try:
+            self._client.close()
+        except Exception:                                 # noqa: BLE001
+            pass
+
     def ensure_collection(self, recreate: bool = False) -> None:
         exists = self._client.collection_exists(self.collection)
-        # смена эмбеддера меняет размерность (bge=1024, yandex=256) — иначе upsert
-        # упадёт с несовпадением. При несоответствии пересоздаём коллекцию.
+        # Смена эмбеддера меняет размерность (bge=1024, yandex=256, fastembed=384).
+        # Несовпадение — ГРОМКАЯ ошибка, а не авто-пересоздание: раньше здесь
+        # молча удалялась вся коллекция (часы ингеста и квоты эмбеддера) из-за
+        # одной строчки EMBEDDER_BACKEND. Пересоздание — только явным recreate=True.
         if exists and not recreate:
             info = self._client.get_collection(self.collection)
             existing_dim = info.config.params.vectors.size
             if existing_dim != self.embedder.dim:
-                import warnings
-                warnings.warn(
-                    f"Коллекция '{self.collection}' имеет dim={existing_dim}, "
-                    f"эмбеддер даёт dim={self.embedder.dim}. Пересоздаю коллекцию "
-                    f"(старые векторы удаляются — переиндексируйте корпус).")
-                recreate = True
+                raise RuntimeError(
+                    f"Коллекция '{self.collection}' имеет dim={existing_dim}, а текущий "
+                    f"эмбеддер даёт dim={self.embedder.dim}. Вероятно, сменился "
+                    f"EMBEDDER_BACKEND. Верните прежний бэкенд или пересоздайте коллекцию "
+                    f"явно: python scripts/reindex_vectors.py (старые векторы удалятся).")
         if exists and recreate:
             self._client.delete_collection(self.collection)
             exists = False
@@ -72,10 +107,17 @@ class QdrantStore:
             n += len(points)
         return n
 
+    def count(self) -> int:
+        """Число точек в коллекции (0, если коллекции ещё нет)."""
+        if not self._client.collection_exists(self.collection):
+            return 0
+        return int(self._client.count(self.collection, exact=True).count)
+
     def search(self, query: str, top_k: int = 8) -> list[dict]:
+        # qdrant-client >=1.10 убрал .search() в пользу .query_points()
         qv = self.embedder.encode_query(query).tolist()
-        hits = self._client.search(self.collection, query_vector=qv, limit=top_k)
-        return [{"score": h.score, **h.payload} for h in hits]
+        res = self._client.query_points(self.collection, query=qv, limit=top_k)
+        return [{"score": p.score, **(p.payload or {})} for p in res.points]
 
 
 class InMemoryVectorStore:
@@ -93,6 +135,9 @@ class InMemoryVectorStore:
         ]
         self._matrix = self.embedder.encode([c.text for c in chunks], kind="doc")
         return len(chunks)
+
+    def count(self) -> int:
+        return len(self._payloads)
 
     def search(self, query: str, top_k: int = 8) -> list[dict]:
         if self._matrix is None or len(self._payloads) == 0:

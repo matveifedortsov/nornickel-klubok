@@ -50,6 +50,39 @@ def test_cached_embedder_hits_cache(tmp_path):
     cache.close()
 
 
+def test_extract_cache_roundtrip(tmp_path):
+    from klubok.extraction.extract_cache import ExtractCache
+    c = ExtractCache(path=tmp_path / "ex.sqlite")
+    assert c.get("chunk текст") is None
+    c.put("chunk текст", '{"entities": [], "relations": []}')
+    assert c.get("chunk текст") == '{"entities": [], "relations": []}'
+    # версия промпта разделяет ключи
+    assert c.get("chunk текст", prompt_version="v2") is None
+    c.close()
+
+
+def test_extract_from_chunk_uses_cache(tmp_path):
+    """LLM вызывается один раз; второй вызов берёт из кэша."""
+    from klubok.ontology import Chunk
+    from klubok.extraction.extract_cache import ExtractCache
+    from klubok.extraction.extractor import extract_from_chunk
+
+    class _OneShotLLM:
+        def __init__(self): self.calls = 0
+        def complete(self, prompt, system=""):
+            self.calls += 1
+            return '{"entities": [{"name": "Ni", "type": "Material"}], "relations": []}'
+
+    cache = ExtractCache(path=tmp_path / "ex.sqlite")
+    llm = _OneShotLLM()
+    ch = Chunk(chunk_id="c1", doc_id="d1", text="никель выщелачивание")
+    r1 = extract_from_chunk(ch, llm, cache=cache)
+    r2 = extract_from_chunk(ch, llm, cache=cache)
+    assert llm.calls == 1                      # второй раз — из кэша
+    assert len(r1.entities) == len(r2.entities) == 1
+    cache.close()
+
+
 def test_cached_embedder_separates_doc_and_query(tmp_path):
     inner = _CountingEmbedder(dim=32)
     cache = CachedEmbedder(inner, path=tmp_path / "emb.sqlite")

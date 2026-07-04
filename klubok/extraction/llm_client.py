@@ -242,10 +242,25 @@ class YandexLLMClient(OpenAICompatClient):
 # --------------------------------------------------------------------------
 # Фабрика
 # --------------------------------------------------------------------------
-def get_llm() -> LLMClient:
+def get_llm(required: bool = False) -> LLMClient:
+    """LLM по конфигу. `required=True` — упасть, а не откатиться в Mock.
+
+    Мягкий откат допустим только на путях ответа (генерация деградирует до
+    заглушки, ретривал продолжает работать). Ингест обязан требовать реальный
+    LLM: MockLLM молча заполнил бы граф фейковыми триплетами, а checkpoint и
+    кэш экстракции закрепили бы порчу навсегда.
+    """
     backend = settings.llm_backend
     if backend == "metalgpt":
         return MetalGPTClient()
     if backend == "yandex":
-        return YandexLLMClient()
+        try:
+            return YandexLLMClient()
+        except Exception as exc:                          # noqa: BLE001
+            if required:
+                raise
+            import logging
+            logging.getLogger(__name__).warning(
+                "YandexGPT недоступен (%s) -> MockLLM", str(exc)[:80])
+            return MockLLM()
     return MockLLM()

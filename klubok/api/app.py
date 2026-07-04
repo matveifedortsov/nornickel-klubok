@@ -30,7 +30,7 @@ from typing import Literal
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from pydantic import BaseModel
 
-from klubok.pipeline import build_stores, ingest_path, answer_question
+from klubok.pipeline import build_stores, ingest_path, answer_question, seed_if_empty
 from klubok.retrieval.graphrag import retrieve
 from klubok.graph import gaps
 from klubok.graph.ingest import upsert_manual_edge
@@ -49,13 +49,34 @@ _state: dict = {}
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     client, store = build_stores()
+    seed_if_empty(client, store)      # пустой граф + есть seed -> демо-данные для жюри
     _state["client"], _state["store"] = client, store
     _state["watch"] = WatchStore()
+    _warmup(client, store)
     try:
         yield
     finally:
         client.close()
+        store.close()
         _state["watch"].close()
+
+
+def _warmup(client, store) -> None:
+    """Прогреть медленный fulltext-индекс Neo4j фиктивным seed-запросом.
+
+    Именно первый seed-запрос к fulltext «холодный» (~5с) и упирается в
+    требование ТЗ «3-5с»; векторный поиск и так ~9мс. Поэтому греем ТОЛЬКО
+    fulltext (find_seed_nodes), НЕ полный retrieve — иначе при исчерпанной квоте
+    эмбеддингов прогрев ушёл бы в долгие ретраи и заблокировал старт API.
+    Ошибки глушим (пустой граф/нет индекса не должны ронять старт).
+    """
+    import logging
+    from klubok.retrieval.graphrag import find_seed_nodes
+    try:
+        find_seed_nodes(client, "прогрев индекса", limit=3)
+        logging.getLogger("klubok.api").info("warm-up fulltext-индекса выполнен")
+    except Exception as exc:                              # noqa: BLE001
+        logging.getLogger("klubok.api").warning("warm-up пропущен: %s", exc)
 
 
 app = FastAPI(title="Научный клубок API", version="0.2.0", lifespan=lifespan)
@@ -79,6 +100,8 @@ class AskRequest(BaseModel):
     question: str
     geography: bool | None = None      # None=авто из текста вопроса; передайте явно, чтобы переопределить
     domain: str | None = None
+    year_from: int | None = None       # временной диапазон (ТЗ); None=авто из вопроса
+    year_to: int | None = None
 
 
 class ReviewRequest(BaseModel):
@@ -142,14 +165,18 @@ def ingest(req: IngestRequest) -> dict:
 def ask(req: AskRequest, role: str = Depends(get_role)) -> dict:
     ans = answer_question(req.question, _state["client"], _state["store"],
                           geography=req.geography if req.geography is not None else "auto",
-                          domain=req.domain)
+                          domain=req.domain, year_from=req.year_from, year_to=req.year_to)
     sources = _visible_sources(_state["client"], role, ans.sources)
     return {
         "question": ans.question, "answer": ans.text, "sources": sources,
         "edges_used": ans.edges_used, "passages_used": ans.passages_used,
         "constraints": [c.model_dump() for c in (ans.constraints or [])],
         "geography_filter": ans.geography_filter,
+        "year_from": ans.year_from, "year_to": ans.year_to,
         "timings_ms": ans.timings_ms or {},
+        # подграф уже найден этим же retrieve — отдаём сразу, чтобы UI не гонял
+        # весь гибридный поиск второй раз через GET /subgraph
+        "subgraph": {"seeds": ans.seed_nodes or [], "edges": ans.subgraph_edges or []},
     }
 
 
@@ -161,12 +188,15 @@ def review(req: ReviewRequest) -> dict:
 
 
 @app.get("/subgraph")
-def subgraph(q: str, geography: bool | None = None, domain: str | None = None) -> dict:
+def subgraph(q: str, geography: bool | None = None, domain: str | None = None,
+             year_from: int | None = None, year_to: int | None = None) -> dict:
     ctx = retrieve(q, _state["store"], _state["client"],
-                   geography=geography if geography is not None else "auto", domain=domain)
+                   geography=geography if geography is not None else "auto", domain=domain,
+                   year_from=year_from, year_to=year_to)
     return {"seeds": ctx.seed_nodes, "edges": ctx.subgraph_edges,
             "constraints": [c.model_dump() for c in ctx.constraints],
             "geography_filter": ctx.geography_filter,
+            "year_from": ctx.year_from, "year_to": ctx.year_to,
             "timings_ms": ctx.timings_ms}
 
 
@@ -178,6 +208,20 @@ def gap_report(role: str = Depends(require_full_access)) -> dict:
 @app.get("/dashboard")
 def dashboard(role: str = Depends(require_full_access)) -> dict:
     return dashboard_mod.dashboard_report(_state["client"])
+
+
+@app.get("/entities")
+def entities(type: str, q: str = "", limit: int = 50) -> dict:
+    """Список сущностей заданного типа (для автодополнения в UI «Сравнение»)."""
+    try:
+        label = NodeType(type).value           # валидация против инъекции
+    except ValueError:
+        raise HTTPException(status_code=400, detail=f"неизвестный тип: {type}")
+    rows = _state["client"].run(
+        f"MATCH (n:{label}) WHERE $q = '' OR toLower(n.name) CONTAINS toLower($q) "
+        "RETURN n.canonical_id AS cid, n.name AS name ORDER BY name LIMIT $limit",
+        q=q, limit=limit)
+    return {"entities": [dict(r) for r in rows]}
 
 
 @app.post("/compare")

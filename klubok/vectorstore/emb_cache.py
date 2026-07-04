@@ -29,6 +29,7 @@ class CachedEmbedder:
     def __init__(self, inner: Embedder, path: str | Path | None = None) -> None:
         self.inner = inner
         self.dim = inner.dim
+        self.remote = getattr(inner, "remote", False)   # прозрачно для потребителей
         self._path = Path(path or settings.emb_cache_path)
         self._path.parent.mkdir(parents=True, exist_ok=True)
         self._lock = threading.Lock()

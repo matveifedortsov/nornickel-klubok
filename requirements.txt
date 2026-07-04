@@ -13,17 +13,17 @@ python-pptx>=0.6.23    # доклады/презентации (PPTX)
 
 # --- Хранилища ---
 neo4j>=5.19            # граф
-qdrant-client>=1.9     # вектор
+qdrant-client>=1.12    # вектор (нужен query_points API; .search убран в 1.10)
 
-# --- Эмбеддинги / реранк (тяжёлое — ставится когда есть железо) ---
-sentence-transformers>=2.7   # BGE-m3 / e5
-# FlagEmbedding>=1.2          # альтернативный загрузчик BGE
+# --- Локальный эмбеддер (ONNX, без torch/квоты) ---
+fastembed>=0.3         # мультиязычный локальный эмбеддер; работает там, где torch падает
 
-# --- LLM-инференс (ставится на машине с GPU) ---
-# vllm>=0.4                   # рекомендуется для MetalGPT-1 (32B)
-# transformers>=4.40
-# accelerate>=0.30
-# bitsandbytes>=0.43          # 4-bit квантизация
+# --- Эмбеддинги ---
+# Боевой бэкенд (Yandex AI Studio) эмбеддит по HTTP и НЕ требует torch.
+# Тяжёлый локальный BGE-m3 (sentence-transformers→torch, ~2-3 ГБ) вынесен в
+# requirements-ml.txt — ставьте его ТОЛЬКО при EMBEDDER_BACKEND=bge:
+#     pip install -r requirements-ml.txt
+# Так основной образ/окружение остаётся лёгким.
 
 # --- API / UI ---
 fastapi>=0.110

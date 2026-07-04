@@ -74,7 +74,14 @@ def _split_long(text: str, max_chars: int, overlap: int) -> list[str]:
 
 
 def parse_pdf(path: str | Path, max_chars: int = 1200) -> Document:
-    """Распарсить один PDF в Document. Требует pymupdf (ленивый импорт)."""
+    """Распарсить один PDF в Document. Требует pymupdf (ленивый импорт).
+
+    Устойчив к битым страницам: сбой одной страницы не роняет весь файл
+    (в реальном корпусе есть повреждённые/сканированные PDF). Скан без
+    текстового слоя вернёт Document с пустыми/скудными chunks — дальше
+    pipeline.ingest_document пропустит его до LLM (экономия квоты).
+    """
+    import logging
     import fitz  # PyMuPDF
 
     path = Path(path)
@@ -83,7 +90,12 @@ def parse_pdf(path: str | Path, max_chars: int = 1200) -> Document:
 
     with fitz.open(path) as pdf:
         for page_no, page in enumerate(pdf, start=1):
-            text = page.get_text("text")
+            try:
+                text = page.get_text("text")
+            except Exception as exc:                      # noqa: BLE001 — битая страница
+                logging.getLogger(__name__).warning(
+                    "PDF %s: пропуск страницы %d (%s)", path.name, page_no, exc)
+                continue
             document.chunks.extend(chunk_text(text, doc_id, page=page_no, max_chars=max_chars))
 
     return document

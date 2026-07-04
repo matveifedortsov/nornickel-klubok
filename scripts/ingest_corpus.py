@@ -41,6 +41,9 @@ def ingest_corpus(file_list: Path, checkpoint: Path, report: Path,
     files = [Path(l) for l in file_list.read_text(encoding="utf-8").splitlines() if l.strip()]
     done = _load_checkpoint(checkpoint)
 
+    from klubok.extraction.extract_cache import ExtractCache
+    extract_cache = ExtractCache()      # кэш сырых LLM-ответов -> ретраи не жгут квоту
+
     client, store = build_stores()
     summary = {"ok": 0, "failed": 0, "skipped": 0, "entities": 0, "relations": 0, "errors": []}
 
@@ -62,7 +65,11 @@ def ingest_corpus(file_list: Path, checkpoint: Path, report: Path,
             for attempt in range(1, retries + 2):
                 try:
                     doc = parser(path)
-                    result = ingest_document(doc, client, store)
+                    result = ingest_document(doc, client, store, extract_cache=extract_cache)
+                    # сбой векторной индексации = файл НЕ готов: без этого он попадал
+                    # в checkpoint и навсегда оставался без векторов (0 failed в отчёте)
+                    if result.get("index_error"):
+                        raise RuntimeError(f"векторная индексация: {result['index_error']}")
                     summary["ok"] += 1
                     summary["entities"] += result.get("entities", 0)
                     summary["relations"] += result.get("relations", 0)
@@ -84,6 +91,8 @@ def ingest_corpus(file_list: Path, checkpoint: Path, report: Path,
                 log.error("FAIL %s: %s", key, last_exc)
     finally:
         client.close()
+        store.close()
+        extract_cache.close()
         report.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
         log.info("Готово: ok=%d failed=%d skipped=%d -> %s",
                   summary["ok"], summary["failed"], summary["skipped"], report)

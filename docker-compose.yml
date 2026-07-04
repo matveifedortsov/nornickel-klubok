@@ -15,17 +15,23 @@ services:
       - "7474:7474"   # HTTP / Browser
       - "7687:7687"   # Bolt
     environment:
-      - NEO4J_AUTH=neo4j/klubok_dev_password
+      # пароль берётся из .env (NEO4J_PASSWORD) — тот же, что читает api; иначе
+      # смена пароля ломала бы захардкоженный healthcheck и деадлочила старт
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:-klubok_dev_password}
       - NEO4J_PLUGINS=["apoc"]            # APOC нужен для обхода графа 1-4 хопа (graphrag.py)
       - NEO4J_dbms_security_procedures_unrestricted=apoc.*
     volumes:
       - neo4j_data:/data
       - neo4j_logs:/logs
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 || exit 1"]
+      # cypher-shell гарантированно есть в образе и проверяет, что БД реально
+      # принимает запросы (а не только слушает HTTP-порт) — api при старте
+      # сразу делает apply_schema, ему нужна готовая БД, а не «порт открыт».
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p ${NEO4J_PASSWORD:-klubok_dev_password} 'RETURN 1' || exit 1"]
       interval: 10s
-      timeout: 5s
-      retries: 10
+      timeout: 10s
+      retries: 15
+      start_period: 30s
 
   qdrant:
     image: qdrant/qdrant:latest
@@ -41,11 +47,30 @@ services:
     container_name: klubok_api
     ports:
       - "8000:8000"
-    env_file: .env
+    # .env необязателен: без него бэкенды падают в дефолты (mock) и compose не
+    # падает с «env file not found». Для боевого прогона: cp .env.example .env
+    # и заполнить YANDEX_* (см. README).
+    env_file:
+      - path: .env
+        required: false
     environment:
       # внутри compose-сети адресуемся по именам сервисов, а не localhost
       - NEO4J_URI=bolt://neo4j:7687
       - QDRANT_URL=http://qdrant:6333
+      # ФОРСИРУЕМ серверный Qdrant (сервис qdrant), даже если в .env стоит
+      # QDRANT_MODE=local для локального Docker-less прогона — иначе контейнер
+      # поднял бы встроенный Qdrant и проигнорировал сервис qdrant.
+      - QDRANT_MODE=server
+      # Эмбеддер — локальный ONNX (совпадает с seed-векторами 384) как дефолт,
+      # чтобы без .env не откатиться в mock (dim 1024) и не сломать seed-импорт.
+      # НЕ жёсткий форс: если в .env задан другой EMBEDDER_BACKEND (уже
+      # проиндексированный корпус), уважаем его — иначе стартовая проверка
+      # размерности коллекции упадёт (см. QdrantStore.ensure_collection).
+      - EMBEDDER_BACKEND=${EMBEDDER_BACKEND:-fastembed}
+      - FASTEMBED_CACHE=/app/models
+      # Генерация — YandexGPT (ключи из .env). Без ключа get_llm мягко откатится
+      # в Mock: ретривал/граф работают, ответ — заглушка (сервис не падает).
+      - LLM_BACKEND=yandex
     volumes:
       - ./data:/app/data
     depends_on:

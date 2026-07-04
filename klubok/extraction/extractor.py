@@ -16,14 +16,15 @@ from klubok.ontology import (
 )
 from klubok.extraction.prompts import EXTRACTION_SYSTEM, build_extraction_prompt
 from klubok.extraction.llm_client import LLMClient
+from klubok.extraction.heuristics import verification_from_evidence
 
 log = logging.getLogger(__name__)
 
 _JSON_BLOCK = re.compile(r"\{.*\}", re.DOTALL)
 
 
-def _loads_lenient(raw: str) -> dict:
-    """Достать JSON-объект из ответа LLM, даже если он обёрнут в текст/```json."""
+def _try_loads(raw: str) -> dict | None:
+    """JSON-объект из ответа LLM (терпит markdown-обёртку) или None, если битый."""
     raw = raw.strip()
     raw = re.sub(r"^```(?:json)?|```$", "", raw, flags=re.MULTILINE).strip()
     try:
@@ -35,8 +36,16 @@ def _loads_lenient(raw: str) -> dict:
                 return json.loads(m.group(0))
             except json.JSONDecodeError:
                 pass
-    log.warning("Не удалось распарсить JSON из ответа LLM: %.120s", raw)
-    return {"entities": [], "relations": []}
+    return None
+
+
+def _loads_lenient(raw: str) -> dict:
+    """Достать JSON-объект из ответа LLM, даже если он обёрнут в текст/```json."""
+    data = _try_loads(raw)
+    if data is None:
+        log.warning("Не удалось распарсить JSON из ответа LLM: %.120s", raw)
+        return {"entities": [], "relations": []}
+    return data
 
 
 def _coerce_node_type(v: str) -> NodeType | None:
@@ -89,13 +98,18 @@ def parse_extraction(raw: str, doc_id: str, chunk_id: str | None) -> ExtractionR
         rt = _coerce_rel_type(r.get("rel", ""))
         if not all([st, dt, rt]) or not r.get("src_name") or not r.get("dst_name"):
             continue
+        # уровень верификации: берём у LLM, а если тот смолчал ("unverified") —
+        # добираем эвристикой по глаголам в цитате (получен/показал → confirmed).
+        vlevel = r.get("verification_level") or "unverified"
+        if vlevel == "unverified":
+            vlevel = verification_from_evidence(r.get("evidence"))
         rel = Relation(
             src_name=r["src_name"], src_type=st, rel=rt,
             dst_name=r["dst_name"], dst_type=dt,
             evidence=r.get("evidence"), chunk_id=chunk_id,
             confidence=float(r.get("confidence", 1.0)),
             source_type=r.get("source_type"),
-            verification_level=r.get("verification_level") or "unverified",
+            verification_level=vlevel,
             actualized_at=r.get("actualized_at"),
             geography=r.get("geography"), is_domestic=r.get("is_domestic"),
         )
@@ -108,11 +122,21 @@ def parse_extraction(raw: str, doc_id: str, chunk_id: str | None) -> ExtractionR
     return result
 
 
-def extract_from_chunk(chunk: Chunk, llm: LLMClient) -> ExtractionResult:
-    prompt = build_extraction_prompt(chunk.text)
-    raw = llm.complete(prompt, system=EXTRACTION_SYSTEM)
+def extract_from_chunk(chunk: Chunk, llm: LLMClient, cache=None) -> ExtractionResult:
+    """Извлечь триплеты из чанка. `cache` (ExtractCache) — опциональный кэш сырого
+    ответа LLM: экономит квоту при ретраях/повторных прогонах (см. extract_cache.py)."""
+    raw = cache.get(chunk.text) if cache is not None else None
+    if raw is None:
+        raw = llm.complete(build_extraction_prompt(chunk.text), system=EXTRACTION_SYSTEM)
+        # В кэш кладём только распарсиваемый ответ и только от реального LLM:
+        # обрезанный по max_tokens / битый JSON (или заглушка MockLLM) иначе
+        # «отравил» бы кэш навсегда — чанк переставал бы извлекаться даже после
+        # починки бэкенда, т.к. ключ кэша не зависит от бэкенда.
+        from klubok.extraction.llm_client import MockLLM
+        if cache is not None and not isinstance(llm, MockLLM) and _try_loads(raw) is not None:
+            cache.put(chunk.text, raw)
     return parse_extraction(raw, doc_id=chunk.doc_id, chunk_id=chunk.chunk_id)
 
 
-def extract_from_chunks(chunks: list[Chunk], llm: LLMClient) -> list[ExtractionResult]:
-    return [extract_from_chunk(c, llm) for c in chunks]
+def extract_from_chunks(chunks: list[Chunk], llm: LLMClient, cache=None) -> list[ExtractionResult]:
+    return [extract_from_chunk(c, llm, cache=cache) for c in chunks]

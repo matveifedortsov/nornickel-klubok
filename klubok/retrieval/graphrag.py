@@ -33,6 +33,8 @@ class RetrievalContext:
     seed_nodes: list[str] = field(default_factory=list)
     constraints: list[NumericConstraint] = field(default_factory=list)   # разобранные из вопроса
     geography_filter: bool | None = None       # True=РФ, False=зарубеж, None=без фильтра
+    year_from: int | None = None               # временной диапазон (ТЗ: «за 5 лет»)
+    year_to: int | None = None
     timings_ms: dict[str, float] = field(default_factory=dict)  # vector_ms/seed_ms/graph_ms (§Y8)
 
     def graph_context_text(self) -> str:
@@ -78,6 +80,55 @@ def extract_geography_filter(question: str) -> bool | None:
     return None
 
 
+import re as _re
+_YEAR = r"(19\d{2}|20\d{2})"
+# Предлог не должен быть хвостом слова: «процесС 2010», «фаЗА 2 года» — иначе
+# однобуквенные «с»/«за» матчатся внутри слов и включают фиктивный фильтр.
+_NOT_WORD_TAIL = r"(?<![а-яёa-z])"
+# Число 1900–2099 с единицей измерения после — величина, а не год («с 2000
+# м³/сут», «до 2000 кПа»). «г» намеренно не в списке: «до 2020 г.» — это год.
+_NO_UNIT = (r"(?!\d)"
+            # после единицы — не буква (не \b: «³» в «м³» — словесный символ,
+            # и \b между «м» и «³» не срабатывает)
+            r"(?!\s*(?:мк?г|кг|км|мм|см|дм|мл|л|т|м|к?па|мпа|гпа|атм|бар|"
+            r"м?вт|квт|к?дж|шт|об|ч|мин|сек|°|%)(?![а-яёa-z]))"
+            r"(?!\s*[²³/])")
+
+
+def extract_year_filter(question: str, now_year: int | None = None) -> tuple[int | None, int | None]:
+    """Временной диапазон из вопроса (ТЗ: «за последние 5 лет», «с 2019», «за 2018–2022»).
+
+    Возвращает (year_from, year_to); None означает открытую границу. Чистая
+    функция — тестируется без БД. now_year для детерминизма в тестах.
+    """
+    from datetime import datetime
+    now_year = now_year or datetime.now().year
+    q = question.lower()
+
+    # «за последние N лет» / «за N лет» / «последних N лет»
+    m = _re.search(rf"{_NOT_WORD_TAIL}(?:за|последн\w*)\s+(?:последн\w*\s+)?(\d{{1,2}})\s+(?:год|лет|года)", q)
+    if m:
+        return now_year - int(m.group(1)), None
+
+    # диапазон «2018–2022» / «2018-2022» / «с 2018 по 2022»
+    m = _re.search(rf"{_YEAR}\s*(?:[-–—]|по|до)\s*{_YEAR}{_NO_UNIT}", q)
+    if m:
+        y1, y2 = int(m.group(1)), int(m.group(2))
+        return min(y1, y2), max(y1, y2)
+
+    # «с 2019» / «после 2019» / «начиная с 2019»
+    m = _re.search(rf"{_NOT_WORD_TAIL}(?:с|после|начиная с|from|since)\s+{_YEAR}{_NO_UNIT}", q)
+    if m:
+        return int(m.group(1)), None
+
+    # «до 2020» / «по 2020» / «before 2020»
+    m = _re.search(rf"{_NOT_WORD_TAIL}(?:до|по|before)\s+{_YEAR}{_NO_UNIT}", q)
+    if m:
+        return None, int(m.group(1))
+
+    return None, None
+
+
 # Привязка свободного текста к узлам через полнотекстовый индекс.
 _SEED_QUERY = """
 CALL db.index.fulltext.queryNodes('entity_names', $q) YIELD node, score
@@ -87,11 +138,15 @@ LIMIT $limit
 """
 
 # Обход окрестности набора стартовых узлов на глубину 1 (fallback без APOC).
+# $excluded_docs — doc_id публикаций вне запрошенного диапазона лет: фильтр по
+# году применяется ДО LIMIT (пост-фильтрация обрезанной выборки схлопывала recall).
 _EXPAND_QUERY = """
 MATCH (a)-[r]->(b)
 WHERE (a.canonical_id IN $seeds OR b.canonical_id IN $seeds)
   AND coalesce(r.is_current, true) = true
+  AND (r.doc_id IS NULL OR NOT r.doc_id IN $excluded_docs)
 RETURN a.name AS src, type(r) AS rel, b.name AS dst,
+       labels(a)[0] AS src_type, labels(b)[0] AS dst_type,
        r.evidence AS evidence, r.doc_id AS doc_id, r.confidence AS confidence,
        r.verification_level AS verification_level, r.actualized_at AS actualized_at,
        r.geography AS geography, r.is_domestic AS is_domestic,
@@ -111,7 +166,9 @@ CALL apoc.path.subgraphAll(start, {maxLevel: $max_hops, limit: $node_limit}) YIE
 UNWIND relationships AS r
 WITH DISTINCT r
 WHERE coalesce(r.is_current, true) = true
+  AND (r.doc_id IS NULL OR NOT r.doc_id IN $excluded_docs)
 RETURN startNode(r).name AS src, type(r) AS rel, endNode(r).name AS dst,
+       labels(startNode(r))[0] AS src_type, labels(endNode(r))[0] AS dst_type,
        r.evidence AS evidence, r.doc_id AS doc_id, r.confidence AS confidence,
        r.verification_level AS verification_level, r.actualized_at AS actualized_at,
        r.geography AS geography, r.is_domestic AS is_domestic,
@@ -132,24 +189,28 @@ def find_seed_nodes(client: Neo4jClient, query: str, limit: int = 8) -> list[dic
     return [dict(r) for r in rows]
 
 
-def expand_subgraph(client: Neo4jClient, seeds: list[str], limit: int = 60) -> list[dict]:
+def expand_subgraph(client: Neo4jClient, seeds: list[str], limit: int = 60,
+                    excluded_docs: list[str] | None = None) -> list[dict]:
     """1-хоп обход, не требует APOC — используется как fallback."""
     if not seeds:
         return []
-    return [dict(r) for r in client.run(_EXPAND_QUERY, seeds=seeds, limit=limit)]
+    return [dict(r) for r in client.run(_EXPAND_QUERY, seeds=seeds, limit=limit,
+                                        excluded_docs=excluded_docs or [])]
 
 
 def expand_subgraph_deep(client: Neo4jClient, seeds: list[str],
-                         max_hops: int = 3, limit: int = 150, node_limit: int = 300) -> list[dict]:
+                         max_hops: int = 3, limit: int = 150, node_limit: int = 300,
+                         excluded_docs: list[str] | None = None) -> list[dict]:
     """1-4 хопа через APOC; при отсутствии APOC откатывается на 1-хоп MATCH."""
     if not seeds:
         return []
     try:
         rows = client.run(_EXPAND_QUERY_DEEP, seeds=seeds, max_hops=max_hops,
-                          node_limit=node_limit, limit=limit)
+                          node_limit=node_limit, limit=limit,
+                          excluded_docs=excluded_docs or [])
         return [dict(r) for r in rows]
     except Exception:                                   # noqa: BLE001 — APOC не установлен
-        return expand_subgraph(client, seeds, limit=limit)
+        return expand_subgraph(client, seeds, limit=limit, excluded_docs=excluded_docs)
 
 
 def _passes_geography(row: dict, is_domestic: bool | None) -> bool:
@@ -193,15 +254,18 @@ def _passes_domain(row: dict, domain: str | None) -> bool:
 def filtered_expand(client: Neo4jClient, seeds: list[str],
                     constraints: list[NumericConstraint] | None = None,
                     is_domestic: bool | None = None, domain: str | None = None,
-                    max_hops: int = 3, limit: int = 150) -> list[dict]:
+                    max_hops: int = 3, limit: int = 150,
+                    excluded_docs: list[str] | None = None) -> list[dict]:
     """Обход графа на 1-4 хопа + фильтр по числовым ограничениям/географии/домену.
 
     Структурный фильтр не ломает семантический путь: строки без гео-метки или
     без числового значения на целевом узле не отбрасываются молча (иначе на
     неполном графе фильтр вычищал бы всё). Отбрасываются только явные
-    противоречия найденным ограничениям.
+    противоречия найденным ограничениям. `excluded_docs` (фильтр по годам)
+    применяется внутри Cypher — до LIMIT.
     """
-    rows = expand_subgraph_deep(client, seeds, max_hops=max_hops, limit=limit)
+    rows = expand_subgraph_deep(client, seeds, max_hops=max_hops, limit=limit,
+                                excluded_docs=excluded_docs)
     constraints = constraints or []
     return [
         r for r in rows
@@ -210,25 +274,76 @@ def filtered_expand(client: Neo4jClient, seeds: list[str],
     ]
 
 
+# Годы публикаций по их doc_id — для временного фильтра (год лежит на Publication,
+# а рёбра/пассажи ссылаются на источник через doc_id). Выборка полная, а не по
+# списку cid: годы нужны ДО обхода графа, чтобы фильтр применился до LIMIT.
+_PUB_YEARS_QUERY = """
+MATCH (p:Publication) WHERE p.year IS NOT NULL
+RETURN p.canonical_id AS cid, p.year AS year
+"""
+
+
+def _publication_years(client: Neo4jClient) -> dict[str, int]:
+    try:
+        rows = client.run(_PUB_YEARS_QUERY)
+    except Exception as exc:                            # noqa: BLE001
+        import logging
+        logging.getLogger(__name__).warning(
+            "годы публикаций недоступны — фильтр по годам не применён (%s)", exc)
+        return {}
+    out: dict[str, int] = {}
+    for r in rows:
+        cid, year = r.get("cid") or "", r.get("year")
+        # canonical_id имеет вид 'Publication:<doc_id>' — парсим в Python, чтобы
+        # смена формата дала пустой результат с warning, а не тихий no-op в Cypher
+        if year is not None and ":" in cid:
+            out[cid.split(":", 1)[1]] = year
+    return out
+
+
+def _passes_year(year: int | None, yf: int | None, yt: int | None) -> bool:
+    if year is None:
+        return True                    # неизвестный год не отбрасываем молча (неполный граф)
+    if yf is not None and year < yf:
+        return False
+    if yt is not None and year > yt:
+        return False
+    return True
+
+
 def retrieve(question: str, vector_store, client: Neo4jClient,
              top_k_passages: int = 6, top_k_seeds: int = 8, max_hops: int = 3,
-             geography: bool | None = "auto", domain: str | None = None) -> RetrievalContext:
+             geography: bool | None = "auto", domain: str | None = None,
+             year_from: int | None = None, year_to: int | None = None,
+             rerank_top_k: int = 40, graph_limit: int = 60) -> RetrievalContext:
     """Главная функция гибридного поиска.
 
     `geography`: явный override гео-фильтра (True/False/None) с UI/API —
     имеет приоритет над эвристикой по тексту вопроса. Значение по умолчанию
     "auto" означает «разобрать из текста вопроса» (см. extract_geography_filter).
-    `domain`: явный фильтр по домену (гидрометаллургия/... ) — используется как
-    из UI, так и из самого вопроса нет автоопределения (слишком неоднозначно).
+    `domain`: явный фильтр по домену (гидрометаллургия/... ).
+    `year_from`/`year_to`: временной диапазон (ТЗ). Если оба None — разбираем из
+    текста вопроса («за последние 5 лет»). Фильтрует пассажи и рёбра по году
+    публикации-источника; узлы с неизвестным годом не отбрасываются.
     """
     import time
     ctx = RetrievalContext(question=question)
     ctx.constraints = extract_query_constraints(question)
     ctx.geography_filter = extract_geography_filter(question) if geography == "auto" else geography
+    if year_from is None and year_to is None:
+        year_from, year_to = extract_year_filter(question)
+    ctx.year_from, ctx.year_to = year_from, year_to
 
-    # 1) векторный recall
+    # 1) векторный recall (НЕ фатально: при сбое эмбеддера/квоты деградируем в
+    # graph-only — seed-узлы берутся из fulltext Neo4j, обход графа не требует
+    # векторов, так что ответ всё равно строится по подграфу).
     t0 = time.perf_counter()
-    ctx.passages = vector_store.search(question, top_k=top_k_passages)
+    try:
+        ctx.passages = vector_store.search(question, top_k=top_k_passages)
+    except Exception as exc:                              # noqa: BLE001
+        import logging
+        logging.getLogger(__name__).warning("векторный recall пропущен (%s)", exc)
+        ctx.passages = []
     t_vec = time.perf_counter()
 
     # 2) точки входа в граф: и по тексту вопроса, и по найденным пассажам
@@ -237,17 +352,42 @@ def retrieve(question: str, vector_store, client: Neo4jClient,
     ctx.seed_nodes = sorted(seeds)
     t_seed = time.perf_counter()
 
-    # 3) обход графа на 1-4 хопа со структурным фильтром по вопросу/API-параметрам
+    # 3) временной фильтр по году публикации-источника: вычисляем исключённые
+    # doc_id ЗАРАНЕЕ и передаём в Cypher-обход — фильтрация после LIMIT молча
+    # схлопывала recall (свежие рёбра за пределами первых LIMIT терялись).
+    excluded_docs: list[str] = []
+    if ctx.year_from is not None or ctx.year_to is not None:
+        years = _publication_years(client)
+        excluded_docs = [d for d, y in years.items()
+                         if not _passes_year(y, ctx.year_from, ctx.year_to)]
+        if excluded_docs:
+            excluded_set = set(excluded_docs)
+            ctx.passages = [p for p in ctx.passages if p.get("doc_id") not in excluded_set]
+
+    # обход графа на 1-4 хопа со структурным фильтром по вопросу/API-параметрам
     ctx.subgraph_edges = filtered_expand(
         client, ctx.seed_nodes, constraints=ctx.constraints,
         is_domestic=ctx.geography_filter, domain=domain, max_hops=max_hops,
+        limit=graph_limit, excluded_docs=excluded_docs,
     )
     t_graph = time.perf_counter()
+
+    # 4) реранкинг рёбер по релевантности вопросу (bi-encoder) — обход даёт рёбра
+    # «в порядке графа», реранк выносит вперёд самые relevantные и режет до
+    # rerank_top_k (precision контекста для LLM). Только ЛОКАЛЬНЫЙ эмбеддер:
+    # удалённый (Yandex, 1 текст = 1 HTTP-вызов с троттлингом) стоил бы до
+    # graph_limit вызовов квоты и ~30с на первый вопрос.
+    emb = getattr(vector_store, "embedder", None)
+    if emb is not None and not getattr(emb, "remote", False) and ctx.subgraph_edges:
+        from klubok.retrieval.rerank import rerank_edges
+        ctx.subgraph_edges = rerank_edges(question, ctx.subgraph_edges, emb, top_k=rerank_top_k)
+    t_rerank = time.perf_counter()
 
     ctx.timings_ms = {
         "vector_ms": round((t_vec - t0) * 1000, 1),
         "seed_ms": round((t_seed - t_vec) * 1000, 1),
         "graph_ms": round((t_graph - t_seed) * 1000, 1),
-        "retrieval_total_ms": round((t_graph - t0) * 1000, 1),
+        "rerank_ms": round((t_rerank - t_graph) * 1000, 1),
+        "retrieval_total_ms": round((t_rerank - t0) * 1000, 1),
     }
     return ctx

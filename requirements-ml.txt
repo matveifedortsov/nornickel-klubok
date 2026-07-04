@@ -1,0 +1,14 @@
+# Тяжёлые ML-зависимости — ставить ТОЛЬКО для локальных моделей (не нужны при
+# боевом Yandex AI Studio бэкенде). Тянут torch (~2-3 ГБ).
+#     pip install -r requirements-ml.txt
+#
+# EMBEDDER_BACKEND=bge  -> BAAI/bge-m3 локально
+sentence-transformers>=2.7   # BGE-m3 / e5 эмбеддинги
+# FlagEmbedding>=1.2          # альтернативный загрузчик BGE
+
+# LLM_BACKEND=metalgpt через локальный vLLM (нужен GPU) — обычно ставится отдельно
+# на инференс-машине, не в этот образ:
+# vllm>=0.4                   # MetalGPT-1 (32B)
+# transformers>=4.40
+# accelerate>=0.30
+# bitsandbytes>=0.43          # 4-bit квантизация

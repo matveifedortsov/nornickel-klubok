@@ -48,8 +48,32 @@ def similar_processes(client: Neo4jClient, canonical_id: str, limit: int = 20) -
     return [dict(r) for r in client.run(SIMILAR_PROCESSES, cid=canonical_id, limit=limit)]
 
 
+# Фолбэк: эксперты по активности (числу публикаций). Нужен, когда контент ещё
+# не извлечён (нет EXPERT_IN-связей), но узлы Expert созданы из имён файлов —
+# показываем самых публикующихся авторов, а не пустой список.
+EXPERTS_BY_ACTIVITY = """
+MATCH (ex:Expert)<-[:AUTHORED_BY]-(pub:Publication)
+WITH ex, count(DISTINCT pub) AS publications
+OPTIONAL MATCH (ex)-[:AFFILIATED_WITH]->(f:Facility)
+RETURN ex.name AS expert, null AS topic, publications,
+       collect(DISTINCT f.name) AS facilities
+ORDER BY publications DESC
+LIMIT $limit
+"""
+
+
 def experts_by_topic(client: Neo4jClient, topic: str, limit: int = 20) -> list[dict]:
     try:
-        return [dict(r) for r in client.run(EXPERTS_BY_TOPIC, topic=topic, limit=limit)]
+        rows = [dict(r) for r in client.run(EXPERTS_BY_TOPIC, topic=topic, limit=limit)]
     except Exception:                                     # noqa: BLE001 — индекса может не быть
+        rows = []
+    if rows:
+        return rows
+    # по теме ничего (нет EXPERT_IN) -> отдаём экспертов по активности
+    try:
+        rows = [dict(r) for r in client.run(EXPERTS_BY_ACTIVITY, limit=limit)]
+        for r in rows:
+            r["by_activity"] = True          # пометка для UI: не тематический матч
+        return rows
+    except Exception:                                     # noqa: BLE001
         return []
