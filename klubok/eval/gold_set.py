@@ -207,4 +207,134 @@ GOLD_SET: list[dict] = [
             ],
         },
     },
+
+    # --- Техногенный гипс (вопрос ТЗ №5) ---
+    {
+        "text": (
+            "Техногенный гипс, образующийся при нейтрализации сернокислых стоков "
+            "известняком, перерабатывали обжигом при 160 °C с получением строительного "
+            "гипса. Прочность на сжатие полученного вяжущего составила 12 МПа."
+        ),
+        "output": {
+            "entities": [
+                {"name": "техногенный гипс", "type": "Material", "attributes": {}},
+                {"name": "обжиг", "type": "Process",
+                 "attributes": {"temperature": 160, "temperature_unit": "°C"}},
+                {"name": "строительный гипс", "type": "Material", "attributes": {}},
+                {"name": "прочность на сжатие", "type": "Property",
+                 "attributes": {"value": 12, "unit": "MPa"}},
+                {"name": "Эксперимент 1", "type": "Experiment", "attributes": {}},
+            ],
+            "relations": [
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "USES",
+                 "dst_name": "техногенный гипс", "dst_type": "Material",
+                 "evidence": "Техногенный гипс, образующийся при нейтрализации сернокислых стоков"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "обжиг", "dst_type": "Process",
+                 "evidence": "перерабатывали обжигом при 160 °C"},
+                {"src_name": "обжиг", "src_type": "Process", "rel": "PRODUCES_OUTPUT",
+                 "dst_name": "строительный гипс", "dst_type": "Material",
+                 "evidence": "с получением строительного гипса"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "MEASURES",
+                 "dst_name": "прочность на сжатие", "dst_type": "Property",
+                 "evidence": "Прочность на сжатие полученного вяжущего составила 12 МПа"},
+            ],
+        },
+    },
+
+    # --- Удаление SO2 из отходящих газов (вопрос ТЗ №8) ---
+    {
+        "text": (
+            "Для очистки отходящих газов от диоксида серы применяли известняковый "
+            "скруббер. Степень улавливания SO2 достигла 95 %. Метод обеспечил "
+            "снижение концентрации SO2 в газе до 200 мг/м3."
+        ),
+        "output": {
+            "entities": [
+                {"name": "отходящие газы", "type": "Material", "attributes": {}},
+                {"name": "известняковый скруббер", "type": "Equipment", "attributes": {}},
+                {"name": "мокрая сероочистка", "type": "Process", "attributes": {}},
+                {"name": "степень улавливания SO2", "type": "Property",
+                 "attributes": {"value": 95, "unit": "%"}},
+                {"name": "Эксперимент 1", "type": "Experiment", "attributes": {}},
+            ],
+            "relations": [
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "мокрая сероочистка", "dst_type": "Process",
+                 "evidence": "применяли известняковый скруббер"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "известняковый скруббер", "dst_type": "Equipment",
+                 "evidence": "применяли известняковый скруббер"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "USES",
+                 "dst_name": "отходящие газы", "dst_type": "Material",
+                 "evidence": "очистки отходящих газов от диоксида серы"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "MEASURES",
+                 "dst_name": "степень улавливания SO2", "dst_type": "Property",
+                 "evidence": "Степень улавливания SO2 достигла 95 %"},
+            ],
+        },
+    },
+
+    # --- Переработка свинцово-цинкового сырья (вопрос ТЗ №10) ---
+    {
+        "text": (
+            "Свинцово-цинковый концентрат перерабатывали методом вельцевания во "
+            "вращающейся печи при 1100 °C. Извлечение цинка в возгоны составило 92 %. "
+            "Полученный вельц-оксид содержал 65 % цинка."
+        ),
+        "output": {
+            "entities": [
+                {"name": "свинцово-цинковый концентрат", "type": "Material", "attributes": {}},
+                {"name": "вельцевание", "type": "Process",
+                 "attributes": {"temperature": 1100, "temperature_unit": "°C"}},
+                {"name": "вращающаяся печь", "type": "Equipment", "attributes": {}},
+                {"name": "извлечение цинка", "type": "Property",
+                 "attributes": {"value": 92, "unit": "%"}},
+                {"name": "Эксперимент 1", "type": "Experiment", "attributes": {}},
+            ],
+            "relations": [
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "USES",
+                 "dst_name": "свинцово-цинковый концентрат", "dst_type": "Material",
+                 "evidence": "Свинцово-цинковый концентрат перерабатывали"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "вельцевание", "dst_type": "Process",
+                 "evidence": "методом вельцевания во вращающейся печи при 1100 °C"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "вращающаяся печь", "dst_type": "Equipment",
+                 "evidence": "во вращающейся печи при 1100 °C"},
+                {"src_name": "Эксперимент 1", "src_type": "Experiment", "rel": "MEASURES",
+                 "dst_name": "извлечение цинка", "dst_type": "Property",
+                 "evidence": "Извлечение цинка в возгоны составило 92 %"},
+            ],
+        },
+    },
+
+    # --- Английский пример №2: closure/backfill (вопрос ТЗ №7) ---
+    {
+        "text": (
+            "Coal fly ash was used as a binder component for backfilling of mined-out "
+            "stopes. The cemented paste backfill reached an unconfined compressive "
+            "strength of 4.5 MPa after 28 days of curing."
+        ),
+        "output": {
+            "entities": [
+                {"name": "coal fly ash", "type": "Material", "attributes": {}},
+                {"name": "cemented paste backfill", "type": "Process", "attributes": {}},
+                {"name": "unconfined compressive strength", "type": "Property",
+                 "attributes": {"value": 4.5, "unit": "MPa"}},
+                {"name": "Experiment 1", "type": "Experiment", "attributes": {}},
+            ],
+            "relations": [
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "USES",
+                 "dst_name": "coal fly ash", "dst_type": "Material",
+                 "evidence": "Coal fly ash was used as a binder component for backfilling"},
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "APPLIES",
+                 "dst_name": "cemented paste backfill", "dst_type": "Process",
+                 "evidence": "The cemented paste backfill"},
+                {"src_name": "Experiment 1", "src_type": "Experiment", "rel": "MEASURES",
+                 "dst_name": "unconfined compressive strength", "dst_type": "Property",
+                 "evidence": "reached an unconfined compressive strength of 4.5 MPa"},
+            ],
+        },
+    },
 ]

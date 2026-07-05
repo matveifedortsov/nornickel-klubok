@@ -530,7 +530,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
     <div class="stat-row">
       <div class="stat"><div class="stat-num">9456</div><div class="stat-label">узлов · 6158 рёбер · 12 типов</div></div>
       <div class="stat"><div class="stat-num">447<span style="font-size:20px;"> мс</span></div><div class="stat-label">медиана ретривала · бюджет 3–5 с</div></div>
-      <div class="stat"><div class="stat-num">0,66</div><div class="stat-label">F1 извлечения сущностей</div></div>
+      <div class="stat"><div class="stat-num">0,60</div><div class="stat-label">F1 извлечения сущностей</div></div>
       <div class="stat"><div class="stat-num">68</div><div class="stat-label">юнит-тестов зелёных</div></div>
     </div>
 
@@ -545,23 +545,23 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
           <line x1="120" y1="30" x2="440" y2="30" stroke="rgba(233,241,248,.08)" stroke-dasharray="3 3"/>
           <text x="114" y="34" font-size="9" fill="rgba(233,241,248,.4)" text-anchor="end">1.0</text>
           <text x="114" y="138" font-size="9" fill="rgba(233,241,248,.4)" text-anchor="end">0</text>
-          <!-- bars: entities 0.66, relations 0.62, attributes 0.67 ; scale 105px = 1.0 -->
+          <!-- bars: entities 0.595, relations 0.530, attributes 0.640 ; scale 105px = 1.0 -->
           <g>
-            <rect x="150" y="66" width="66" height="69" fill="#12A5DE" rx="3"/>
-            <text x="183" y="58" text-anchor="middle" font-size="13" font-weight="900" fill="#12A5DE">0,66</text>
+            <rect x="150" y="73" width="66" height="62" fill="#12A5DE" rx="3"/>
+            <text x="183" y="65" text-anchor="middle" font-size="13" font-weight="900" fill="#12A5DE">0,60</text>
             <text x="183" y="152" text-anchor="middle" font-size="10.5" fill="rgba(233,241,248,.7)">сущности</text>
-            <rect x="258" y="70" width="66" height="65" fill="rgba(18,165,222,.7)" rx="3"/>
-            <text x="291" y="62" text-anchor="middle" font-size="13" font-weight="900" fill="#12A5DE">0,62</text>
+            <rect x="258" y="79" width="66" height="56" fill="rgba(18,165,222,.7)" rx="3"/>
+            <text x="291" y="71" text-anchor="middle" font-size="13" font-weight="900" fill="#12A5DE">0,53</text>
             <text x="291" y="152" text-anchor="middle" font-size="10.5" fill="rgba(233,241,248,.7)">связи</text>
-            <rect x="366" y="65" width="66" height="70" fill="#D98A4B" rx="3"/>
-            <text x="399" y="57" text-anchor="middle" font-size="13" font-weight="900" fill="#E0A26A">0,67</text>
+            <rect x="366" y="68" width="66" height="67" fill="#D98A4B" rx="3"/>
+            <text x="399" y="60" text-anchor="middle" font-size="13" font-weight="900" fill="#E0A26A">0,64</text>
             <text x="399" y="152" text-anchor="middle" font-size="10.5" fill="rgba(233,241,248,.7)">атрибуты</text>
           </g>
           <text x="120" y="20" font-size="10" font-weight="800" fill="rgba(233,241,248,.5)" letter-spacing="0.1em">F1-МЕРА</text>
         </svg>
         <div style="font-size:10.5px;color:rgba(233,241,248,.5);margin-top:8px;line-height:1.5;">
-          Бэкенд YandexGPT, few-shot. Атрибуты (числа/единицы) — критичны для ТЗ:
-          бэкфилл значений из цитат поднял F1 на ~15 п.п.
+          Бэкенд YandexGPT, few-shot, 10 held-out примеров. Атрибуты (числа/единицы)
+          критичны для ТЗ: бэкфилл значений из цитат поднял их F1 на ~10 п.п.
         </div>
       </div>
       <div>
