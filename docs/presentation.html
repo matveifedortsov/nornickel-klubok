@@ -9,19 +9,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --cream: #F1EEEC;
-  --dark:  #131A16;
-  --mint:  #92E8B5;
-  --blue:  #536BEB;
-  --gray:  #8A918D;
-  --lgray: #D5D2D0;
+  --cream: #E9F1F8;
+  --dark:  #062B4A;
+  --mint:  #12A5DE;
+  --blue:  #00589C;
+  --gray:  #5F7488;
+  --lgray: #C2D1DE;
   --white: #FFFFFF;
+  --copper: #D98A4B;   /* тёплый металл-акцент: медь — флагманский продукт Норникеля */
   --slide-w: 1280px;
   --slide-h: 720px;
 }
 
 html { scroll-snap-type: y mandatory; overflow-y: scroll; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { font-family: 'Manrope', system-ui, -apple-system, sans-serif; background: #1f1d1b; color: var(--dark); padding: 40px 0; }
+body { font-family: 'Manrope', system-ui, -apple-system, sans-serif; background: #08192B; color: var(--dark); padding: 40px 0; }
 
 #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--mint); width: 0%; z-index: 1000; transition: width 0.15s ease; }
 #slide-counter { position: fixed; bottom: 28px; right: 32px; font-size: 11px; font-weight: 700; color: var(--cream); letter-spacing: 0.1em; z-index: 1000; opacity: 0.7; }
@@ -50,7 +51,7 @@ section.cream { background: var(--cream); color: var(--dark);  }
 section.divider { background: var(--blue); color: var(--cream); }
 
 section::-webkit-scrollbar { width: 6px; }
-section::-webkit-scrollbar-thumb { background: rgba(146,232,181,.3); border-radius: 3px; }
+section::-webkit-scrollbar-thumb { background: rgba(18,165,222,.3); border-radius: 3px; }
 section::-webkit-scrollbar-track { background: transparent; }
 
 @media (max-width: 1360px) {
@@ -61,6 +62,12 @@ section::-webkit-scrollbar-track { background: transparent; }
     margin-bottom: calc(32px - var(--slide-h) * (1 - (100vw - 48px) / var(--slide-w)));
   }
 }
+
+/* Фирменный дизайн-элемент Норникеля — глобус-сфера (меридианы/параллели) */
+.globe { position: absolute; pointer-events: none; z-index: 0; }
+.globe.hero { right: -70px; bottom: -90px; width: 460px; height: 460px; opacity: 0.18; }
+.globe.corner { right: 34px; top: 40px; width: 150px; height: 150px; opacity: 0.14; }
+.inner { position: relative; z-index: 1; }
 
 .arrow { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); font-size: 17px; color: var(--gray); opacity: 0.45; animation: bob 2.2s infinite; cursor: pointer; user-select: none; }
 .arrow:hover { opacity: 0.9; }
@@ -88,23 +95,23 @@ p  { font-size: 15px; line-height: 1.7; }
 .q-num { font-size: 86px; font-weight: 900; line-height: 1; letter-spacing: -0.05em; color: var(--mint); opacity: 0.5; margin-bottom: -6px; }
 .q-title { font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 16px; }
 .q-intro { font-size: 14.5px; line-height: 1.7; margin-bottom: 22px; max-width: 560px; }
-section.dark  .q-intro { color: rgba(241,238,236,.62); }
+section.dark  .q-intro { color: rgba(233,241,248,.62); }
 section.cream .q-intro { color: var(--gray); }
 
 .context-intro { font-size: 15px; line-height: 1.75; color: var(--gray); margin-bottom: 22px; }
 .context-intro strong { color: var(--dark); }
 section.dark .context-intro strong { color: var(--cream); }
-.code { font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: 12.5px; background: rgba(83,107,235,.09); color: var(--blue); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
-section.dark .code { background: rgba(83,107,235,.22); color: #a3b0f7; }
+.code { font-family: 'Courier New', Courier, monospace; font-weight: 700; font-size: 12.5px; background: rgba(0,88,156,.09); color: var(--blue); padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+section.dark .code { background: rgba(0,88,156,.22); color: #6FB2E4; }
 
-.callout-mint { background: rgba(146,232,181,.14); border-left: 3px solid var(--mint); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; line-height: 1.6; }
+.callout-mint { background: rgba(18,165,222,.14); border-left: 3px solid var(--mint); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; line-height: 1.6; }
 .callout-green { background: var(--mint); color: var(--dark); padding: 16px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; line-height: 1.55; margin-top: 18px; }
 .callout-dark  { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); color: var(--cream); padding: 16px 20px; border-radius: 10px; font-size: 14px; font-weight: 500; line-height: 1.55; margin-top: 18px; }
-.callout-blue { background: rgba(83,107,235,.10); border-left: 3px solid var(--blue); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; line-height: 1.55; color: var(--dark); }
+.callout-blue { background: rgba(0,88,156,.10); border-left: 3px solid var(--blue); padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 14px; font-weight: 500; line-height: 1.55; color: var(--dark); }
 
 .q-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
 .q-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.5; padding: 9px 14px; border-radius: 8px; }
-section.cream .q-list li { background: rgba(19,26,22,.04); }
+section.cream .q-list li { background: rgba(6,43,74,.04); }
 section.dark  .q-list li { background: rgba(255,255,255,.05); }
 .q-list li::before { content: '→'; color: var(--mint); font-weight: 800; flex-shrink: 0; padding-top: 1px; }
 .q-list strong { font-weight: 800; }
@@ -118,39 +125,39 @@ section.dark .data-table thead tr { border-bottom-color: rgba(255,255,255,.18); 
 section.dark .data-table td { border-bottom-color: rgba(255,255,255,.08); }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table td.num { text-align: right; font-family: 'Courier New', monospace; font-weight: 700; }
-.data-table tr.highlight td { background: rgba(146,232,181,.15); }
+.data-table tr.highlight td { background: rgba(18,165,222,.15); }
 
 .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .feature-grid.three { grid-template-columns: repeat(3, 1fr); }
 .feat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 9px; padding: 12px 15px; }
-section.cream .feat { background: rgba(19,26,22,.04); border-color: rgba(19,26,22,.06); }
+section.cream .feat { background: rgba(6,43,74,.04); border-color: rgba(6,43,74,.06); }
 .feat-num { font-size: 9.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--mint); margin-bottom: 4px; text-transform: uppercase; }
 .feat-title { font-size: 13.5px; font-weight: 800; margin-bottom: 3px; }
 .feat-body { font-size: 11.5px; color: var(--gray); line-height: 1.45; }
 
 .flow { display: flex; flex-direction: column; gap: 8px; }
-.flow-row { display: flex; align-items: center; gap: 14px; padding: 10px 15px; border-radius: 10px; background: rgba(19,26,22,.04); }
+.flow-row { display: flex; align-items: center; gap: 14px; padding: 10px 15px; border-radius: 10px; background: rgba(6,43,74,.04); }
 section.dark .flow-row { background: rgba(255,255,255,.05); }
 .flow-step { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; color: var(--mint); min-width: 92px; }
 .flow-text { font-size: 13px; line-height: 1.5; flex: 1; }
-.flow-text code { font-family: 'Courier New', monospace; font-size: 12px; color: var(--blue); background: rgba(83,107,235,.08); padding: 1px 5px; border-radius: 3px; }
-section.dark .flow-text code { color: #a3b0f7; background: rgba(83,107,235,.18); }
+.flow-text code { font-family: 'Courier New', monospace; font-size: 12px; color: var(--blue); background: rgba(0,88,156,.08); padding: 1px 5px; border-radius: 3px; }
+section.dark .flow-text code { color: #6FB2E4; background: rgba(0,88,156,.18); }
 
 .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.stat { padding: 16px 18px; border-radius: 10px; background: rgba(19,26,22,.04); }
+.stat { padding: 16px 18px; border-radius: 10px; background: rgba(6,43,74,.04); }
 section.dark .stat { background: rgba(255,255,255,.05); }
 .stat-num { font-size: 40px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--mint); margin-bottom: 6px; }
 .stat-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); line-height: 1.4; }
 
-.formula { font-family: 'Courier New', monospace; font-size: 14.5px; font-weight: 700; background: rgba(19,26,22,.05); padding: 14px 18px; border-radius: 10px; margin: 14px 0; line-height: 1.7; text-align: center; }
+.formula { font-family: 'Courier New', monospace; font-size: 14.5px; font-weight: 700; background: rgba(6,43,74,.05); padding: 14px 18px; border-radius: 10px; margin: 14px 0; line-height: 1.7; text-align: center; }
 section.dark .formula { background: rgba(255,255,255,.05); color: var(--cream); }
 .formula em { color: var(--mint); font-style: normal; font-weight: 800; }
 
-.panel { background: rgba(19,26,22,.04); border: 1px solid rgba(19,26,22,.1); border-radius: 14px; padding: 22px; }
+.panel { background: rgba(6,43,74,.04); border: 1px solid rgba(6,43,74,.1); border-radius: 14px; padding: 22px; }
 section.dark .panel { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1); }
 .panel-label { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); margin-bottom: 14px; }
-section.dark .panel-label { color: rgba(241,238,236,.5); }
-.legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(19,26,22,.1); font-size: 11px; color: var(--gray); }
+section.dark .panel-label { color: rgba(233,241,248,.5); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(6,43,74,.1); font-size: 11px; color: var(--gray); }
 section.dark .legend { border-top-color: rgba(255,255,255,.12); }
 .legend span { display: flex; align-items: center; gap: 7px; }
 .chip { display: inline-block; width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
@@ -164,10 +171,18 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
 
 <!-- ╔═══ S01 · TITLE ═══╗ -->
 <section id="s01" class="dark">
+  <svg class="globe hero" viewBox="0 0 200 200" fill="none" stroke="#12A5DE" stroke-width="1.1">
+    <circle cx="100" cy="100" r="94"/>
+    <ellipse cx="100" cy="100" rx="94" ry="33"/>
+    <ellipse cx="100" cy="100" rx="94" ry="66"/>
+    <ellipse cx="100" cy="100" rx="33" ry="94"/>
+    <ellipse cx="100" cy="100" rx="66" ry="94"/>
+    <line x1="6" y1="100" x2="194" y2="100"/><line x1="100" y1="6" x2="100" y2="194"/>
+  </svg>
   <div class="inner">
     <div class="org-line">Норникель · AI Science Hack · Трек «Научный клубок» · 2026</div>
     <h1>Научный<br>клубок</h1>
-    <p style="font-size:17px;color:rgba(241,238,236,.66);margin-top:26px;max-width:640px;line-height:1.65;">
+    <p style="font-size:17px;color:rgba(233,241,248,.66);margin-top:26px;max-width:640px;line-height:1.65;">
       Единая R&D-карта знаний горно-металлургической отрасли. Граф знаний +
       гибридный поиск отвечают на сложные технические вопросы экспертов —
       с цитатами, достоверностью и датой актуализации. Не «RAG поверх PDF».
@@ -283,11 +298,11 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
       <svg viewBox="0 0 560 400" width="100%" style="display:block;" font-family="Manrope, system-ui, sans-serif">
         <defs>
           <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#8A918D"/>
+            <path d="M0,0 L10,5 L0,10 z" fill="#5F7488"/>
           </marker>
         </defs>
         <!-- edges (все соединяют реальные узлы) -->
-        <g stroke="#8A918D" stroke-width="1.4" fill="none" marker-end="url(#ar)" opacity="0.85">
+        <g stroke="#5F7488" stroke-width="1.4" fill="none" marker-end="url(#ar)" opacity="0.85">
           <path d="M 152,80 C 132,108 118,128 110,148"/>        <!-- Эксперимент→Материал (USES) -->
           <path d="M 205,80 C 250,110 300,130 333,150"/>        <!-- Эксперимент→Процесс (APPLIES) -->
           <path d="M 300,171 C 250,182 200,176 163,172"/>        <!-- Процесс→Материал (USES_MATERIAL) -->
@@ -296,37 +311,37 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
           <path d="M 348,316 C 350,272 351,225 352,190"/>       <!-- Оборудование→Процесс (APPLIES) -->
           <path d="M 468,96 C 458,150 448,218 438,263"/>        <!-- Публикация→Свойство (REPORTS) -->
         </g>
-        <g stroke="#536BEB" stroke-width="2.2" fill="none" marker-end="url(#ar)">
+        <g stroke="#00589C" stroke-width="2.2" fill="none" marker-end="url(#ar)">
           <path d="M 448,90 C 400,78 260,70 210,68"/>           <!-- Публикация→Эксперимент (DESCRIBES) -->
         </g>
-        <text x="300" y="52" text-anchor="middle" font-size="10" font-weight="800" fill="#536BEB">DESCRIBES</text>
+        <text x="300" y="52" text-anchor="middle" font-size="10" font-weight="800" fill="#00589C">DESCRIBES</text>
 
         <!-- nodes -->
         <g font-size="12" font-weight="800">
           <!-- Experiment (center-top, mint) -->
-          <rect x="120" y="46" width="118" height="34" rx="7" fill="#92E8B5" stroke="#92E8B5"/>
-          <text x="179" y="68" text-anchor="middle" fill="#131A16">Эксперимент</text>
+          <rect x="120" y="46" width="118" height="34" rx="7" fill="#12A5DE" stroke="#12A5DE"/>
+          <text x="179" y="68" text-anchor="middle" fill="#062B4A">Эксперимент</text>
           <!-- Material -->
-          <rect x="55" y="150" width="105" height="34" rx="7" fill="rgba(19,26,22,.10)" stroke="#131A16" stroke-width="1"/>
-          <text x="107" y="172" text-anchor="middle" fill="#131A16">Материал</text>
+          <rect x="55" y="150" width="105" height="34" rx="7" fill="rgba(6,43,74,.10)" stroke="#062B4A" stroke-width="1"/>
+          <text x="107" y="172" text-anchor="middle" fill="#062B4A">Материал</text>
           <!-- Process -->
-          <rect x="300" y="152" width="105" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
-          <text x="352" y="174" text-anchor="middle" fill="#131A16">Процесс</text>
+          <rect x="300" y="152" width="105" height="34" rx="7" fill="rgba(0,88,156,.16)" stroke="#00589C" stroke-width="1.2"/>
+          <text x="352" y="174" text-anchor="middle" fill="#062B4A">Процесс</text>
           <!-- Property (outcome, mint) -->
-          <rect x="378" y="265" width="112" height="34" rx="7" fill="#92E8B5" stroke="#92E8B5"/>
-          <text x="434" y="287" text-anchor="middle" fill="#131A16">Свойство</text>
+          <rect x="378" y="265" width="112" height="34" rx="7" fill="#12A5DE" stroke="#12A5DE"/>
+          <text x="434" y="287" text-anchor="middle" fill="#062B4A">Свойство</text>
           <!-- Element -->
-          <rect x="150" y="270" width="98" height="34" rx="7" fill="rgba(19,26,22,.10)" stroke="#131A16" stroke-width="1"/>
-          <text x="199" y="292" text-anchor="middle" fill="#131A16">Элемент</text>
+          <rect x="150" y="270" width="98" height="34" rx="7" fill="rgba(6,43,74,.10)" stroke="#062B4A" stroke-width="1"/>
+          <text x="199" y="292" text-anchor="middle" fill="#062B4A">Элемент</text>
           <!-- Equipment -->
-          <rect x="292" y="316" width="112" height="34" rx="7" fill="rgba(19,26,22,.10)" stroke="#131A16" stroke-width="1"/>
-          <text x="348" y="338" text-anchor="middle" fill="#131A16">Оборудование</text>
+          <rect x="292" y="316" width="112" height="34" rx="7" fill="rgba(6,43,74,.10)" stroke="#062B4A" stroke-width="1"/>
+          <text x="348" y="338" text-anchor="middle" fill="#062B4A">Оборудование</text>
           <!-- Publication -->
-          <rect x="415" y="62" width="112" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
-          <text x="471" y="84" text-anchor="middle" fill="#131A16">Публикация</text>
+          <rect x="415" y="62" width="112" height="34" rx="7" fill="rgba(0,88,156,.16)" stroke="#00589C" stroke-width="1.2"/>
+          <text x="471" y="84" text-anchor="middle" fill="#062B4A">Публикация</text>
         </g>
         <!-- edge labels -->
-        <g font-size="9" font-weight="700" fill="#8A918D">
+        <g font-size="9" font-weight="700" fill="#5F7488">
           <text x="92" y="118">USES</text>
           <text x="250" y="120">APPLIES</text>
           <text x="196" y="160">USES_MATERIAL</text>
@@ -335,9 +350,9 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
         </g>
       </svg>
       <div class="legend">
-        <span><span class="chip" style="background:#92E8B5;"></span> эксперимент / свойство</span>
-        <span><span class="chip" style="background:rgba(83,107,235,.5);"></span> публикация / процесс</span>
-        <span><span class="chip" style="background:rgba(19,26,22,.2);"></span> материал / элемент / оборудование</span>
+        <span><span class="chip" style="background:#12A5DE;"></span> эксперимент / свойство</span>
+        <span><span class="chip" style="background:rgba(0,88,156,.5);"></span> публикация / процесс</span>
+        <span><span class="chip" style="background:rgba(6,43,74,.2);"></span> материал / элемент / оборудование</span>
       </div>
       <div style="font-size:10.5px;color:var(--gray);margin-top:10px;line-height:1.5;">
         Плюс: Method, Facility, Condition, Phase, Expert. Каждое ребро несёт
@@ -353,7 +368,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
   <div class="inner wide">
     <div class="q-num">04</div>
     <div class="q-title">Архитектура · LLM-агностичность, без GPU</div>
-    <p class="q-intro" style="color:rgba(241,238,236,.6);max-width:820px;">
+    <p class="q-intro" style="color:rgba(233,241,248,.6);max-width:820px;">
       Один пайплайн, сменные бэкенды. Сегодня — YandexGPT в облаке; в проде
       Норникеля — тот же код с <strong style="color:var(--cream);">MetalGPT-1 on-prem</strong>,
       клиент уже написан. Эмбеддинги локальные (ONNX) — без облачной квоты и без GPU.
@@ -364,11 +379,11 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
       <svg viewBox="0 0 1080 210" width="100%" style="display:block;" font-family="Manrope, system-ui, sans-serif">
         <defs>
           <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#92E8B5"/>
+            <path d="M0,0 L10,5 L0,10 z" fill="#12A5DE"/>
           </marker>
         </defs>
         <!-- flow arrows -->
-        <g stroke="#92E8B5" stroke-width="2" fill="none" marker-end="url(#arw)">
+        <g stroke="#12A5DE" stroke-width="2" fill="none" marker-end="url(#arw)">
           <line x1="165" y1="58" x2="205" y2="58"/>
           <line x1="365" y1="58" x2="405" y2="58"/>
           <line x1="610" y1="58" x2="650" y2="58"/>
@@ -377,44 +392,44 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
         <g font-family="Manrope">
           <!-- Docs -->
           <rect x="25" y="34" width="140" height="48" rx="8" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.15)"/>
-          <text x="95" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#F1EEEC">Документы</text>
-          <text x="95" y="71" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">PDF · DOCX · PPTX</text>
+          <text x="95" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#E9F1F8">Документы</text>
+          <text x="95" y="71" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.55)">PDF · DOCX · PPTX</text>
           <!-- Parse -->
           <rect x="205" y="34" width="160" height="48" rx="8" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.15)"/>
-          <text x="285" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#F1EEEC">Парсинг + чанки</text>
-          <text x="285" y="71" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">нормализация единиц</text>
+          <text x="285" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#E9F1F8">Парсинг + чанки</text>
+          <text x="285" y="71" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.55)">нормализация единиц</text>
           <!-- Extract -->
-          <rect x="405" y="34" width="205" height="48" rx="8" fill="rgba(146,232,181,.14)" stroke="#92E8B5" stroke-width="1.4"/>
-          <text x="507" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#92E8B5">Извлечение · LLM</text>
-          <text x="507" y="71" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.7)">триплеты в JSON по онтологии</text>
+          <rect x="405" y="34" width="205" height="48" rx="8" fill="rgba(18,165,222,.14)" stroke="#12A5DE" stroke-width="1.4"/>
+          <text x="507" y="55" text-anchor="middle" font-size="13" font-weight="800" fill="#12A5DE">Извлечение · LLM</text>
+          <text x="507" y="71" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.7)">триплеты в JSON по онтологии</text>
           <!-- Stores -->
-          <rect x="650" y="20" width="175" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
-          <text x="737" y="42" text-anchor="middle" font-size="12.5" font-weight="800" fill="#a3b0f7">Neo4j · граф</text>
-          <rect x="650" y="62" width="175" height="34" rx="7" fill="rgba(83,107,235,.16)" stroke="#536BEB" stroke-width="1.2"/>
-          <text x="737" y="84" text-anchor="middle" font-size="12.5" font-weight="800" fill="#a3b0f7">Qdrant · вектор</text>
+          <rect x="650" y="20" width="175" height="34" rx="7" fill="rgba(0,88,156,.16)" stroke="#00589C" stroke-width="1.2"/>
+          <text x="737" y="42" text-anchor="middle" font-size="12.5" font-weight="800" fill="#6FB2E4">Neo4j · граф</text>
+          <rect x="650" y="62" width="175" height="34" rx="7" fill="rgba(0,88,156,.16)" stroke="#00589C" stroke-width="1.2"/>
+          <text x="737" y="84" text-anchor="middle" font-size="12.5" font-weight="800" fill="#6FB2E4">Qdrant · вектор</text>
         </g>
 
         <!-- query flow (lower row) -->
-        <g stroke="#536BEB" stroke-width="2" fill="none" marker-end="url(#arw)" opacity="0.9">
+        <g stroke="#00589C" stroke-width="2" fill="none" marker-end="url(#arw)" opacity="0.9">
           <line x1="180" y1="165" x2="140" y2="165"/>
           <line x1="405" y1="165" x2="365" y2="165"/>
           <line x1="650" y1="165" x2="610" y2="165"/>
           <line x1="875" y1="165" x2="835" y2="165"/>
         </g>
         <g font-family="Manrope">
-          <text x="60" y="128" font-size="10" font-weight="800" letter-spacing="0.1em" fill="rgba(241,238,236,.45)">ЗАПРОС ←</text>
+          <text x="60" y="128" font-size="10" font-weight="800" letter-spacing="0.1em" fill="rgba(233,241,248,.45)">ЗАПРОС ←</text>
           <rect x="25" y="142" width="115" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
-          <text x="82" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Ответ +</text>
-          <text x="82" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">цитаты, граф</text>
+          <text x="82" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#E9F1F8">Ответ +</text>
+          <text x="82" y="178" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.55)">цитаты, граф</text>
           <rect x="180" y="142" width="185" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
-          <text x="272" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Реранк + генерация</text>
-          <text x="272" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">bi-encoder → LLM</text>
+          <text x="272" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#E9F1F8">Реранк + генерация</text>
+          <text x="272" y="178" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.55)">bi-encoder → LLM</text>
           <rect x="405" y="142" width="245" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
-          <text x="527" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Обход графа 1–4 хопа</text>
-          <text x="527" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">фильтры: числа · гео · годы</text>
+          <text x="527" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#E9F1F8">Обход графа 1–4 хопа</text>
+          <text x="527" y="178" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.55)">фильтры: числа · гео · годы</text>
           <rect x="690" y="142" width="185" height="46" rx="8" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.13)"/>
-          <text x="782" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#F1EEEC">Seed-узлы</text>
-          <text x="782" y="178" text-anchor="middle" font-size="10" fill="rgba(241,238,236,.55)">fulltext + вектор</text>
+          <text x="782" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#E9F1F8">Seed-узлы</text>
+          <text x="782" y="178" text-anchor="middle" font-size="10" fill="rgba(233,241,248,.55)">fulltext + вектор</text>
         </g>
       </svg>
     </div>
@@ -470,10 +485,10 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
         <svg viewBox="0 0 460 150" style="width:100%;height:auto;display:block;" font-family="Manrope, system-ui, sans-serif">
           <!-- stacked horizontal bar -->
           <g>
-            <rect x="10" y="20" width="180" height="30" fill="#92E8B5" rx="3"/>
-            <rect x="190" y="20" width="55" height="30" fill="rgba(83,107,235,.55)" rx="0"/>
-            <rect x="245" y="20" width="125" height="30" fill="rgba(83,107,235,.85)" rx="0"/>
-            <rect x="370" y="20" width="48" height="30" fill="rgba(146,232,181,.45)" rx="3"/>
+            <rect x="10" y="20" width="180" height="30" fill="#12A5DE" rx="3"/>
+            <rect x="190" y="20" width="55" height="30" fill="rgba(0,88,156,.55)" rx="0"/>
+            <rect x="245" y="20" width="125" height="30" fill="rgba(0,88,156,.85)" rx="0"/>
+            <rect x="370" y="20" width="48" height="30" fill="rgba(18,165,222,.45)" rx="3"/>
           </g>
           <g font-size="10.5" font-weight="700" fill="var(--dark)">
             <text x="100" y="39" text-anchor="middle">вектор ~130</text>
@@ -485,7 +500,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
           <text x="418" y="70" font-size="10" fill="var(--gray)" text-anchor="end">~450 мс</text>
           <!-- budget marker -->
           <text x="10" y="105" font-size="12" font-weight="800" fill="var(--dark)">Бюджет ТЗ: 3000–5000 мс</text>
-          <text x="10" y="126" font-size="11" font-weight="700" fill="#2c8c4f">Запас ×2–×11 · min 129 / max 1365 мс</text>
+          <text x="10" y="126" font-size="11" font-weight="700" fill="#0E7FB0">Запас ×2–×11 · min 129 / max 1365 мс</text>
         </svg>
       </div>
       <div class="callout-mint" style="margin-top:16px;">
@@ -507,7 +522,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
   <div class="inner wide">
     <div class="q-num">06</div>
     <div class="q-title">Результаты в цифрах</div>
-    <p class="q-intro" style="color:rgba(241,238,236,.6);max-width:820px;">
+    <p class="q-intro" style="color:rgba(233,241,248,.6);max-width:820px;">
       Всё измерено на реальном стенде (YandexGPT + fastembed + Neo4j), а не оценено
       «на глаз». Held-out gold-набор не пересекается с few-shot примерами промпта.
     </p>
@@ -524,27 +539,27 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
         <div class="panel-label">Точность извлечения триплетов · held-out gold (RU)</div>
         <svg viewBox="0 0 460 170" style="width:100%;height:auto;display:block;" font-family="Manrope, system-ui, sans-serif">
           <!-- baseline -->
-          <line x1="120" y1="135" x2="440" y2="135" stroke="rgba(241,238,236,.15)"/>
-          <line x1="120" y1="30" x2="120" y2="135" stroke="rgba(241,238,236,.15)"/>
+          <line x1="120" y1="135" x2="440" y2="135" stroke="rgba(233,241,248,.15)"/>
+          <line x1="120" y1="30" x2="120" y2="135" stroke="rgba(233,241,248,.15)"/>
           <!-- 1.0 gridline -->
-          <line x1="120" y1="30" x2="440" y2="30" stroke="rgba(241,238,236,.08)" stroke-dasharray="3 3"/>
-          <text x="114" y="34" font-size="9" fill="rgba(241,238,236,.4)" text-anchor="end">1.0</text>
-          <text x="114" y="138" font-size="9" fill="rgba(241,238,236,.4)" text-anchor="end">0</text>
+          <line x1="120" y1="30" x2="440" y2="30" stroke="rgba(233,241,248,.08)" stroke-dasharray="3 3"/>
+          <text x="114" y="34" font-size="9" fill="rgba(233,241,248,.4)" text-anchor="end">1.0</text>
+          <text x="114" y="138" font-size="9" fill="rgba(233,241,248,.4)" text-anchor="end">0</text>
           <!-- bars: entities 0.66, relations 0.62, attributes 0.67 ; scale 105px = 1.0 -->
           <g>
-            <rect x="150" y="66" width="66" height="69" fill="#92E8B5" rx="3"/>
-            <text x="183" y="58" text-anchor="middle" font-size="13" font-weight="900" fill="#92E8B5">0,66</text>
-            <text x="183" y="152" text-anchor="middle" font-size="10.5" fill="rgba(241,238,236,.7)">сущности</text>
-            <rect x="258" y="70" width="66" height="65" fill="rgba(146,232,181,.7)" rx="3"/>
-            <text x="291" y="62" text-anchor="middle" font-size="13" font-weight="900" fill="#92E8B5">0,62</text>
-            <text x="291" y="152" text-anchor="middle" font-size="10.5" fill="rgba(241,238,236,.7)">связи</text>
-            <rect x="366" y="65" width="66" height="70" fill="#536BEB" rx="3"/>
-            <text x="399" y="57" text-anchor="middle" font-size="13" font-weight="900" fill="#a3b0f7">0,67</text>
-            <text x="399" y="152" text-anchor="middle" font-size="10.5" fill="rgba(241,238,236,.7)">атрибуты</text>
+            <rect x="150" y="66" width="66" height="69" fill="#12A5DE" rx="3"/>
+            <text x="183" y="58" text-anchor="middle" font-size="13" font-weight="900" fill="#12A5DE">0,66</text>
+            <text x="183" y="152" text-anchor="middle" font-size="10.5" fill="rgba(233,241,248,.7)">сущности</text>
+            <rect x="258" y="70" width="66" height="65" fill="rgba(18,165,222,.7)" rx="3"/>
+            <text x="291" y="62" text-anchor="middle" font-size="13" font-weight="900" fill="#12A5DE">0,62</text>
+            <text x="291" y="152" text-anchor="middle" font-size="10.5" fill="rgba(233,241,248,.7)">связи</text>
+            <rect x="366" y="65" width="66" height="70" fill="#D98A4B" rx="3"/>
+            <text x="399" y="57" text-anchor="middle" font-size="13" font-weight="900" fill="#E0A26A">0,67</text>
+            <text x="399" y="152" text-anchor="middle" font-size="10.5" fill="rgba(233,241,248,.7)">атрибуты</text>
           </g>
-          <text x="120" y="20" font-size="10" font-weight="800" fill="rgba(241,238,236,.5)" letter-spacing="0.1em">F1-МЕРА</text>
+          <text x="120" y="20" font-size="10" font-weight="800" fill="rgba(233,241,248,.5)" letter-spacing="0.1em">F1-МЕРА</text>
         </svg>
-        <div style="font-size:10.5px;color:rgba(241,238,236,.5);margin-top:8px;line-height:1.5;">
+        <div style="font-size:10.5px;color:rgba(233,241,248,.5);margin-top:8px;line-height:1.5;">
           Бэкенд YandexGPT, few-shot. Атрибуты (числа/единицы) — критичны для ТЗ:
           бэкфилл значений из цитат поднял F1 на ~15 п.п.
         </div>
@@ -618,10 +633,18 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
 
 <!-- ╔═══ S09 · РАЗВИТИЕ / ПРОД-ТРЕК ═══╗ -->
 <section id="s09" class="dark">
+  <svg class="globe corner" viewBox="0 0 200 200" fill="none" stroke="#12A5DE" stroke-width="1.2">
+    <circle cx="100" cy="100" r="94"/>
+    <ellipse cx="100" cy="100" rx="94" ry="33"/>
+    <ellipse cx="100" cy="100" rx="94" ry="66"/>
+    <ellipse cx="100" cy="100" rx="33" ry="94"/>
+    <ellipse cx="100" cy="100" rx="66" ry="94"/>
+    <line x1="6" y1="100" x2="194" y2="100"/><line x1="100" y1="6" x2="100" y2="194"/>
+  </svg>
   <div class="inner">
     <div class="q-num">08</div>
     <div class="q-title">Прод-трек и развитие</div>
-    <p class="q-intro" style="color:rgba(241,238,236,.6);max-width:800px;">
+    <p class="q-intro" style="color:rgba(233,241,248,.6);max-width:800px;">
       «Научный клубок» готов к пилоту в НИИ уже сейчас, а архитектура рассчитана на
       промышленный масштаб корпуса Норникеля.
     </p>

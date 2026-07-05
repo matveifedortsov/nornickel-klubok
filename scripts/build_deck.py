@@ -74,7 +74,7 @@ NOTES = [
 # CSS для экспорта: расплющиваем секции в чистые прямоугольники 1280x720
 # (без border-radius/тени/полей — иначе по углам просвечивает фон body).
 FLATTEN_CSS = """
-  html, body { padding: 0 !important; margin: 0 !important; background: #131A16 !important; }
+  html, body { padding: 0 !important; margin: 0 !important; background: #062B4A !important; }
   section { margin: 0 !important; border-radius: 0 !important; box-shadow: none !important;
             transform: none !important; }
   #progress-bar, #slide-counter, #nav-dots, .arrow { display: none !important; }
