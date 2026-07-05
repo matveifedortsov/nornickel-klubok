@@ -173,7 +173,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
       с цитатами, достоверностью и датой актуализации. Не «RAG поверх PDF».
     </p>
     <div class="title-meta">
-      <span class="meta-pill">Граф 2100+ узлов, 12 типов</span>
+      <span class="meta-pill">Граф 9400+ узлов, 12 типов</span>
       <span class="meta-pill">LLM-агностично: YandexGPT / MetalGPT-1</span>
       <span class="meta-pill">Ретривал ~0,45 c · без GPU</span>
     </div>
@@ -272,8 +272,8 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
         каждый — с evidence-цитатой из источника.
       </p>
       <div class="stat-row" style="grid-template-columns:repeat(2,1fr);gap:10px;">
-        <div class="stat"><div class="stat-num" style="font-size:32px;">2111</div><div class="stat-label">узлов графа</div></div>
-        <div class="stat"><div class="stat-num" style="font-size:32px;">1436</div><div class="stat-label">рёбер-связей</div></div>
+        <div class="stat"><div class="stat-num" style="font-size:32px;">9456</div><div class="stat-label">узлов графа</div></div>
+        <div class="stat"><div class="stat-num" style="font-size:32px;">6158</div><div class="stat-label">рёбер-связей</div></div>
         <div class="stat"><div class="stat-num" style="font-size:32px;">12</div><div class="stat-label">типов сущностей</div></div>
         <div class="stat"><div class="stat-num" style="font-size:32px;">15</div><div class="stat-label">типов связей</div></div>
       </div>
@@ -513,7 +513,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
     </p>
 
     <div class="stat-row">
-      <div class="stat"><div class="stat-num">2111</div><div class="stat-label">узлов · 1436 рёбер · 12 типов</div></div>
+      <div class="stat"><div class="stat-num">9456</div><div class="stat-label">узлов · 6158 рёбер · 12 типов</div></div>
       <div class="stat"><div class="stat-num">447<span style="font-size:20px;"> мс</span></div><div class="stat-label">медиана ретривала · бюджет 3–5 с</div></div>
       <div class="stat"><div class="stat-num">0,66</div><div class="stat-label">F1 извлечения сущностей</div></div>
       <div class="stat"><div class="stat-num">68</div><div class="stat-label">юнит-тестов зелёных</div></div>
@@ -629,7 +629,7 @@ section.dark .legend { border-top-color: rgba(255,255,255,.12); }
       <div>
         <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mint);margin-bottom:10px;">ДОРОЖНАЯ КАРТА</div>
         <div class="flow">
-          <div class="flow-row"><div class="flow-step">Сейчас</div><div class="flow-text">Пилот: seed-граф 2100+ узлов, все функции ТЗ, RBAC + аудит</div></div>
+          <div class="flow-row"><div class="flow-step">Сейчас</div><div class="flow-text">Пилот: seed-граф 9400+ узлов, все функции ТЗ, RBAC + аудит</div></div>
           <div class="flow-row"><div class="flow-step">Шаг 1</div><div class="flow-text">On-prem <code>MetalGPT-1</code> — тот же код, данные в периметре</div></div>
           <div class="flow-row"><div class="flow-step">Шаг 2</div><div class="flow-text">Полный корпус: отчёты, патенты, лабораторные журналы</div></div>
           <div class="flow-row"><div class="flow-step">Шаг 3</div><div class="flow-text">Каталог экспериментов, справочники, связи с сотрудниками</div></div>
