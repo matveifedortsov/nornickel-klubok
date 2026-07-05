@@ -41,9 +41,14 @@ QUESTIONS = [
 ]
 
 
+# роль researcher: видит источники-провенанс (роль по умолчанию без ключа их скрывает)
+_HEADERS = {"X-API-Key": "dev-researcher"}
+
+
 def _ask(q: str) -> dict:
     t0 = time.time()
-    r = requests.post(f"{API}/ask", json={"question": q}, timeout=180).json()
+    r = requests.post(f"{API}/ask", json={"question": q},
+                      headers=_HEADERS, timeout=180).json()
     r["_elapsed_s"] = round(time.time() - t0, 1)
     return r
 

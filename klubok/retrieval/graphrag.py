@@ -345,9 +345,15 @@ def _publication_years(client: Neo4jClient) -> dict[str, int]:
     for r in rows:
         cid, year = r.get("cid") or "", r.get("year")
         # canonical_id имеет вид 'Publication:<doc_id>' — парсим в Python, чтобы
-        # смена формата дала пустой результат с warning, а не тихий no-op в Cypher
-        if year is not None and ":" in cid:
-            out[cid.split(":", 1)[1]] = year
+        # смена формата дала пустой результат с warning, а не тихий no-op в Cypher.
+        # Год приводим к int: часть публикаций (OA-ингест) хранит год строкой —
+        # без приведения сравнение str<int в _passes_year роняло /ask с фильтром годов.
+        if year is None or ":" not in cid:
+            continue
+        try:
+            out[cid.split(":", 1)[1]] = int(str(year).strip()[:4])
+        except (ValueError, TypeError):
+            continue                       # нечисловой год игнорируем (не фильтруем по нему)
     return out
 
 
